@@ -20,4 +20,4 @@ def submit_form():
     return f"Received name: {name}, email: {email}, subject: {subject}, message: {message}"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
