@@ -15,7 +15,7 @@ html{
 }
 
 body{
-    background: #000000f5;
+    background: #000000;
     color: white;
 }
 
@@ -36,232 +36,145 @@ body{
     background: #555;
 }
 
-#header{
-    width: 100%;
-    height: 100vh;
-    background-image: url(images/background.png);
-    background-size: cover;
-    background-position: center;
-}
-.container{
-    padding: 5px 10%
-}
-
-nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
+#header {
+    background-color: black; /* Set background color to black */
+    height: 100vh; /* Make the header take up the full viewport height */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-direction: column; /* Stack elements vertically */
+    width: 100%; /* Ensure the header takes up the full width */
+    overflow: hidden; /* Prevent overflow */
 }
 
-.logo{
-    width: 170px;
-    
+.container {
+    width: 100%; /* Ensure the container takes up the full width */
+    text-align: center; /* Center the text within the container */
 }
 
-nav ul li{
-    display: inline-block;
-    list-style: none;
-    margin: 10px 20px;
-    
+.centered-text {
+    color: white; /* Set text color to white */
+    opacity: 0; /* Initially hide the text */
+    animation: fadeIn 1s ease-in-out 1s forwards; /* Apply the fade-in animation */
+    font-family: 'Roboto', sans-serif; /* Apply the new font */
 }
 
-nav ul li a{
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    font-size: 18px;
-    font-weight: 500;
+.centered-text h1 {
+    font-size: 150vw; /* Use viewport width units for h1 */
+    margin: 0; /* Remove default margin */
 }
 
-nav ul li a:hover{ 
-    
-    color: rgb(220, 151, 5);
-    
-    
+.centered-text h2 {
+    font-size: 5vw; /* Use viewport width units for h2 */
+    margin: 0; /* Remove default margin */
 }
 
-nav ul li a:after{ 
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background: rgb(149, 94, 11);
-    transition: width .3s;
-    
+@keyframes fadeIn {
+    to {
+        opacity: 1; /* Fade in to full opacity */
+    }
 }
-
-nav ul li a:hover:after{
-    width: 100%;
-    transition: width .3s;
-}
-
-.header-text{
-    font-size: 30px;
-    margin-top: 70px;
-}
-
-.header-text h1{
-    font-size: 45px;
-    margin-top: 10px;
-}
-
-.header-text h1 span{
-    color: rgba(0, 236, 236, 0.749);
-    flex-wrap: wrap;
-    text-shadow: 0 0 10px #099e9eb2, 0 0 20px #008a8a, 0 0 30px #157c7c, 0 0 40px #0d6666;
-}
-
-.header-text h2{
-    font-size: 30px;
-    color: rgba(255, 137, 26, 0.749);
-    flex-wrap: wrap;
-    text-shadow: 0 0 10px #607072b2, 0 0 20px #425656, 0 0 30px #293838, 0 0 40px #182525;
-}
-
-.header-text p{
-    font-size: 20px;
-    margin-top: 60px;
-}
-
-
-
-#about{
-    padding: 80px 0;
-    color:rgba(0, 236, 236, 0.749); 
-    flex-wrap: wrap;
-    text-shadow: 0 0 10px #126c6cb2, 0 0 20px #114242, 0 0 30px #103b3b, 0 0 40px #143434;
-
-}
-.row{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.about-col-1{
-    flex-basis: 35%;
-    
-}
-
-.about-col-1 img{
-    width: 100%;
-    border-radius: 15px;
-    
-}
-
-.about-col-2{
-    flex-basis: 60%;
-    
-}
-
-.sub-title{
-    font-size: 45px;
-    font-weight: 600;
-    color: white;
-}
-
-.tab-titles{
-    display: flex;
-    margin: 20px 0 40px;
-
-}
-
-.tab-links{
-    margin-right: 50px;
-    font-size: 20px;
-    font-weight: 500;
-    cursor: pointer;
-    position: relative;
-}
-
-.tab-links::after{
-    content: "";
-    width: 0;
-    height: 3px;
-    background: rgba(255, 137, 26, 0.749);
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    transition: width .3s;
-
-}
-
-.tab-links.active-link::after{
-    width: 50%;
-    
-}
-
-.tab-contents ul li{
-    list-style: none;
-    margin: 10px 0;
-    
-}
-
-.tab-contents ul li span{
-    color: rgba(255, 137, 26, 0.749);
-    font-size: 14px;
-    
-}
-
-.tab-contents ul li p{
-    color: white;
-    font-size: 14px;
-    
-}
-
-.tab-contents{
-    display: none;
-    font-size: 14px;
-    
-}
-
-.tab-contents.active-tab{
-    display: block;
-}
-
 
 
 /*services*/
 
-#header2{
+#header2 {
     width: 100%;
-    height: 130vh;
+    height: 130vh; /* Use viewport height units */
     background-image: url(images/work-1.png);
     background-size: cover;
     background-position: center;
-    margin-top: 40px;
+    margin-top: 4vh; /* Use viewport height units for margin */
+}
+
+#header2 .container {
+    max-width: 800px; /* Set a maximum width for the container */
+    margin: 0 auto; /* Center the container */
+    padding: 0 20px; /* Add padding for spacing */
+    text-align: center; /* Center the text */
 }
 
 .sub-title80 {
-    text-align: center; /* Center the text */
-    font-size: 2.5em; /* Make the text larger */
-    margin-top: 250px;
+    font-size: 5vw; /* Use viewport width units for responsive font size */
+    margin-top: 15vh; /* Use viewport height units for responsive margin */
 }
 
-#header2 .container p{
-    text-align: center; /* Center the text */
-    margin-top: 20px; /* Lower the text */
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    .sub-title80 {
+        font-size: 7vw; /* Adjust font size for smaller screens */
+        margin-top: 15vh; /* Adjust margin for smaller screens */
+    }
+}
+
+/* Media query for larger screens */
+@media (min-width: 800px) {
+    .sub-title80 {
+        font-size: 3vw; /* Adjust font size for larger screens */
+        margin-top: 5vh; /* Adjust margin for larger screens */
+    }
+}
+
+#header2 .container p {
+    margin-top: 2vh; /* Use viewport height units for margin */
+    font-size: 2vw; /* Use viewport width units for responsive font size */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    #header2 .container p {
+        font-size: 3vw; /* Adjust font size for smaller screens */
+        margin-top: 3vh; /* Adjust margin for smaller screens */
+    }
+}
+
+/* Media query for larger screens */
+@media (min-width: 800px) {
+    #header2 .container p {
+        font-size: 1.5vw; /* Adjust font size for larger screens */
+        margin-top: 1vh; /* Adjust margin for larger screens */
+    }
 }
 
 #header2 .info-button {
     display: block; /* Make the button a block element */
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 1vh 2vw; /* Use viewport units for padding */
+    font-size: 2vw; /* Use viewport width units for font size */
     text-align: center;
     cursor: pointer;
     background-color: transparent; /* Make the button transparent */
     color: white; /* Change as needed */
-    border: 2px solid white; /* Add a white border */
-    border-radius: 4px;
+    border: 0.2vw solid white; /* Use viewport width units for border */
+    border-radius: 0.5vw; /* Use viewport width units for border radius */
     text-decoration: none;
-    margin: 40px auto; /* Center the button and add some space above it */
+    margin: 4vh auto; /* Use viewport height units for margin */
     transition: transform 0.3s ease; /* Add a transition for the transform property */
 }
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    #header2 .info-button {
+        font-size: 3vw; /* Adjust font size for smaller screens */
+        padding: 1.5vh 3vw; /* Adjust padding for smaller screens */
+        border: 0.3vw solid white; /* Adjust border for smaller screens */
+        border-radius: 0.7vw; /* Adjust border radius for smaller screens */
+    }
+}
+
+/* Media query for larger screens */
+@media (min-width: 800px) {
+    #header2 .info-button {
+        font-size: 1.5vw; /* Adjust font size for larger screens */
+        padding: 0.8vh 1.5vw; /* Adjust padding for larger screens */
+        border: 0.1vw solid white; /* Adjust border for larger screens */
+        border-radius: 0.3vw; /* Adjust border radius for larger screens */
+    }
+}
+/* Media query for larger screens */
 
 #header2 .info-button:hover {
     transform: scale(1.1); /* Scale the button up to 110% when hovered */
 }
-
 .modal {
     display: flex; /* Use flexbox */
     justify-content: center; /* Center the content horizontally */
@@ -316,7 +229,7 @@ nav ul li a:hover:after{
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 .popup-content {
@@ -460,22 +373,43 @@ nav ul li a:hover:after{
     
     
 }
-
-.sub-title90 {
+#header6 .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
     text-align: center; /* Center the text */
-    font-size: 2.5em; /* Make the text larger */
-    margin-top: 250px;
 }
 
-#header6 .container p{
-    text-align: center; /* Center the text */
-    margin-top: 20px; /* Lower the text */
+.sub-title90 {
+    font-size: 3vw; /* Use viewport width units for responsive font size */
+    margin-top: 3vh; /* Add margin for spacing */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    .sub-title90 {
+        font-size: 5vw; /* Adjust font size for smaller screens */
+        margin-top: 3vh; /* Increase margin-top for smaller screens */
+    }
+}
+
+#header6 p {
+    font-size: 3vw; /* Use viewport width units for responsive font size */
+    margin-top: 1vh; /* Add margin for spacing */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    #header6 p {
+        font-size: 3vw; /* Adjust font size for smaller screens */
+        margin-top: 3vh; /* Increase margin-top for smaller screens */
+    }
 }
 
 #header6 .info-button {
     display: block; /* Make the button a block element */
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 8px 18px;
+    font-size: 14px;
     text-align: center;
     cursor: pointer;
     background-color: transparent; /* Make the button transparent */
@@ -483,47 +417,93 @@ nav ul li a:hover:after{
     border: 2px solid white; /* Add a white border */
     border-radius: 4px;
     text-decoration: none;
-    margin: 40px auto; /* Center the button and add some space above it */
+    margin: 38px auto; /* Center the button and add some space above it */
     transition: transform 0.3s ease; /* Add a transition for the transform property */
 }
 
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    #header6 .info-button {
+        font-size: 3vw; /* Adjust font size for smaller screens */
+        padding: 1.5vh 3vw; /* Adjust padding for smaller screens */
+        border-radius: 0.7vw; /* Adjust border radius for smaller screens */
+        margin-top: 10vh; /* Increase margin-top for smaller screens */
+    }
+}
 #header6 .info-button:hover {
     transform: scale(1.1); /* Scale the button up to 110% when hovered */
 }
 
-#header7{
+#header7 {
     width: 100%;
-    height: 100vh;
+    height: 130vh; /* Use viewport height units */
     background-image: url(images/work-3.png);
     background-size: cover;
     background-position: center;
-    
-    
+    margin-top: 4vh; /* Use viewport height units for margin */
+}
+
+#header7 .container {
+    max-width: 800px; /* Set a maximum width for the container */
+    margin: 0 auto; /* Center the container */
+    padding: 0 20px; /* Add padding for spacing */
+    text-align: center; /* Center the text */
 }
 
 .sub-title70 {
-    text-align: center; /* Center the text */
-    font-size: 2.5em; /* Make the text larger */
-    margin-top: 250px;
+    font-size: 5vw; /* Use viewport width units for responsive font size */
+    margin-top: 0vh; /* Use viewport height units for responsive margin */
 }
 
-#header7 .container p{
-    text-align: center; /* Center the text */
-    margin-top: 20px; /* Lower the text */
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    .sub-title70 {
+        font-size: 7vw; /* Adjust font size for smaller screens */
+        margin-top: 0vh; /* Adjust margin for smaller screens */
+    }
+}
+
+/* Media query for larger screens */
+@media (min-width: 800px) {
+    .sub-title70 {
+        font-size: 3vw; /* Adjust font size for larger screens */
+        margin-top: 5vh; /* Adjust margin for larger screens */
+    }
+}
+
+#header7 .container p {
+    margin-top: 2vh; /* Use viewport height units for margin */
+    font-size: 2vw; /* Use viewport width units for responsive font size */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    #header7 .container p {
+        font-size: 3vw; /* Adjust font size for smaller screens */
+        margin-top: 3vh; /* Adjust margin for smaller screens */
+    }
+}
+
+/* Media query for larger screens */
+@media (min-width: 800px) {
+    #header7 .container p {
+        font-size: 1.5vw; /* Adjust font size for larger screens */
+        margin-top: 1vh; /* Adjust margin for larger screens */
+    }
 }
 
 #header7 .info-button {
     display: block; /* Make the button a block element */
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 1vh 2vw; /* Use viewport units for padding */
+    font-size: 2vw; /* Use viewport width units for font size */
     text-align: center;
     cursor: pointer;
     background-color: transparent; /* Make the button transparent */
     color: white; /* Change as needed */
-    border: 2px solid white; /* Add a white border */
-    border-radius: 4px;
+    border: 0.2vw solid white; /* Use viewport width units for border */
+    border-radius: 0.5vw; /* Use viewport width units for border radius */
     text-decoration: none;
-    margin: 40px auto; /* Center the button and add some space above it */
+    margin: 4vh auto; /* Use viewport height units for margin */
     transition: transform 0.3s ease; /* Add a transition for the transform property */
 }
 
@@ -531,208 +511,133 @@ nav ul li a:hover:after{
     transform: scale(1.1); /* Scale the button up to 110% when hovered */
 }
 
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    #header7 .info-button {
+        font-size: 3vw; /* Adjust font size for smaller screens */
+        padding: 1.5vh 3vw; /* Adjust padding for smaller screens */
+        border: 0.3vw solid white; /* Adjust border for smaller screens */
+        border-radius: 0.7vw; /* Adjust border radius for smaller screens */
+    }
+}
+
+/* Media query for larger screens */
+@media (min-width: 600px) {
+    #header7 .info-button {
+        font-size: 1.5vw; /* Adjust font size for larger screens */
+        padding: 0.8vh 1.5vw; /* Adjust padding for larger screens */
+        border: 0.1vw solid white; /* Adjust border for larger screens */
+        border-radius: 0.3vw; /* Adjust border radius for larger screens */
+    }
+}
 
 
 /*contact*/
+/*contact*/
 
-.contact-left{
-    margin-top: 160px;
-    flex-basis: 35%;
-    
+.sub-title {
+    font-size: 2.5em; /* Adjust the size as needed */
+    text-align: center; /* Optional: Center the text */
+    margin: 20px 0; /* Optional: Adjust the margin */
 }
-
-.contact-right{
-    margin-top: 160px;
-    flex-basis: 60%;
-    
-}
-
-.contact-left p{
-    margin-top: 20px;
-    
-}
-
-.contact-left p i{
-    color:rgb(149, 94, 11);
-    margin-right: 15px;
-    font-size: 25px;
-    
-}
-
-.social-icons{
-    margin-top: 30px;
-}
-
-.social-icons a{
-    display: inline-blocks;
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
-    margin-right: 20px;
-    transition: transform .3s;
-}
-
-.social-icons a:hover{
-    color: red;
-    transform: translate(-5px);
-}
-
-.btn.btn2{
+.social-icons a {
+    font-size: 3em; /* Increased size */
     display: inline-block;
-    background: rgba(0, 236, 236, 0.749);
-    text-shadow: 0 0 10px #126c6cb2, 0 0 20px #114242, 0 0 30px #103b3b, 0 0 40px #143434;
-    
+    margin-right: 20px; /* Increased spacing */
+    color: white; /* Make icons white */
+    transition: transform 0.3s ease; /* Add transition for smooth animation */
 }
 
-.contact-right form{
+.social-icons a:last-child {
+    margin-right: 0; /* Remove margin from the last icon */
+}
+
+.social-icons a:hover {
+    transform: scale(1.2); /* Scale up the icon on hover */
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .social-icons a {
+        font-size: 4em; /* Larger size for tablets */
+        margin-right: 20px; /* Adjust spacing for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .social-icons a {
+        font-size: 2em; /* Larger size for mobile devices */
+        margin-right: 20px; /* Adjust spacing for mobile devices */
+    }
+}
+
+.contact-form-container {
     width: 100%;
+    max-width: 600px; /* Set a maximum width for the container */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add padding for spacing */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    background-color: #000000; /* Set background color to dark grey */
+    border-radius: 10px; /* Add rounded corners */
+    margin-top: 20vh; /* Adjust margin for smaller screens *
 }
 
-form input, form textarea{
-    width: 100%;
-    border: 0;
-    outline: none;
-    background: rgb(52, 52, 52);
-    padding: 15px;
-    margin: 10px 0;
-    color: white;
-    font-size: 18px;
-    border-radius: 6px;
-    
+.contact-form {
+    display: flex;
+    flex-direction: column; /* Stack form elements vertically */
 }
 
-form btn2{
-    padding: 14px 50px;
-    font-size:  18px;
-    margin-top: 20px;
-    cursor: pointer;;
+.contact-form label {
+    margin-bottom: 5px; /* Add space below labels */
+    font-size: 1.2em; /* Increase font size for labels */
+    color: #fff; /* Set label color to white */
 }
 
-.container4{
-	width: 350px;
-	background-color: white;
-	border-radius: 5px;
-	padding: 20px;
-	text-align: center;
-}
-.container4 input{
-	width: 100%;
-	padding: 10px;
-	border: none;
-	border-bottom: 2px solid #777777;
-	margin-bottom: 20px;
-	font-size: 16px;
-	outline: none;
-}
-.btn5{
-	border: none !important;
-	cursor: pointer;
-	background-color: #32cd9c;
-	margin: 15px 0;
-	font-size: 16px;
-	width: 100%;
-	padding: 14px;
-}
-.btn5:hover{
-	background-color: #1f7d5f;
-	color: white;
+.contact-form input,
+.contact-form textarea {
+    width: 100%; /* Make inputs and textarea full width */
+    padding: 10px; /* Add padding for better touch targets */
+    margin-bottom: 15px; /* Add space below inputs and textarea */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 5px; /* Add rounded corners */
+    font-size: 1em; /* Set font size */
+    background-color: #252525; /* Set background color to grey */
+    color: #fff; /* Set text color to white */
 }
 
-.copyright{
-    width: 100%;
-    font-size: 12px;
-    text-align: center;
-    padding: 15px 0;
-    background: transparent;
-    font-weight: 300;
-    margin-top: 20px;
+.contact-form button {
+    padding: 10px 20px; /* Add padding for the button */
+    font-size: 1.2em; /* Increase font size for the button */
+    color: #fff; /* Set text color to white */
+    background-color: #5c5c5c; /* Set background color to black */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s ease; /* Add transition for background color */
 }
 
-/*------------------css for small screeen--------------*/
-nav .fa-solid{
-    display: none;
+.contact-form button:hover {
+    background-color: #444; /* Change background color on hover to dark grey */
 }
 
-@media only screen and (max-width: 600px){
-    #header{
-        background-image: url(images/background.png);
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    .contact-form-container {
+        padding: 10px; /* Reduce padding for smaller screens */
     }
 
-    .header-text{
-        margin-top: 175px;
-        font-size: 14px;
-
+    .contact-form label {
+        font-size: 1em; /* Reduce font size for labels */
     }
 
-    .header-text h1{
-        font-size: 25px;
-
-
-        
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 0.9em; /* Reduce font size for inputs and textarea */
     }
 
-    nav .fa-solid{
-        display: block;
-        font-size: 25px;
+    .contact-form button {
+        font-size: 1em; /* Reduce font size for the button */
+        padding: 8px 16px; /* Reduce padding for the button */
     }
-
-    nav ul{
-        background: rgba(0, 134, 236, 0.749);
-        position: fixed;
-        top: 0;
-        right: -200px;
-        width: 200px;
-        height: 100vh;
-        padding-top: 50px;
-        z-index: 2;
-        transition: right .3s;
-    }
-
-    nav ul li{
-        display: block;
-        margin: 25px 25px;
-    }
-
-    nav ul .fa-solid{
-        position: absolute;
-        top: 25px;
-        right: 25px;
-        cursor: pointer;
-    }
-
-    .sub-title{
-        font-size: 40px;
-    }
-
-    .about-col-1, .about-col-2{
-        flex-basis: 100%;
-    }
-
-    .about-col-1 img{
-        margin-bottom: 30px;
-    }
-
-    .about-col-2{
-        font-size: 14px;
-    }
-
-    .tab-links{
-        font-size: 16px ;
-        margin-right: 20px;
-    }
-
-    .contact-left, .contact-right{
-        flex-basis: 100%;
-        
-        
-    }
-
-    .copyright{
-        font-size: 14px;
-        text-align: center;
-    }
-
-  
-
-
 }
+

@@ -13,19 +13,8 @@
 <body>
     <div id="header">
         <div class="container">
-            <nav>
-                <img src="images/logo.png" class="logo">
-                <ul id="sidemenu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#header2">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <i class="fa-solid fa-x" onclick="closemenu()"></i>
-                </ul>
-                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
-            </nav>
-            <h1 class="sub-title">Aroul Da Vinci</h1>
-            <p>Welcome to the official website of the Multi Platinum Producer</p>
+            <h1 class="centered-text">AROUL DA VINCI</h1>
+            <h2 class="centered-text">Welcome to the Official Website</h2>
         </div>
     </div>
     <div id="frameWrapper" style="display: flex; justify-content: center; align-items: center; margin: auto 0;">
@@ -34,7 +23,7 @@
     <!------------------Services---------->
     <div id="header2">
         <div class="container">
-            <h1 class="sub-title80">Let's produce a song from start to finish!</h1>
+            <h1 class="sub-title80"><br><br><br><br>Let's produce a song from start to finish!</h1>
             <p>
                 Our service provides comprehensive support for singers to create, write, and publish their own songs. We guide artists through the entire process, from conceptualization to release, ensuring their vision and style are fully realized. Our team collaborates closely with the artist, crafting melodies, refining lyrics, and offering professional guidance at every step. Once the song is perfected, we assist in publishing, helping singers share their music with the world. With our expertise, artists can confidently bring their musical ideas to life and reach a wider audience.            </p>
             <button class="info-button">Info and Pricing</button>
@@ -232,7 +221,7 @@
  <!------------------WOULD BE COOL TO SHOW THE INFO IN A POPUP---------->
  <div id="header6">
     <div class="container">
-        <h1 class="sub-title90">Beat Leasing
+        <h1 class="sub-title90"><br><br><br><br><br>Beat Leasing
         </h1>
         <p>
             
@@ -243,7 +232,7 @@ Explore our diverse range of purchasing and leasing options.  </p>
 
         <div id="header7">
             <div class="container">
-                <h1 class="sub-title70">Producer Services: Empowering Your Music Production
+                <h1 class="sub-title70"><br><br><br><br><br>Producer Services: Empowering Your Music Production
                 </h1>
                 
                 <p>
@@ -257,42 +246,35 @@ Explore our diverse range of purchasing and leasing options.  </p>
         <div class="container">
             <div class="row">
                 <div class="contact-left">
-                <h1 class= "sub-title">Contact Me</h1>
-                <p>e-mail: aroulkingproduction@gmail.com</p>
-                <p>phone: +393460853467</p>
+                <h1 class= "sub-title"><br><br>Contact Me<br><br></h1>
+                
                 <div class="social-icons">
                     <a href="https://www.instagram.com/aroulbidda_music/"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=aroulkingproduction@gmail.com" target="_blank"><i class="fa-regular fa-envelope"></i></a>
+                    <a href="https://x.com/aroulking"><i class="fa-brands fa-x-twitter"></i></a>
+
                     
             </div>
             
-            <div class="container">
-                <div class="row">
-                    <div class="contact-left">
-                        <h1 class="sub-title">Contact Me</h1>
-                        <p>e-mail: aroulkingproduction@gmail.com</p>
-                        <p>phone: +393460853467</p>
-                        <div class="social-icons">
-                            <a href="https://www.instagram.com/aroulbidda_music/"><i class="fa-brands fa-instagram"></i></a>
-                        </div>
-                    </div>
+            
                     
-                    <div class="contact-form-container">
-                        <form action="/submit_form" method="post" class="contact-form">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" required>
-        
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
-        
-                            <label for="subject">Subject:</label>
-                            <input type="text" id="subject" name="subject" required>
-        
-                            <label for="message">Message:</label>
-                            <textarea id="message" name="message" rows="4" required></textarea>
-        
-                            <button type="submit">Submit</button>
-                        </form>
-                    </div>
+            <div class="contact-form-container">
+                <form id="contact-form" class="contact-form">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+            
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+            
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" required>
+            
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+            
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
                 </div>
             </div>
     
@@ -601,6 +583,36 @@ Explore our diverse range of purchasing and leasing options.  </p>
                     popup.style.display = 'none';
                 }
             }            
+        </script>
+
+
+        <script>
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+        
+                // Collect form data
+                var formData = new FormData(event.target);
+        
+                // Convert form data to URL-encoded string
+                var formParams = new URLSearchParams(formData).toString();
+        
+                // Send data to Google Apps Script web app
+                fetch('https://script.google.com/macros/s/AKfycbxELZX64kjG56nWVRlMm33TdV05N-yLAY0yAge4CZcWWBVgQm5ObbTpiHEvARJeHo59nw/exec', { // Replace with your web app URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formParams
+                })
+                .then(response => response.text())
+                .then(result => {
+                    alert('Form submitted successfully!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to submit form. Please try again later.');
+                });
+            });
         </script>
         
         
