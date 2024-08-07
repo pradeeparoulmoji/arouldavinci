@@ -430,6 +430,15 @@ body{
         margin-top: 10vh; /* Increase margin-top for smaller screens */
     }
 }
+
+@media (min-width: 800px) {
+    #header6 .info-button {
+        font-size: 1.5vw; /* Adjust font size for larger screens */
+        padding: 0.8vh 1.5vw; /* Adjust padding for larger screens */
+        border: 0.1vw solid white; /* Adjust border for larger screens */
+        border-radius: 0.3vw; /* Adjust border radius for larger screens */
+    }
+}
 #header6 .info-button:hover {
     transform: scale(1.1); /* Scale the button up to 110% when hovered */
 }
