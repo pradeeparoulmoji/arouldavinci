@@ -38,13 +38,14 @@ body{
 
 #header {
     background-color: black; /* Set background color to black */
-    height: 100vh; /* Make the header take up the full viewport height */
+    height: 10vh; /* Make the header take up the full viewport height */
     display: flex; /* Use flexbox for centering */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     flex-direction: column; /* Stack elements vertically */
     width: 100%; /* Ensure the header takes up the full width */
     overflow: hidden; /* Prevent overflow */
+    margin-bottom: 20px;
 }
 
 .container {
