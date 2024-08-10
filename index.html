@@ -18,7 +18,7 @@
         </div>
     </div>
     <div id="frameWrapper" style="display: flex; justify-content: center; align-items: center; margin: auto 0;">
-        <iframe src="https://www.beatstars.com/aroulking/tracks" width="100%" height="800" style="max-width: 1500px; border: 1px solid black;"></iframe>
+        <iframe id="beatstarsIframe" name="beatstars" src="https://www.beatstars.com/aroulking/tracks" width="100%" height="800" style="max-width: 1500px; border: 1px solid black;"></iframe>
     </div>
     <!------------------Services---------->
     <div id="header2">
@@ -744,6 +744,18 @@ Explore our diverse range of purchasing and leasing options.  </p>
                     alert('Failed to submit form. Please try again later.');
                 });
             });
+        </script>
+        <script>
+            
+            window.onload = function() {
+                // Delay the scroll by 2 seconds (2000 milliseconds)
+                setTimeout(function() {
+                    // Get the iframe element
+                    var iframe = document.getElementById('beatstarsIframe');
+                    // Scroll to the iframe
+                    iframe.scrollIntoView({ behavior: 'smooth' });
+                }, 1500);
+            };
         </script>
         
         
