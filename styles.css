@@ -80,7 +80,7 @@ body{
 
 #header2 {
     width: 100%;
-    height: 130vh; /* Use viewport height units */
+    height: 100vh; /* Use viewport height units */
     background-image: url(images/work-11.jpg);
     background-size: cover;
     background-position: center;
