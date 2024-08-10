@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;780;700&display=swap');
 
 *{
 
@@ -101,7 +101,7 @@ body{
 }
 
 /* Media query for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 780px) {
     .sub-title80 {
         font-size: 7vw; /* Adjust font size for smaller screens */
         margin-top: 15vh; /* Adjust margin for smaller screens */
@@ -122,7 +122,7 @@ body{
 }
 
 /* Media query for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 780px) {
     #header2 .container p {
         font-size: 3vw; /* Adjust font size for smaller screens */
         margin-top: 3vh; /* Adjust margin for smaller screens */
@@ -153,7 +153,7 @@ body{
 }
 
 /* Media query for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 780px) {
     #header2 .info-button {
         font-size: 3vw; /* Adjust font size for smaller screens */
         padding: 1.5vh 3vw; /* Adjust padding for smaller screens */
@@ -375,7 +375,7 @@ body{
     
 }
 #header6 .container {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 0 20px;
     text-align: center; /* Center the text */
@@ -387,12 +387,13 @@ body{
 }
 
 /* Media query for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 780px) {
     .sub-title90 {
         font-size: 5vw; /* Adjust font size for smaller screens */
         margin-top: 3vh; /* Increase margin-top for smaller screens */
     }
 }
+
 
 #header6 p {
     font-size: 3vw; /* Use viewport width units for responsive font size */
@@ -400,7 +401,7 @@ body{
 }
 
 /* Media query for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 780px) {
     #header6 p {
         font-size: 3vw; /* Adjust font size for smaller screens */
         margin-top: 3vh; /* Increase margin-top for smaller screens */
@@ -423,7 +424,7 @@ body{
 }
 
 /* Media query for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 780px) {
     #header6 .info-button {
         font-size: 3vw; /* Adjust font size for smaller screens */
         padding: 1.5vh 3vw; /* Adjust padding for smaller screens */
@@ -466,7 +467,7 @@ body{
 }
 
 /* Media query for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 780px) {
     .sub-title70 {
         font-size: 7vw; /* Adjust font size for smaller screens */
         margin-top: 0vh; /* Adjust margin for smaller screens */
@@ -487,7 +488,7 @@ body{
 }
 
 /* Media query for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 780px) {
     #header7 .container p {
         font-size: 3vw; /* Adjust font size for smaller screens */
         margin-top: 3vh; /* Adjust margin for smaller screens */
@@ -522,7 +523,7 @@ body{
 }
 
 /* Media query for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 780px) {
     #header7 .info-button {
         font-size: 3vw; /* Adjust font size for smaller screens */
         padding: 1.5vh 3vw; /* Adjust padding for smaller screens */
@@ -532,7 +533,7 @@ body{
 }
 
 /* Media query for larger screens */
-@media (min-width: 600px) {
+@media (min-width: 780px) {
     #header7 .info-button {
         font-size: 1.5vw; /* Adjust font size for larger screens */
         padding: 0.8vh 1.5vw; /* Adjust padding for larger screens */
@@ -583,7 +584,7 @@ body{
 
 .contact-form-container {
     width: 100%;
-    max-width: 600px; /* Set a maximum width for the container */
+    max-width: 780px; /* Set a maximum width for the container */
     margin: 0 auto; /* Center the container */
     padding: 20px; /* Add padding for spacing */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
@@ -631,7 +632,7 @@ body{
 }
 
 /* Media query for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 780px) {
     .contact-form-container {
         padding: 10px; /* Reduce padding for smaller screens */
     }
