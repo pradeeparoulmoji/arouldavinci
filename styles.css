@@ -55,7 +55,7 @@ body{
 .centered-text {
     color: white; /* Set text color to white */
     opacity: 0; /* Initially hide the text */
-    animation: fadeIn 1s ease-in-out 1s forwards; /* Apply the fade-in animation */
+    animation: fadeIn 0.5s ease-in-out 0.5s forwards; /* Apply the fade-in animation */
     font-family: 'Roboto', sans-serif; /* Apply the new font */
 }
 
