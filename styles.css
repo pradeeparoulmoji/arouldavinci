@@ -445,7 +445,7 @@ body{
 
 #header7 {
     width: 100%;
-    height: 130vh; /* Use viewport height units */
+    height: 100vh; /* Use viewport height units */
     background-image: url(images/work-33.jpg);
     background-size: cover;
     background-position: center;
