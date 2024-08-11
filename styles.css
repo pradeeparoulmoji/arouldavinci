@@ -581,7 +581,24 @@ body{
         margin-right: 20px; /* Adjust spacing for mobile devices */
     }
 }
+.redirect-button {
+    display: block; /* Make the button a block element */
+    padding: 8px 18px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    background-color: transparent; /* Make the button transparent */
+    color: white; /* Change as needed */
+    border: 2px solid white; /* Add a white border */
+    border-radius: 4px;
+    text-decoration: none;
+    margin: 40px auto; /* Center the button and add some space above it */
+    transition: transform 0.3s ease; /* Add a transition for the transform property */
+}
 
+.redirect-button:hover {
+    transform: scale(1.1); /* Scale the button up to 110% when hovered */
+}
 .contact-form-container {
     width: 100%;
     max-width: 780px; /* Set a maximum width for the container */
