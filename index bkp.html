@@ -1584,7 +1584,6 @@
       var currentIndex = -1;
       var isPlaying = false;
       var isUserSeeking = false;
-      var wasPlayingBeforeSeek = false;
       var currentFilter = '';
 
       function escapeHtml(str) {
@@ -1953,9 +1952,7 @@
 
       audio.addEventListener('loadedmetadata', function () {
         durationEl.textContent = formatTime(audio.duration);
-        if (!isUserSeeking) {
-          setSeekBarUI(audio.duration ? (audio.currentTime / audio.duration) * 1000 : 0);
-        }
+        setSeekBarUI(audio.duration ? (audio.currentTime / audio.duration) * 1000 : 0);
       });
 
       audio.addEventListener('timeupdate', function () {
@@ -1964,45 +1961,25 @@
         setSeekBarUI((audio.currentTime / audio.duration) * 1000);
       });
 
-      // --- Seek bar: live scrub fix ---
-      // Previously this only *previewed* the time on 'input' and relied on
-      // 'change'/'mouseup'/'touchend' to actually move playback. Those events
-      // don't fire reliably for a simple click on some browsers/touch devices,
-      // so the actual seek never happened and the track kept playing from
-      // wherever it already was (perceived as "restarting"). Now we seek the
-      // audio directly on every 'input' event, which fires immediately even
-      // for a single click/tap - so it always jumps to the clicked point.
-      seekBar.addEventListener('pointerdown', function () {
-        isUserSeeking = true;
-        wasPlayingBeforeSeek = isPlaying;
-      });
-
       seekBar.addEventListener('input', function () {
         if (!audio.duration) return;
         isUserSeeking = true;
-        var t = (Number(this.value) / 1000) * audio.duration;
-        audio.currentTime = t;
-        currentTimeEl.textContent = formatTime(t);
+        var previewTime = (Number(this.value) / 1000) * audio.duration;
+        currentTimeEl.textContent = formatTime(previewTime);
         setSeekBarUI(this.value);
       });
 
-      function releaseSeek() {
+      function commitSeek() {
+        if (!audio.duration) return;
+        var nextTime = (Number(seekBar.value) / 1000) * audio.duration;
+        audio.currentTime = nextTime;
+        currentTimeEl.textContent = formatTime(nextTime);
         isUserSeeking = false;
-        if (wasPlayingBeforeSeek && audio.paused) {
-          audio.play().catch(function () {});
-        }
-        wasPlayingBeforeSeek = false;
       }
 
-      seekBar.addEventListener('change', releaseSeek);
-      seekBar.addEventListener('mouseup', releaseSeek);
-      seekBar.addEventListener('touchend', releaseSeek);
-      seekBar.addEventListener('pointerup', releaseSeek);
-
-      seekBar.addEventListener('keydown', function () {
-        wasPlayingBeforeSeek = isPlaying;
-      });
-
+      seekBar.addEventListener('change', commitSeek);
+      seekBar.addEventListener('mouseup', commitSeek);
+      seekBar.addEventListener('touchend', commitSeek);
       seekBar.addEventListener('keyup', function (e) {
         if (
           e.key === 'ArrowLeft' ||
@@ -2012,12 +1989,7 @@
           e.key === 'Home' ||
           e.key === 'End'
         ) {
-          if (audio.duration) {
-            var t = (Number(seekBar.value) / 1000) * audio.duration;
-            audio.currentTime = t;
-            currentTimeEl.textContent = formatTime(t);
-          }
-          releaseSeek();
+          commitSeek();
         }
       });
 

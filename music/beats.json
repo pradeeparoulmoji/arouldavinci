@@ -1,0 +1,40 @@
+[
+  {
+    "folder": "juno",
+    "title": "Jiunoo",
+    "key": "F# Min",
+    "tag": ["Sabrina Carpenter","Feather","Pop"],
+    "bpm": "88",
+    "buyUrl": "https://www.beatstars.com/aroulking/beat/midnight-drive"
+  },
+  {
+    "folder": "no-words-just-us",
+    "title": "No Words, Just Us",
+    "genre": "R&B",
+    "bpm": "87"
+  },
+  {
+    "folder": "godspeed-forever",
+    "title": "godspeed forever",
+    "genre": "POP",
+    "bpm": ""
+  },
+  {
+    "folder": "woman",
+    "title": "W O M A N",
+    "genre": "R&B",
+    "bpm": "90"
+  },
+  {
+    "folder": "la-cura-dentro",
+    "title": "La cura dentro",
+    "genre": "POP",
+    "bpm": "76"
+  },
+  {
+    "folder": "your-boyfriend",
+    "title": "your boyfriend",
+    "genre": "POP",
+    "bpm": ""
+  }
+]
