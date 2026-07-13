@@ -98,6 +98,7 @@
     .flex-wrap { flex-wrap: wrap; }
     .flex-item { display: flex; flex: 1 1 0; }
     .flex-item.left { justify-content: flex-start; flex: 1 1 80px; }
+
     .flex-item.center {
       flex: 1 1 520px;
       width: 100%;
@@ -105,6 +106,7 @@
       align-items: center;
       justify-content: flex-start;
     }
+
     .flex-item.right { justify-content: flex-end; flex: 1 1 80px; }
 
     .ghost-logo {
@@ -534,7 +536,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin: 0 0 18px;
+      margin: 0;
       padding: 18px 18px 0;
       flex-wrap: wrap;
       background: rgba(15, 15, 15, 0.92);
@@ -605,47 +607,52 @@
       border-top: none;
       border-radius: 0 0 var(--radius-12) var(--radius-12);
       overflow: hidden;
+      padding: 10px 18px 18px;
     }
 
     .beat-tracklist-header {
       display: grid;
-      grid-template-columns: 42px 56px 1fr 220px 90px 80px 95px 130px 150px;
+      grid-template-columns: 52px 56px minmax(0, 1fr) 200px;
       align-items: center;
       gap: 14px;
-      padding: 14px 22px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 14px 16px 10px;
       font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: rgba(255, 255, 255, 0.35);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 12px;
     }
-
-    .beat-tracklist-header .col-title { grid-column: 3; text-align: left; }
-    .beat-tracklist-header .col-tags { grid-column: 4; text-align: center; }
-    .beat-tracklist-header .col-key { grid-column: 5; text-align: center; }
-    .beat-tracklist-header .col-bpm { grid-column: 6; text-align: center; }
-    .beat-tracklist-header .col-listens { grid-column: 7; text-align: center; }
-    .beat-tracklist-header .col-buy { grid-column: 8; text-align: center; }
-    .beat-tracklist-header .col-download { grid-column: 9; text-align: center; }
 
     .beat-track-item {
       display: grid;
-      grid-template-columns: 42px 56px 1fr 220px 90px 80px 95px 130px 150px;
-      align-items: center;
+      grid-template-columns: 52px 56px minmax(0, 1fr) auto;
       gap: 14px;
-      padding: 18px 22px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid transparent;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.02);
       cursor: pointer;
-      transition: background 0.15s ease;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
     }
 
-    .beat-track-item:last-child { border-bottom: none; }
-    .beat-track-item:hover { background: rgba(255, 255, 255, 0.04); }
-    .beat-track-item.active { background: rgba(197, 216, 230, 0.08); }
+    .beat-track-item + .beat-track-item { margin-top: 12px; }
+
+    .beat-track-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255,255,255,0.08);
+      transform: translateY(-1px);
+    }
+
+    .beat-track-item.active {
+      background: rgba(197, 216, 230, 0.08);
+      border-color: rgba(197, 216, 230, 0.28);
+    }
 
     .track-play-icon {
-      width: 42px;
-      height: 42px;
+      width: 52px;
+      height: 52px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
@@ -655,11 +662,6 @@
       font-size: 14px;
       color: var(--primary);
       transition: background 0.15s ease;
-    }
-
-    .beat-track-item:hover .track-play-icon {
-      background: rgba(197, 216, 230, 0.25);
-      color: var(--accent);
     }
 
     .beat-track-item.active .track-play-icon {
@@ -676,7 +678,17 @@
       background: #222;
     }
 
-    .track-title-block { flex: 1; text-align: left; min-width: 0; }
+    .track-main {
+      min-width: 0;
+      text-align: left;
+    }
+
+    .track-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: space-between;
+    }
 
     .track-title {
       font-size: 17px;
@@ -684,59 +696,68 @@
       white-space: normal;
       overflow: visible;
       text-overflow: unset;
+      overflow-wrap: anywhere;
+    }
+
+    .track-listens-inline {
+      color: rgba(255,255,255,0.45);
+      font-size: 12px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .track-genre {
       font-size: 13px;
       color: rgba(255, 255, 255, 0.35);
       margin-top: 4px;
-    }
-
-    .track-tags-col,
-    .track-key-col,
-    .track-bpm-col,
-    .track-listens-col {
-      min-height: 38px;
-      font-size: 13px;
-      flex-shrink: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
 
-    .track-tags-col {
-      min-width: 220px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(197, 216, 230, 0.12);
-      border: 1px solid rgba(197, 216, 230, 0.34);
-      color: var(--accent);
-      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+    .track-meta-inline {
+      display: none;
     }
 
-    .beat-track-item:hover .track-tags-col,
-    .beat-track-item.active .track-tags-col {
-      background: rgba(197, 216, 230, 0.2);
-      border-color: rgba(197, 216, 230, 0.55);
-      transform: translateY(-1px);
+    .track-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
     }
 
-    .track-key-col {
-      min-width: 90px;
-      color: rgba(255, 255, 255, 0.78);
+    .track-detail {
+      min-width: 0;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
     }
 
-    .track-bpm-col {
-      min-width: 80px;
-      color: rgba(255, 255, 255, 0.6);
+    .track-detail-label {
+      display: block;
+      color: rgba(255,255,255,0.38);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
     }
 
-    .track-listens-col {
-      min-width: 95px;
-      color: rgba(255,255,255,0.75);
+    .track-detail-value {
+      display: block;
+      font-size: 12px;
+      color: rgba(255,255,255,0.90);
+      line-height: 1.35;
+      word-break: break-word;
+      text-transform: uppercase;
+    }
+
+    .track-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .buy-btn,
@@ -753,17 +774,17 @@
       text-transform: uppercase;
       cursor: pointer;
       transition: all 0.2s ease;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
+      min-width: 130px;
+      white-space: nowrap;
     }
 
-    .buy-btn { width: 130px; }
-
     .download-btn {
-      width: 150px;
       text-decoration: none;
+      min-width: 150px;
     }
 
     .buy-btn:hover,
@@ -1122,193 +1143,6 @@
       color: #fff;
     }
 
-    @media (max-width: 1200px) {
-      .beat-tracklist-header,
-      .beat-track-item {
-        grid-template-columns: 42px 56px 1fr 180px 80px 70px 85px 120px 140px;
-      }
-
-      .track-tags-col {
-        min-width: 180px;
-      }
-
-      .buy-btn {
-        width: 120px;
-      }
-
-      .download-btn {
-        width: 140px;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .beat-track-item {
-        grid-template-columns: 42px 56px 1fr 80px 70px 85px;
-        gap: 12px;
-      }
-
-      .track-tags-col {
-        grid-column: 3 / -1;
-        justify-self: start;
-        min-width: 0;
-        width: fit-content;
-        margin-top: 6px;
-      }
-
-      .buy-btn,
-      .download-btn {
-        grid-column: 1 / -1;
-        width: 100%;
-        margin-top: 8px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .header-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .flex-item.left,
-      .flex-item.right {
-        display: none;
-      }
-
-      .main-nav { justify-content: center; }
-
-      .beat-player-top {
-        grid-template-columns: 96px 1fr;
-      }
-
-      .beat-play-btn {
-        grid-column: 1 / -1;
-        width: 100%;
-        height: 58px;
-        border-radius: 999px;
-      }
-
-      .beat-progress-row { flex-wrap: wrap; }
-
-      .beat-seek-bar {
-        width: 100%;
-        flex: 0 0 100%;
-        order: 3;
-      }
-
-      .beat-tracklist-header { display: none; }
-
-      .beat-track-item {
-        grid-template-columns: 42px 48px 1fr auto auto;
-        align-items: center;
-      }
-
-      .track-key-col,
-      .track-bpm-col,
-      .track-tags-col,
-      .track-listens-col {
-        width: auto;
-        font-size: 12px;
-      }
-
-      .track-tags-col {
-        grid-column: 1 / -1;
-        justify-self: start;
-        margin-top: 6px;
-      }
-
-      .track-listens-col {
-        justify-self: end;
-      }
-
-      .service-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .service-modal-header,
-      .service-modal-body {
-        padding-left: 18px;
-        padding-right: 18px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      :root {
-        --space-25: 16px;
-        --space-50: 30px;
-      }
-
-      .header-row {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-
-      .ghost-logo { display: none; }
-
-      .wordmark {
-        font-size: clamp(28px, 9vw, 36px);
-      }
-
-      .main-nav {
-        gap: 8px 12px;
-      }
-
-      .main-nav a {
-        font-size: 14px;
-      }
-
-      .promo-button {
-        font-size: 18px;
-        min-height: 56px;
-        padding: 10px 16px;
-      }
-
-      .content-section {
-        padding: 50px 16px;
-      }
-
-      .content-section h2 {
-        font-size: 26px;
-      }
-
-      .content-section p {
-        font-size: 16px;
-      }
-
-      .track-thumb {
-        width: 42px;
-        height: 42px;
-      }
-
-      .track-title { font-size: 14px; }
-
-      .track-genre,
-      .track-key-col,
-      .track-bpm-col,
-      .track-tags-col,
-      .track-listens-col {
-        font-size: 11px;
-      }
-
-      .track-tags-col {
-        min-width: 84px;
-        padding: 6px 10px;
-      }
-
-      .newsletter-button,
-      .contact-form button[type="submit"],
-      .card-button {
-        width: 100%;
-      }
-
-      .toast {
-        top: 16px;
-        right: 16px;
-        left: 16px;
-        width: auto;
-      }
-    }
-
     .privacy-consent {
       margin-top: 18px;
     }
@@ -1399,6 +1233,246 @@
       opacity: 0.82;
     }
 
+    @media (max-width: 1200px) {
+      .beat-track-item {
+        grid-template-columns: 52px 56px minmax(0, 1fr);
+      }
+
+      .track-actions {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .beat-player-top {
+        grid-template-columns: 100px 1fr;
+      }
+
+      .beat-play-btn {
+        grid-column: 1 / -1;
+        width: 100%;
+        height: 56px;
+        border-radius: 999px;
+      }
+
+      .track-detail-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .buy-btn,
+      .download-btn {
+        flex: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .flex-item.left,
+      .flex-item.right {
+        display: none;
+      }
+
+      .main-nav { justify-content: center; }
+      .beat-progress-row { flex-wrap: wrap; }
+
+      .beat-seek-bar {
+        width: 100%;
+        flex: 0 0 100%;
+        order: 3;
+      }
+
+      .beat-tracklist-header { display: none; }
+      .service-grid { grid-template-columns: 1fr; }
+
+      .service-modal-header,
+      .service-modal-body {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .beat-player-main {
+        padding: 18px 16px;
+      }
+
+      .beat-player-top {
+        grid-template-columns: 76px 1fr;
+        gap: 14px;
+      }
+
+      .beat-artwork {
+        width: 76px;
+        height: 76px;
+        border-radius: 14px;
+      }
+
+      .beat-now-title {
+        font-size: 22px;
+      }
+
+      .beat-tracklist {
+        padding: 10px 10px 12px;
+      }
+
+      .beat-track-item {
+        grid-template-columns: 38px 42px minmax(0, 1fr) auto;
+        gap: 8px;
+        padding: 10px 12px;
+        align-items: center;
+        border-radius: 14px;
+      }
+
+      .track-play-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 12px;
+      }
+
+      .track-thumb {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+      }
+
+      .track-main {
+        min-width: 0;
+      }
+
+      .track-title-row {
+        display: block;
+      }
+
+      .track-title {
+        font-size: 14px;
+        line-height: 1.15;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .track-listens-inline,
+      .track-genre,
+      .track-detail-grid {
+        display: none;
+      }
+
+      .track-meta-inline {
+        display: block;
+        margin-top: 3px;
+        font-size: 10px;
+        line-height: 1.2;
+        color: rgba(255, 255, 255, 0.48);
+        text-transform: uppercase;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .track-actions {
+        grid-column: auto;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+        gap: 6px;
+      }
+
+      .buy-btn,
+      .download-btn {
+        width: 34px;
+        min-width: 34px;
+        height: 34px;
+        min-height: 34px;
+        padding: 0;
+        border-radius: 999px;
+        gap: 0;
+        flex: 0 0 34px;
+      }
+
+      .buy-btn span,
+      .download-btn span {
+        display: none;
+      }
+
+      .buy-btn i,
+      .download-btn i {
+        font-size: 11px;
+        margin: 0;
+      }
+
+      .beat-filter-input,
+      .beat-filter-clear,
+      .beat-volume-slider {
+        width: 100%;
+      }
+
+      .beat-volume-row {
+        display: grid;
+        grid-template-columns: 18px 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --space-25: 16px;
+        --space-50: 30px;
+      }
+
+      .header-row {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .ghost-logo { display: none; }
+
+      .wordmark {
+        font-size: clamp(28px, 9vw, 36px);
+      }
+
+      .main-nav {
+        gap: 8px 12px;
+      }
+
+      .main-nav a {
+        font-size: 14px;
+      }
+
+      .promo-button {
+        font-size: 18px;
+        min-height: 56px;
+        padding: 10px 16px;
+      }
+
+      .content-section {
+        padding: 50px 16px;
+      }
+
+      .content-section h2 {
+        font-size: 26px;
+      }
+
+      .content-section p {
+        font-size: 16px;
+      }
+
+      .newsletter-button,
+      .contact-form button[type="submit"],
+      .card-button {
+        width: 100%;
+      }
+
+      .toast {
+        top: 16px;
+        right: 16px;
+        left: 16px;
+        width: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1502,13 +1576,8 @@
             <div class="beat-tracklist-header">
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
-              <span class="col-title">Title</span>
-              <span class="col-tags">Tags</span>
-              <span class="col-key">Key</span>
-              <span class="col-bpm">BPM</span>
-              <span class="col-listens">Listens</span>
-              <span class="col-buy">Purchase</span>
-              <span class="col-download">Download</span>
+              <span>Track Details</span>
+              <span style="text-align:right;">Actions</span>
             </div>
             <div class="beat-loading">Loading tracks...</div>
           </div>
@@ -1593,7 +1662,7 @@
               <li>MP3 file</li>
               <li>No tags</li>
             </ul>
-            <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBP_S/view?usp=drive_link" target="_blank" rel="noopener">More Info</a>
+            <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
           </article>
 
           <article class="service-card">
@@ -1606,7 +1675,7 @@
               <li>MP3 + WAV file</li>
               <li>No tags</li>
             </ul>
-            <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBP_S/view?usp=drive_link" target="_blank" rel="noopener">More Info</a>
+            <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
           </article>
 
           <article class="service-card">
@@ -1617,9 +1686,9 @@
               <li>All streaming platforms</li>
               <li>Up to 1 million streams</li>
               <li>3 year term duration</li>
-              <li>MP3 + WAV + stems</li>
+              <li>MP3 + WAV stems</li>
             </ul>
-            <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBP_S/view?usp=drive_link" target="_blank" rel="noopener">More Info</a>
+            <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
           </article>
 
           <article class="service-card">
@@ -1629,10 +1698,10 @@
               <li>Tracked out files for mixing and rearranging</li>
               <li>Unlimited streams</li>
               <li>Unlimited term duration</li>
-              <li>MP3 + WAV + stems</li>
+              <li>MP3 + WAV stems</li>
               <li>No tags</li>
             </ul>
-            <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBP_S/view?usp=drive_link" target="_blank" rel="noopener">More Info</a>
+            <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
           </article>
         </div>
       </section>
@@ -1643,7 +1712,7 @@
 
         <div class="service-grid">
           <article class="service-card">
-            <h3>Melody + Drum Help</h3>
+            <h3>Melody Drum Help</h3>
             <p class="card-price">Production Support</p>
             <ul class="card-list">
               <li>Melody development and drum arrangement in one service</li>
@@ -1677,7 +1746,7 @@
 
           <article class="service-card">
             <h3>MIDI Packs</h3>
-            <p class="card-price">Workflow Tools</p>
+            <p class="card-price">Workflow Tool</p>
             <ul class="card-list">
               <li>Melody and chord ideas to speed up creation</li>
               <li>Useful starting points when inspiration is low</li>
@@ -1690,18 +1759,18 @@
 
       <section id="contact" class="content-section">
         <h2>Contact</h2>
-        <p>Let's make something great together. Reach out via social media or the form below.</p>
+        <p>Lets make something great together. Reach out via social media or the form below.</p>
 
-        <div class="footer-links" style="margin-bottom:30px">
+        <div class="footer-links" style="margin-bottom:30px;">
           <div class="flex flex-wrap social-row">
-            <a class="social-link" href="https://www.instagram.com/arouldavinci/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a class="social-link" href="https://www.instagram.com/arouldavinci" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             <a class="social-link" href="https://x.com/aroulking" target="_blank" rel="noopener" aria-label="X"><i class="fab fa-x-twitter"></i></a>
             <a class="social-link" href="https://www.beatstars.com/aroulking/tracks" target="_blank" rel="noopener" aria-label="BeatStars"><i class="fas fa-music"></i></a>
             <a class="social-link" href="mailto:aroulkingproduction@gmail.com" aria-label="Email"><i class="far fa-envelope"></i></a>
           </div>
         </div>
 
-        <button class="newsletter-button" onclick="window.open('https://arouldavinci.beehiiv.com/subscribe','_blank')">Subscribe to Newsletter</button>
+        <button class="newsletter-button" onclick="window.open('https://arouldavinci.beehiiv.com/subscribe', '_blank')">Subscribe to Newsletter</button>
 
         <div class="contact-form-container">
           <form id="contact-form" class="contact-form" novalidate>
@@ -1719,12 +1788,9 @@
 
             <div class="privacy-consent">
               <label class="checkbox-label" for="privacy-consent">
-                <input class="checkbox-input" type="checkbox" id="privacy-consent" name="privacy_consent" required />
+                <input class="checkbox-input" type="checkbox" id="privacy-consent" name="privacy-consent" required />
                 <span class="checkbox-custom" aria-hidden="true"></span>
-                <span class="checkbox-text">
-                  I have read and accept the
-                  <button type="button" id="open-privacy-modal" class="inline-privacy-link">Privacy Policy</button>.
-                </span>
+                <span class="checkbox-text">I have read and accept the <button type="button" id="open-privacy-modal" class="inline-privacy-link">Privacy Policy</button>.</span>
               </label>
             </div>
 
@@ -1738,18 +1804,15 @@
     <footer id="site-footer">
       <div class="footer-legal">
         <div class="flex flex-wrap legal-row">
-          <span>&copy; © 2026 Aroul Da Vinci. All rights reserved for original music and audio content created by Your Artist Name. Visual materials, videos, images, and other third-party content belong to their respective owners.
-</span>
+          <span>&copy; 2026 Aroul Da Vinci. All rights reserved for original music and audio content created by Your Artist Name. Visual materials, videos, images, and other third-party content belong to their respective owners.</span>
           <a class="legal-link" href="#" id="footer-privacy-link">Privacy</a>
         </div>
       </div>
-
       <div class="mobile-spacer"></div>
     </footer>
   </div>
 
   <div class="service-modal-overlay" id="service-modal-overlay" aria-hidden="true"></div>
-
   <div class="service-modal" id="service-modal" role="dialog" aria-modal="true" aria-labelledby="service-modal-title" aria-describedby="service-modal-description">
     <div class="service-modal-header">
       <div>
@@ -1768,7 +1831,6 @@
   </div>
 
   <div class="service-modal-overlay" id="privacy-modal-overlay" aria-hidden="true"></div>
-
   <div class="service-modal" id="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title" aria-describedby="privacy-modal-description">
     <div class="service-modal-header">
       <div>
@@ -1789,16 +1851,12 @@
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">
-    <div class="toast-icon" id="toast-icon">
-      <i class="fas fa-check"></i>
-    </div>
+    <div class="toast-icon" id="toast-icon"><i class="fas fa-check"></i></div>
     <div class="toast-content">
       <div class="toast-title" id="toast-title">Success</div>
       <div class="toast-message" id="toast-message">Thank you, we will respond soon.</div>
     </div>
-    <button class="toast-close" id="toast-close" type="button" aria-label="Close notification">
-      <i class="fas fa-xmark"></i>
-    </button>
+    <button class="toast-close" id="toast-close" type="button" aria-label="Close notification"><i class="fas fa-xmark"></i></button>
   </div>
 
   <script>
@@ -1819,7 +1877,6 @@
       var currentTimeEl = document.getElementById('player-current-time');
       var durationEl = document.getElementById('player-duration');
       var volumeSlider = document.getElementById('player-volume');
-
       var tagSearchInput = document.getElementById('beat-tag-search');
       var clearFilterBtn = document.getElementById('beat-filter-clear');
       var filterStatusEl = document.getElementById('beat-filter-status');
@@ -1833,16 +1890,16 @@
       var currentFilter = '';
 
       function escapeHtml(str) {
-        return String(str || '')
+        return String(str)
           .replace(/&/g, '&amp;')
           .replace(/</g, '&lt;')
           .replace(/>/g, '&gt;')
-          .replace(/\"/g, '&quot;')
+          .replace(/"/g, '&quot;')
           .replace(/'/g, '&#39;');
       }
 
       function formatTime(sec) {
-        if (isNaN(sec) || sec <= 0) return '0:00';
+        if (isNaN(sec) || sec < 0) return '0:00';
         var m = Math.floor(sec / 60);
         var s = Math.floor(sec % 60);
         return m + ':' + (s < 10 ? '0' + s : s);
@@ -1858,15 +1915,12 @@
         var safeValue = Math.max(0, Math.min(1000, Number(value) || 0));
         seekBar.value = safeValue;
         var pct = (safeValue / 1000) * 100;
-        seekBar.style.background =
-          'linear-gradient(to right, var(--accent) 0%, var(--accent) ' + pct + '%, rgba(255,255,255,0.12) ' + pct + '%, rgba(255,255,255,0.12) 100%)';
+        seekBar.style.background = 'linear-gradient(to right, var(--accent) 0%, var(--accent) ' + pct + '%, rgba(255,255,255,0.12) ' + pct + '%, rgba(255,255,255,0.12) 100%)';
       }
 
       function clearTrackItems() {
         var items = tracklistEl.querySelectorAll('.beat-track-item, .beat-loading, .beat-error, .beat-empty');
-        items.forEach(function (item) {
-          item.remove();
-        });
+        items.forEach(function (item) { item.remove(); });
       }
 
       function setMessage(className, text) {
@@ -1878,43 +1932,31 @@
       }
 
       function joinPath(base, fileName) {
-        return base + '/' + String(fileName || '').replace(/^\/+/, '');
+        return base + '/' + String(fileName).replace(/^\/+/, '');
       }
 
       function buildArtworkCandidates(base, item) {
         var candidates = [];
-
         if (item.artwork) candidates.push(joinPath(base, item.artwork));
         if (item.coverArt) candidates.push(joinPath(base, item.coverArt));
         if (item.cover) candidates.push(joinPath(base, item.cover));
-
         candidates.push(joinPath(base, 'cover.jpg'));
         candidates.push(joinPath(base, 'cover.jpeg'));
         candidates.push(joinPath(base, 'cover.png'));
         candidates.push(joinPath(base, 'cover.webp'));
-
         return candidates.filter(function (src, index, arr) {
           return src && arr.indexOf(src) === index;
         });
       }
 
       function normalizeTrack(item) {
-        var folder = item.folder || '';
-        var cleanFolder = folder.replace(/^\/+|\/+$/g, '');
+        var folder = item.folder || item.slug || item.id || item.title || 'beat';
+        var cleanFolder = String(folder).replace(/^\/+|\/+$/g, '');
         var base = './music/' + cleanFolder;
-
-        var rawTags = Array.isArray(item.tags)
-          ? item.tags
-          : (Array.isArray(item.tag) ? item.tag : (item.tag ? String(item.tag).split(',') : []));
-
-        var tags = rawTags
-          .map(function (t) { return String(t || '').trim(); })
-          .filter(Boolean)
-          .slice(0, 10);
-
+        var rawTags = Array.isArray(item.tags) ? item.tags : Array.isArray(item.tag) ? item.tag : item.tag ? String(item.tag).split(',') : [];
+        var tags = rawTags.map(function (t) { return String(t).trim(); }).filter(Boolean).slice(0, 10);
         var audioPath = item.audio ? joinPath(base, item.audio) : joinPath(base, 'beat.mp3');
         var downloadPath = item.download ? joinPath(base, item.download) : audioPath;
-
         return {
           id: cleanFolder || item.title || Math.random().toString(36).slice(2),
           title: item.title || cleanFolder || 'Untitled Beat',
@@ -1933,11 +1975,7 @@
       }
 
       function getTrackIdentity(track) {
-        return [
-          track.title || '',
-          track.audio || '',
-          track.download || ''
-        ].join('||');
+        return [track.title, track.audio, track.download].join('|');
       }
 
       function getCurrentTrack() {
@@ -1947,31 +1985,21 @@
 
       function updateFilterStatus() {
         if (!filterStatusEl) return;
-
         if (!currentFilter) {
           filterStatusEl.textContent = 'Showing all tracks (' + FILTERED_TRACKS.length + ')';
           return;
         }
-
-        filterStatusEl.textContent =
-          'Showing ' + FILTERED_TRACKS.length + ' result' + (FILTERED_TRACKS.length === 1 ? '' : 's') +
-          ' for "' + currentFilter + '"';
+        filterStatusEl.textContent = 'Showing ' + FILTERED_TRACKS.length + ' result' + (FILTERED_TRACKS.length === 1 ? '' : 's') + ' for "' + currentFilter + '"';
       }
 
       function updateActiveTrackUI() {
         var items = tracklistEl.querySelectorAll('.beat-track-item');
-
         items.forEach(function (el, i) {
           el.classList.toggle('active', i === currentIndex);
-
           var icon = el.querySelector('.track-play-icon i');
           if (!icon) return;
-
-          if (i === currentIndex && isPlaying) {
-            icon.className = 'fas fa-pause';
-          } else {
-            icon.className = 'fas fa-play';
-          }
+          if (i === currentIndex && isPlaying) icon.className = 'fas fa-pause';
+          else icon.className = 'fas fa-play';
         });
       }
 
@@ -1985,7 +2013,6 @@
             imgEl.src = './music/default-cover.jpg';
             return;
           }
-
           var nextSrc = list[index++];
           imgEl.onerror = tryNext;
           imgEl.src = nextSrc;
@@ -1997,20 +2024,15 @@
       function setPlayerMeta(track) {
         setArtworkWithFallback(artworkEl, track.artworkCandidates);
         titleEl.textContent = track.title;
-
-        var joinedTags = (track.tags || []).join(' • ');
+        var joinedTags = track.tags.join(' • ');
         tagsEl.textContent = joinedTags;
         tagsEl.style.display = joinedTags ? 'inline-flex' : 'none';
-
-        keyEl.textContent = track.key || '';
+        keyEl.textContent = track.key;
         keyEl.style.display = track.key ? 'inline-flex' : 'none';
-
         bpmEl.textContent = track.bpm ? track.bpm + ' BPM' : '';
         bpmEl.style.display = track.bpm ? 'inline-flex' : 'none';
-
         listensEl.textContent = formatNumber(track.listenCount) + ' listens';
         listensEl.style.display = 'inline-flex';
-
         currentTimeEl.textContent = '0:00';
         durationEl.textContent = track.duration || '0:00';
         setSeekBarUI(0);
@@ -2024,8 +2046,8 @@
         keyEl.style.display = 'none';
         bpmEl.textContent = '';
         bpmEl.style.display = 'none';
-        listensEl.textContent = '';
-        listensEl.style.display = 'none';
+        listensEl.textContent = '0 listens';
+        listensEl.style.display = 'inline-flex';
         artworkEl.src = './music/default-cover.jpg';
         currentTimeEl.textContent = '0:00';
         durationEl.textContent = '0:00';
@@ -2034,61 +2056,10 @@
 
       function matchesTagFilter(track, query) {
         if (!query) return true;
-
-        var searchableTags = (track.tags || []).join(' ').toLowerCase();
-        var keywords = query
-          .toLowerCase()
-          .split(/\s+/)
-          .map(function (word) { return word.trim(); })
-          .filter(Boolean);
-
+        var searchableTags = track.tags.join(' ').toLowerCase();
+        var keywords = query.toLowerCase().split(' ').map(function (word) { return word.trim(); }).filter(Boolean);
         if (!keywords.length) return true;
-
-        return keywords.every(function (word) {
-          return searchableTags.indexOf(word) !== -1;
-        });
-      }
-
-      function applyFilter(preserveCurrentTrack) {
-        var previousTrack = preserveCurrentTrack ? getCurrentTrack() : null;
-        var previousIdentity = previousTrack ? getTrackIdentity(previousTrack) : null;
-
-        FILTERED_TRACKS = BEAT_TRACKS.filter(function (track) {
-          return matchesTagFilter(track, currentFilter);
-        });
-
-        renderTrackList();
-
-        if (!FILTERED_TRACKS.length) {
-          audio.pause();
-          audio.removeAttribute('src');
-          audio.load();
-          currentIndex = -1;
-          updatePlayUI(false);
-          resetPlayerFallback('No matching beats');
-          return;
-        }
-
-        if (previousIdentity) {
-          var foundIndex = FILTERED_TRACKS.findIndex(function (track) {
-            return getTrackIdentity(track) === previousIdentity;
-          });
-
-          if (foundIndex !== -1) {
-            currentIndex = foundIndex;
-            setPlayerMeta(FILTERED_TRACKS[currentIndex]);
-            updateActiveTrackUI();
-            return;
-          }
-        }
-
-        currentIndex = 0;
-        setPlayerMeta(FILTERED_TRACKS[0]);
-        audio.pause();
-        audio.src = FILTERED_TRACKS[0].audio;
-        audio.load();
-        updatePlayUI(false);
-        updateActiveTrackUI();
+        return keywords.every(function (word) { return searchableTags.indexOf(word) !== -1; });
       }
 
       function renderTrackList() {
@@ -2105,27 +2076,70 @@
           item.className = 'beat-track-item';
           item.setAttribute('data-index', i);
 
-          var tagsText = (track.tags && track.tags.length) ? track.tags.join(' • ') : '--';
+          var tagsText = track.tags && track.tags.length ? track.tags.join(' • ') : '--';
           var safeFileName = (track.title || 'beat')
             .replace(/[<>:"/\\|?*\x00-\x1F]/g, '')
-            .replace(/\s+/g, '_')
+            .replace(/\s+/g, ' ')
             .trim() || 'beat';
 
-          item.innerHTML =
-            '<div class="track-play-icon"><i class="fas fa-play"></i></div>' +
-            '<img class="track-thumb" src="' + escapeHtml(track.artwork) + '" alt="">' +
-            '<div class="track-title-block">' +
-              '<div class="track-title">' + escapeHtml(track.title) + '</div>' +
-              '<div class="track-genre">' + escapeHtml(track.genre) + '</div>' +
-            '</div>' +
-            '<div class="track-tags-col">' + escapeHtml(tagsText) + '</div>' +
-            '<div class="track-key-col">' + escapeHtml(track.key || '--') + '</div>' +
-            '<div class="track-bpm-col">' + escapeHtml(track.bpm || '--') + '</div>' +
-            '<div class="track-listens-col">' + escapeHtml(formatNumber(track.listenCount)) + '</div>' +
-            '<button class="buy-btn" type="button"><i class="fas fa-shopping-cart"></i> Buy</button>' +
-            '<a class="download-btn" href="' + escapeHtml(track.download) + '" download="' + escapeHtml(safeFileName + '.mp3') + '">' +
-              '<i class="fas fa-download"></i> Download' +
-            '</a>';
+          var metaInline = [
+            track.genre || '',
+            track.key || '--',
+            track.bpm ? track.bpm + ' BPM' : '--',
+            track.duration || '--'
+          ].filter(Boolean).join(' • ');
+
+          item.innerHTML = `
+            <div class="track-play-icon"><i class="fas fa-play"></i></div>
+
+            <img class="track-thumb" src="${escapeHtml(track.artwork)}" alt="">
+
+            <div class="track-main">
+              <div class="track-title-row">
+                <div class="track-title">${escapeHtml(track.title)}</div>
+                <div class="track-listens-inline">${escapeHtml(formatNumber(track.listenCount))} listens</div>
+              </div>
+
+              <div class="track-genre">${escapeHtml(track.genre || '')}</div>
+              <div class="track-meta-inline">${escapeHtml(metaInline)}</div>
+
+              <div class="track-detail-grid">
+                <div class="track-detail">
+                  <span class="track-detail-label">Tags</span>
+                  <span class="track-detail-value">${escapeHtml(tagsText)}</span>
+                </div>
+                <div class="track-detail">
+                  <span class="track-detail-label">Key</span>
+                  <span class="track-detail-value">${escapeHtml(track.key || '--')}</span>
+                </div>
+                <div class="track-detail">
+                  <span class="track-detail-label">BPM</span>
+                  <span class="track-detail-value">${escapeHtml(track.bpm || '--')}</span>
+                </div>
+                <div class="track-detail">
+                  <span class="track-detail-label">Length</span>
+                  <span class="track-detail-value">${escapeHtml(track.duration || '--')}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="track-actions">
+              <button class="buy-btn" type="button" aria-label="Buy">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Buy</span>
+              </button>
+
+              <a
+                class="download-btn"
+                href="${escapeHtml(track.download)}"
+                download="${escapeHtml(safeFileName)}.mp3"
+                aria-label="Download"
+              >
+                <i class="fas fa-download"></i>
+                <span>Download</span>
+              </a>
+            </div>
+          `;
 
           var thumb = item.querySelector('.track-thumb');
           setArtworkWithFallback(thumb, track.artworkCandidates);
@@ -2156,24 +2170,59 @@
         updateActiveTrackUI();
       }
 
+      function applyFilter(preserveCurrentTrack) {
+        var previousTrack = preserveCurrentTrack ? getCurrentTrack() : null;
+        var previousIdentity = previousTrack ? getTrackIdentity(previousTrack) : null;
+
+        FILTERED_TRACKS = BEAT_TRACKS.filter(function (track) {
+          return matchesTagFilter(track, currentFilter);
+        });
+
+        renderTrackList();
+
+        if (!FILTERED_TRACKS.length) {
+          audio.pause();
+          audio.removeAttribute('src');
+          audio.load();
+          currentIndex = -1;
+          updatePlayUI(false);
+          resetPlayerFallback('No matching beats');
+          return;
+        }
+
+        if (previousIdentity) {
+          var foundIndex = FILTERED_TRACKS.findIndex(function (track) {
+            return getTrackIdentity(track) === previousIdentity;
+          });
+          if (foundIndex !== -1) {
+            currentIndex = foundIndex;
+            setPlayerMeta(FILTERED_TRACKS[currentIndex]);
+            updateActiveTrackUI();
+            return;
+          }
+        }
+
+        currentIndex = 0;
+        setPlayerMeta(FILTERED_TRACKS[0]);
+        audio.pause();
+        audio.src = FILTERED_TRACKS[0].audio;
+        audio.load();
+        updatePlayUI(false);
+        updateActiveTrackUI();
+      }
+
       function loadTrack(index, autoplay) {
         if (!FILTERED_TRACKS[index]) return;
-
         currentIndex = index;
         var track = FILTERED_TRACKS[index];
-
         audio.pause();
         audio.removeAttribute('src');
         audio.load();
-
         setPlayerMeta(track);
         audio.src = track.audio;
         audio.load();
         updateActiveTrackUI();
-
-        if (autoplay) {
-          audio.play().catch(function () {});
-        }
+        if (autoplay) audio.play().catch(function () {});
       }
 
       function selectTrack(index, autoplay) {
@@ -2182,21 +2231,13 @@
 
       function togglePlay() {
         if (!FILTERED_TRACKS.length) return;
-
         if (currentIndex === -1) {
           selectTrack(0, true);
           return;
         }
-
-        if (!audio.src) {
-          loadTrack(currentIndex, false);
-        }
-
-        if (isPlaying) {
-          audio.pause();
-        } else {
-          audio.play().catch(function () {});
-        }
+        if (!audio.src) loadTrack(currentIndex, false);
+        if (isPlaying) audio.pause();
+        else audio.play().catch(function () {});
       }
 
       function updatePlayUI(playing) {
@@ -2209,13 +2250,11 @@
         try {
           var response = await fetch('./music/beats.json', { cache: 'no-store' });
           if (!response.ok) throw new Error('Cannot load beats.json');
-
           var data = await response.json();
           if (!Array.isArray(data)) throw new Error('beats.json must be an array');
 
           BEAT_TRACKS = data.map(normalizeTrack);
           FILTERED_TRACKS = BEAT_TRACKS.slice();
-
           renderTrackList();
 
           if (FILTERED_TRACKS.length) {
@@ -2245,9 +2284,8 @@
       });
 
       audio.addEventListener('ended', function () {
-        if (currentIndex < FILTERED_TRACKS.length - 1) {
-          selectTrack(currentIndex + 1, true);
-        } else {
+        if (currentIndex < FILTERED_TRACKS.length - 1) selectTrack(currentIndex + 1, true);
+        else {
           updatePlayUI(false);
           setSeekBarUI(1000);
         }
@@ -2255,9 +2293,7 @@
 
       audio.addEventListener('loadedmetadata', function () {
         durationEl.textContent = formatTime(audio.duration);
-        if (!isUserSeeking) {
-          setSeekBarUI(audio.duration ? (audio.currentTime / audio.duration) * 1000 : 0);
-        }
+        if (!isUserSeeking) setSeekBarUI(audio.duration ? (audio.currentTime / audio.duration) * 1000 : 0);
       });
 
       audio.addEventListener('timeupdate', function () {
@@ -2282,9 +2318,7 @@
 
       function releaseSeek() {
         isUserSeeking = false;
-        if (wasPlayingBeforeSeek && audio.paused) {
-          audio.play().catch(function () {});
-        }
+        if (wasPlayingBeforeSeek && audio.paused) audio.play().catch(function () {});
         wasPlayingBeforeSeek = false;
       }
 
@@ -2292,20 +2326,11 @@
       seekBar.addEventListener('mouseup', releaseSeek);
       seekBar.addEventListener('touchend', releaseSeek);
       seekBar.addEventListener('pointerup', releaseSeek);
-
       seekBar.addEventListener('keydown', function () {
         wasPlayingBeforeSeek = isPlaying;
       });
-
       seekBar.addEventListener('keyup', function (e) {
-        if (
-          e.key === 'ArrowLeft' ||
-          e.key === 'ArrowRight' ||
-          e.key === 'ArrowUp' ||
-          e.key === 'ArrowDown' ||
-          e.key === 'Home' ||
-          e.key === 'End'
-        ) {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Home' || e.key === 'End') {
           if (audio.duration) {
             var t = (Number(seekBar.value) / 1000) * audio.duration;
             audio.currentTime = t;
@@ -2349,6 +2374,7 @@
       var toastIcon = document.getElementById('toast-icon');
       var toastClose = document.getElementById('toast-close');
       var toastTimer;
+      var privacyCheckbox = document.getElementById('privacy-consent');
 
       function hideToast() {
         toast.classList.remove('show');
@@ -2356,14 +2382,12 @@
 
       function showToast(type, title, message) {
         clearTimeout(toastTimer);
-
         toast.className = 'toast ' + type;
         toastTitle.textContent = title;
         toastMessage.textContent = message;
         toastIcon.innerHTML = type === 'success'
           ? '<i class="fas fa-check"></i>'
           : '<i class="fas fa-triangle-exclamation"></i>';
-
         toast.classList.add('show');
         toastTimer = setTimeout(hideToast, 4000);
       }
@@ -2372,49 +2396,45 @@
         toastClose.addEventListener('click', hideToast);
       }
 
-      var privacyCheckbox = document.getElementById('privacy-consent');
+      if (!form) return;
 
-      if (form) {
-        form.addEventListener('submit', function (event) {
-          event.preventDefault();
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-          if (privacyCheckbox && !privacyCheckbox.checked) {
-            privacyCheckbox.focus({ preventScroll: true });
-            showToast('error', 'Privacy required', 'Please accept the Privacy Policy before submitting.');
-            return;
-          }
+        if (privacyCheckbox && !privacyCheckbox.checked) {
+          privacyCheckbox.focus({ preventScroll: true });
+          showToast('error', 'Privacy required', 'Please accept the Privacy Policy before submitting.');
+          return;
+        }
 
-          if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
-          }
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
 
-          var submitBtn = form.querySelector('button[type="submit"]');
+        var submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Submitting...';
+        }
 
-          if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
-          }
+        if (statusEl) {
+          statusEl.textContent = '';
+          statusEl.className = 'form-status';
+        }
 
-          if (statusEl) {
-            statusEl.textContent = '';
-            statusEl.className = 'form-status';
-          }
+        var formData = new FormData(form);
+        var formParams = new URLSearchParams(formData).toString();
 
-          var formData = new FormData(form);
-          var formParams = new URLSearchParams(formData).toString();
-
-          fetch('https://script.google.com/macros/s/AKfycbxFylcaWg3yvrwA3fInDP95wYabAuSdfsAjdvGdST4GOgEb5UlRhXzblJhefCva1yti/exec', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: formParams
-          })
+        fetch('https://script.google.com/macros/s/AKfycbxFylcaWg3yvrwA3fInDP95wYabAuSdfsAjdvGdST4GOgEb5UlRhXzblJhefCva1yti/exec', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: formParams
+        })
           .then(function (response) {
-            if (!response.ok) {
-              throw new Error('Request failed');
-            }
+            if (!response.ok) throw new Error('Request failed');
             return response.text();
           })
           .then(function () {
@@ -2430,8 +2450,7 @@
               submitBtn.textContent = 'Submit';
             }
           });
-        });
-      }
+      });
     })();
   </script>
 
@@ -2455,7 +2474,6 @@
         priceEl.textContent = button.getAttribute('data-price');
         textOneEl.textContent = button.getAttribute('data-paragraph-one');
         textTwoEl.textContent = button.getAttribute('data-paragraph-two');
-
         modal.classList.add('active');
         overlay.classList.add('active');
         overlay.setAttribute('aria-hidden', 'false');
@@ -2468,10 +2486,7 @@
         overlay.classList.remove('active');
         overlay.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('modal-open');
-
-        if (lastFocusedButton) {
-          lastFocusedButton.focus();
-        }
+        if (lastFocusedButton) lastFocusedButton.focus();
       }
 
       infoButtons.forEach(function (button) {
@@ -2482,11 +2497,8 @@
 
       closeBtn.addEventListener('click', closeModal);
       overlay.addEventListener('click', closeModal);
-
       document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && modal.classList.contains('active')) {
-          closeModal();
-        }
+        if (event.key === 'Escape' && modal.classList.contains('active')) closeModal();
       });
     })();
   </script>
@@ -2537,12 +2549,9 @@
       if (privacyOverlay) privacyOverlay.addEventListener('click', closePrivacyModal);
 
       document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && privacyModal.classList.contains('active')) {
-          closePrivacyModal();
-        }
+        if (event.key === 'Escape' && privacyModal.classList.contains('active')) closePrivacyModal();
       });
     })();
   </script>
-
 </body>
 </html>
