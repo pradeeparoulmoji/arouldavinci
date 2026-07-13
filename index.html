@@ -33,7 +33,7 @@
     body {
       color: var(--primary);
       font-family: 'cxoxo', system-ui, sans-serif;
-      overflow-x: hidden;
+      overflow-x: clip;
       -webkit-tap-highlight-color: transparent;
       overscroll-behavior-y: none;
     }
@@ -373,7 +373,8 @@
 
     .beat-now-tag,
     .beat-now-key,
-    .beat-now-bpm {
+    .beat-now-bpm,
+    .beat-now-listens {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -398,6 +399,12 @@
       background: rgba(255, 255, 255, 0.06);
       color: rgba(255, 255, 255, 0.82);
       border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .beat-now-listens {
+      background: rgba(197, 216, 230, 0.08);
+      color: rgba(255,255,255,0.9);
+      border-color: rgba(197, 216, 230, 0.22);
     }
 
     .beat-play-btn {
@@ -602,7 +609,7 @@
 
     .beat-tracklist-header {
       display: grid;
-      grid-template-columns: 42px 56px 1fr 220px 90px 80px 130px 150px;
+      grid-template-columns: 42px 56px 1fr 220px 90px 80px 95px 130px 150px;
       align-items: center;
       gap: 14px;
       padding: 14px 22px;
@@ -617,12 +624,13 @@
     .beat-tracklist-header .col-tags { grid-column: 4; text-align: center; }
     .beat-tracklist-header .col-key { grid-column: 5; text-align: center; }
     .beat-tracklist-header .col-bpm { grid-column: 6; text-align: center; }
-    .beat-tracklist-header .col-buy { grid-column: 7; text-align: center; }
-    .beat-tracklist-header .col-download { grid-column: 8; text-align: center; }
+    .beat-tracklist-header .col-listens { grid-column: 7; text-align: center; }
+    .beat-tracklist-header .col-buy { grid-column: 8; text-align: center; }
+    .beat-tracklist-header .col-download { grid-column: 9; text-align: center; }
 
     .beat-track-item {
       display: grid;
-      grid-template-columns: 42px 56px 1fr 220px 90px 80px 130px 150px;
+      grid-template-columns: 42px 56px 1fr 220px 90px 80px 95px 130px 150px;
       align-items: center;
       gap: 14px;
       padding: 18px 22px;
@@ -686,7 +694,8 @@
 
     .track-tags-col,
     .track-key-col,
-    .track-bpm-col {
+    .track-bpm-col,
+    .track-listens-col {
       min-height: 38px;
       font-size: 13px;
       flex-shrink: 0;
@@ -725,6 +734,11 @@
       color: rgba(255, 255, 255, 0.6);
     }
 
+    .track-listens-col {
+      min-width: 95px;
+      color: rgba(255,255,255,0.75);
+    }
+
     .buy-btn,
     .download-btn {
       min-height: 40px;
@@ -745,9 +759,7 @@
       gap: 6px;
     }
 
-    .buy-btn {
-      width: 130px;
-    }
+    .buy-btn { width: 130px; }
 
     .download-btn {
       width: 150px;
@@ -1018,10 +1030,102 @@
       line-height: 1.7;
     }
 
-    @media (max-width: 1100px) {
+    .toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: min(420px, calc(100vw - 32px));
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px;
+      background: rgba(12, 12, 12, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      color: #fff;
+      z-index: 10000;
+      opacity: 0;
+      transform: translateY(-12px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .toast.success {
+      border-color: rgba(111, 207, 151, 0.35);
+    }
+
+    .toast.error {
+      border-color: rgba(235, 87, 87, 0.35);
+    }
+
+    .toast-icon {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(197, 216, 230, 0.12);
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    .toast.success .toast-icon {
+      background: rgba(111, 207, 151, 0.14);
+      color: #6fcf97;
+    }
+
+    .toast.error .toast-icon {
+      background: rgba(235, 87, 87, 0.14);
+      color: #eb5757;
+    }
+
+    .toast-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .toast-title {
+      font-family: 'cxoxo', system-ui, sans-serif;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .toast-message {
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .toast-close {
+      border: 0;
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      font-size: 16px;
+      padding: 4px;
+    }
+
+    .toast-close:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 1200px) {
       .beat-tracklist-header,
       .beat-track-item {
-        grid-template-columns: 42px 56px 1fr 180px 80px 70px 120px 140px;
+        grid-template-columns: 42px 56px 1fr 180px 80px 70px 85px 120px 140px;
       }
 
       .track-tags-col {
@@ -1039,7 +1143,7 @@
 
     @media (max-width: 900px) {
       .beat-track-item {
-        grid-template-columns: 42px 56px 1fr 90px 80px;
+        grid-template-columns: 42px 56px 1fr 80px 70px 85px;
         gap: 12px;
       }
 
@@ -1101,7 +1205,8 @@
 
       .track-key-col,
       .track-bpm-col,
-      .track-tags-col {
+      .track-tags-col,
+      .track-listens-col {
         width: auto;
         font-size: 12px;
       }
@@ -1110,6 +1215,10 @@
         grid-column: 1 / -1;
         justify-self: start;
         margin-top: 6px;
+      }
+
+      .track-listens-col {
+        justify-self: end;
       }
 
       .service-grid {
@@ -1176,7 +1285,8 @@
       .track-genre,
       .track-key-col,
       .track-bpm-col,
-      .track-tags-col {
+      .track-tags-col,
+      .track-listens-col {
         font-size: 11px;
       }
 
@@ -1190,7 +1300,105 @@
       .card-button {
         width: 100%;
       }
+
+      .toast {
+        top: 16px;
+        right: 16px;
+        left: 16px;
+        width: auto;
+      }
     }
+
+    .privacy-consent {
+      margin-top: 18px;
+    }
+
+    .checkbox-label {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+      text-transform: none;
+      color: rgba(255,255,255,0.82);
+      margin-top: 0;
+      margin-bottom: 0;
+      cursor: pointer;
+    }
+
+    .checkbox-input {
+      position: absolute;
+      left: 0;
+      top: 1px;
+      width: 22px;
+      height: 22px;
+      margin: 0;
+      opacity: 0;
+      pointer-events: auto;
+    }
+
+    .checkbox-custom {
+      width: 22px;
+      height: 22px;
+      margin-top: 1px;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.45);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.05);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      position: relative;
+    }
+
+    .checkbox-custom::after {
+      content: "✓";
+      color: #000;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .checkbox-input:checked + .checkbox-custom {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(197, 216, 230, 0.18);
+    }
+
+    .checkbox-input:checked + .checkbox-custom::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .checkbox-input:focus-visible + .checkbox-custom {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .checkbox-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .inline-privacy-link {
+      background: none;
+      border: 0;
+      color: var(--accent);
+      padding: 0;
+      font: inherit;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .inline-privacy-link:hover {
+      opacity: 0.82;
+    }
+
   </style>
 </head>
 <body>
@@ -1257,6 +1465,7 @@
                   <span class="beat-now-tag" id="player-tags"></span>
                   <span class="beat-now-key" id="player-key"></span>
                   <span class="beat-now-bpm" id="player-bpm"></span>
+                  <span class="beat-now-listens" id="player-listens"></span>
                 </div>
               </div>
               <button class="beat-play-btn" id="player-play-btn" type="button" aria-label="Play / Pause">
@@ -1297,6 +1506,7 @@
               <span class="col-tags">Tags</span>
               <span class="col-key">Key</span>
               <span class="col-bpm">BPM</span>
+              <span class="col-listens">Listens</span>
               <span class="col-buy">Purchase</span>
               <span class="col-download">Download</span>
             </div>
@@ -1484,7 +1694,7 @@
 
         <div class="footer-links" style="margin-bottom:30px">
           <div class="flex flex-wrap social-row">
-            <a class="social-link" href="https://www.instagram.com/aroulbidda_music/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a class="social-link" href="https://www.instagram.com/arouldavinci/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             <a class="social-link" href="https://x.com/aroulking" target="_blank" rel="noopener" aria-label="X"><i class="fab fa-x-twitter"></i></a>
             <a class="social-link" href="https://www.beatstars.com/aroulking/tracks" target="_blank" rel="noopener" aria-label="BeatStars"><i class="fas fa-music"></i></a>
             <a class="social-link" href="mailto:aroulkingproduction@gmail.com" aria-label="Email"><i class="far fa-envelope"></i></a>
@@ -1507,6 +1717,17 @@
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="4" required spellcheck="true"></textarea>
 
+            <div class="privacy-consent">
+              <label class="checkbox-label" for="privacy-consent">
+                <input class="checkbox-input" type="checkbox" id="privacy-consent" name="privacy_consent" required />
+                <span class="checkbox-custom" aria-hidden="true"></span>
+                <span class="checkbox-text">
+                  I have read and accept the
+                  <button type="button" id="open-privacy-modal" class="inline-privacy-link">Privacy Policy</button>.
+                </span>
+              </label>
+            </div>
+
             <button type="submit">Submit</button>
             <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
           </form>
@@ -1515,22 +1736,11 @@
     </main>
 
     <footer id="site-footer">
-      <div class="footer-links">
-        <div class="flex flex-wrap social-row">
-          <a class="social-link" href="https://www.instagram.com/aroulbidda_music/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a class="social-link" href="https://x.com/aroulking" target="_blank" rel="noopener" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-          <a class="social-link" href="https://www.beatstars.com/aroulking/tracks" target="_blank" rel="noopener" aria-label="BeatStars"><i class="fas fa-music"></i></a>
-          <a class="social-link" href="https://arouldavinci.beehiiv.com/subscribe" target="_blank" rel="noopener" aria-label="Newsletter"><i class="fas fa-newspaper"></i></a>
-          <a class="social-link" href="mailto:aroulkingproduction@gmail.com" aria-label="Email"><i class="far fa-envelope"></i></a>
-        </div>
-      </div>
-
       <div class="footer-legal">
         <div class="flex flex-wrap legal-row">
-          <span>&copy; 2024 Pradeep Aroulmoji &mdash; All Rights Reserved</span>
-          <a class="legal-link" href="#">Terms</a>
-          <a class="legal-link" href="#">Privacy</a>
-          <a class="legal-link" href="#">Cookie Choices</a>
+          <span>&copy; © 2026 Aroul Da Vinci. All rights reserved for original music and audio content created by Your Artist Name. Visual materials, videos, images, and other third-party content belong to their respective owners.
+</span>
+          <a class="legal-link" href="#" id="footer-privacy-link">Privacy</a>
         </div>
       </div>
 
@@ -1557,6 +1767,40 @@
     </div>
   </div>
 
+  <div class="service-modal-overlay" id="privacy-modal-overlay" aria-hidden="true"></div>
+
+  <div class="service-modal" id="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title" aria-describedby="privacy-modal-description">
+    <div class="service-modal-header">
+      <div>
+        <h3 class="service-modal-title" id="privacy-modal-title">Privacy Policy</h3>
+        <p class="service-modal-price">For users in Italy and the EU</p>
+      </div>
+      <button class="service-modal-close" id="privacy-modal-close" type="button" aria-label="Close privacy policy">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <div class="service-modal-body" id="privacy-modal-description">
+      <p class="service-modal-text">This website may collect the data you submit through the contact form: name, email address, subject, and message.</p>
+      <p class="service-modal-text">This data is used only to respond to your inquiry, discuss music production, licensing, collaborations, or customer support.</p>
+      <p class="service-modal-text">Form submissions are sent to an external Google Apps Script endpoint for processing. External platforms linked on this website may include Instagram, X, BeatStars, Beehiiv, Google Drive, and email services.</p>
+      <p class="service-modal-text">If you are in Italy or the EU, you may have rights under GDPR, including access, correction, deletion, restriction, objection, and the right to contact the Garante per la protezione dei dati personali.</p>
+      <p class="service-modal-note">Data Controller: Pradeep Aroulmoji. Contact: aroulkingproduction@gmail.com</p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">
+    <div class="toast-icon" id="toast-icon">
+      <i class="fas fa-check"></i>
+    </div>
+    <div class="toast-content">
+      <div class="toast-title" id="toast-title">Success</div>
+      <div class="toast-message" id="toast-message">Thank you, we will respond soon.</div>
+    </div>
+    <button class="toast-close" id="toast-close" type="button" aria-label="Close notification">
+      <i class="fas fa-xmark"></i>
+    </button>
+  </div>
+
   <script>
     (function () {
       'use strict';
@@ -1570,6 +1814,7 @@
       var tagsEl = document.getElementById('player-tags');
       var keyEl = document.getElementById('player-key');
       var bpmEl = document.getElementById('player-bpm');
+      var listensEl = document.getElementById('player-listens');
       var seekBar = document.getElementById('player-seek-bar');
       var currentTimeEl = document.getElementById('player-current-time');
       var durationEl = document.getElementById('player-duration');
@@ -1592,7 +1837,7 @@
           .replace(/&/g, '&amp;')
           .replace(/</g, '&lt;')
           .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
+          .replace(/\"/g, '&quot;')
           .replace(/'/g, '&#39;');
       }
 
@@ -1601,6 +1846,12 @@
         var m = Math.floor(sec / 60);
         var s = Math.floor(sec % 60);
         return m + ':' + (s < 10 ? '0' + s : s);
+      }
+
+      function formatNumber(value) {
+        var n = Number(value);
+        if (!isFinite(n)) return '0';
+        return n.toLocaleString();
       }
 
       function setSeekBarUI(value) {
@@ -1626,6 +1877,27 @@
         tracklistEl.appendChild(div);
       }
 
+      function joinPath(base, fileName) {
+        return base + '/' + String(fileName || '').replace(/^\/+/, '');
+      }
+
+      function buildArtworkCandidates(base, item) {
+        var candidates = [];
+
+        if (item.artwork) candidates.push(joinPath(base, item.artwork));
+        if (item.coverArt) candidates.push(joinPath(base, item.coverArt));
+        if (item.cover) candidates.push(joinPath(base, item.cover));
+
+        candidates.push(joinPath(base, 'cover.jpg'));
+        candidates.push(joinPath(base, 'cover.jpeg'));
+        candidates.push(joinPath(base, 'cover.png'));
+        candidates.push(joinPath(base, 'cover.webp'));
+
+        return candidates.filter(function (src, index, arr) {
+          return src && arr.indexOf(src) === index;
+        });
+      }
+
       function normalizeTrack(item) {
         var folder = item.folder || '';
         var cleanFolder = folder.replace(/^\/+|\/+$/g, '');
@@ -1633,15 +1905,15 @@
 
         var rawTags = Array.isArray(item.tags)
           ? item.tags
-          : (item.tag ? String(item.tag).split(',') : []);
+          : (Array.isArray(item.tag) ? item.tag : (item.tag ? String(item.tag).split(',') : []));
 
         var tags = rawTags
           .map(function (t) { return String(t || '').trim(); })
           .filter(Boolean)
           .slice(0, 10);
 
-        var audioPath = item.audio ? base + '/' + item.audio : base + '/beat.mp3';
-        var downloadPath = item.download ? base + '/' + item.download : audioPath;
+        var audioPath = item.audio ? joinPath(base, item.audio) : joinPath(base, 'beat.mp3');
+        var downloadPath = item.download ? joinPath(base, item.download) : audioPath;
 
         return {
           id: cleanFolder || item.title || Math.random().toString(36).slice(2),
@@ -1651,10 +1923,12 @@
           key: item.key || '',
           tags: tags,
           duration: item.duration || '',
-          artwork: item.artwork ? base + '/' + item.artwork : base + '/cover.jpg',
+          artworkCandidates: buildArtworkCandidates(base, item),
+          artwork: buildArtworkCandidates(base, item)[0] || './music/default-cover.jpg',
           audio: audioPath,
           download: downloadPath,
-          buyUrl: item.buyUrl || ''
+          buyUrl: item.buyUrl || '',
+          listenCount: Number(item.listenCount || item.plays || item.playCount || 0)
         };
       }
 
@@ -1701,8 +1975,27 @@
         });
       }
 
+      function setArtworkWithFallback(imgEl, candidates) {
+        var list = Array.isArray(candidates) && candidates.length ? candidates.slice() : ['./music/default-cover.jpg'];
+        var index = 0;
+
+        function tryNext() {
+          if (index >= list.length) {
+            imgEl.onerror = null;
+            imgEl.src = './music/default-cover.jpg';
+            return;
+          }
+
+          var nextSrc = list[index++];
+          imgEl.onerror = tryNext;
+          imgEl.src = nextSrc;
+        }
+
+        tryNext();
+      }
+
       function setPlayerMeta(track) {
-        artworkEl.src = track.artwork;
+        setArtworkWithFallback(artworkEl, track.artworkCandidates);
         titleEl.textContent = track.title;
 
         var joinedTags = (track.tags || []).join(' • ');
@@ -1714,6 +2007,9 @@
 
         bpmEl.textContent = track.bpm ? track.bpm + ' BPM' : '';
         bpmEl.style.display = track.bpm ? 'inline-flex' : 'none';
+
+        listensEl.textContent = formatNumber(track.listenCount) + ' listens';
+        listensEl.style.display = 'inline-flex';
 
         currentTimeEl.textContent = '0:00';
         durationEl.textContent = track.duration || '0:00';
@@ -1728,6 +2024,8 @@
         keyEl.style.display = 'none';
         bpmEl.textContent = '';
         bpmEl.style.display = 'none';
+        listensEl.textContent = '';
+        listensEl.style.display = 'none';
         artworkEl.src = './music/default-cover.jpg';
         currentTimeEl.textContent = '0:00';
         durationEl.textContent = '0:00';
@@ -1823,10 +2121,14 @@
             '<div class="track-tags-col">' + escapeHtml(tagsText) + '</div>' +
             '<div class="track-key-col">' + escapeHtml(track.key || '--') + '</div>' +
             '<div class="track-bpm-col">' + escapeHtml(track.bpm || '--') + '</div>' +
+            '<div class="track-listens-col">' + escapeHtml(formatNumber(track.listenCount)) + '</div>' +
             '<button class="buy-btn" type="button"><i class="fas fa-shopping-cart"></i> Buy</button>' +
             '<a class="download-btn" href="' + escapeHtml(track.download) + '" download="' + escapeHtml(safeFileName + '.mp3') + '">' +
               '<i class="fas fa-download"></i> Download' +
             '</a>';
+
+          var thumb = item.querySelector('.track-thumb');
+          setArtworkWithFallback(thumb, track.artworkCandidates);
 
           item.addEventListener('click', function (e) {
             if (e.target.closest('.buy-btn')) {
@@ -1964,14 +2266,6 @@
         setSeekBarUI((audio.currentTime / audio.duration) * 1000);
       });
 
-      // --- Seek bar: live scrub fix ---
-      // Previously this only *previewed* the time on 'input' and relied on
-      // 'change'/'mouseup'/'touchend' to actually move playback. Those events
-      // don't fire reliably for a simple click on some browsers/touch devices,
-      // so the actual seek never happened and the track kept playing from
-      // wherever it already was (perceived as "restarting"). Now we seek the
-      // audio directly on every 'input' event, which fires immediately even
-      // for a single click/tap - so it always jumps to the clicked point.
       seekBar.addEventListener('pointerdown', function () {
         isUserSeeking = true;
         wasPlayingBeforeSeek = isPlaying;
@@ -2049,16 +2343,46 @@
 
       var form = document.getElementById('contact-form');
       var statusEl = document.getElementById('form-status');
+      var toast = document.getElementById('toast');
+      var toastTitle = document.getElementById('toast-title');
+      var toastMessage = document.getElementById('toast-message');
+      var toastIcon = document.getElementById('toast-icon');
+      var toastClose = document.getElementById('toast-close');
+      var toastTimer;
 
-      function setStatus(msg, type) {
-        if (!statusEl) return;
-        statusEl.textContent = msg;
-        statusEl.className = 'form-status ' + (type || '');
+      function hideToast() {
+        toast.classList.remove('show');
       }
+
+      function showToast(type, title, message) {
+        clearTimeout(toastTimer);
+
+        toast.className = 'toast ' + type;
+        toastTitle.textContent = title;
+        toastMessage.textContent = message;
+        toastIcon.innerHTML = type === 'success'
+          ? '<i class="fas fa-check"></i>'
+          : '<i class="fas fa-triangle-exclamation"></i>';
+
+        toast.classList.add('show');
+        toastTimer = setTimeout(hideToast, 4000);
+      }
+
+      if (toastClose) {
+        toastClose.addEventListener('click', hideToast);
+      }
+
+      var privacyCheckbox = document.getElementById('privacy-consent');
 
       if (form) {
         form.addEventListener('submit', function (event) {
           event.preventDefault();
+
+          if (privacyCheckbox && !privacyCheckbox.checked) {
+            privacyCheckbox.focus({ preventScroll: true });
+            showToast('error', 'Privacy required', 'Please accept the Privacy Policy before submitting.');
+            return;
+          }
 
           if (!form.checkValidity()) {
             form.reportValidity();
@@ -2066,17 +2390,21 @@
           }
 
           var submitBtn = form.querySelector('button[type="submit"]');
+
           if (submitBtn) {
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
           }
 
-          setStatus('', '');
+          if (statusEl) {
+            statusEl.textContent = '';
+            statusEl.className = 'form-status';
+          }
 
           var formData = new FormData(form);
           var formParams = new URLSearchParams(formData).toString();
 
-          fetch('https://script.google.com/macros/s/AKfycbxELZX64kjG56nWVRlMm33TdV05N-yLAY0yAge4CZcWWBVgQm5ObbTpiHEvARJeHo59nw/exec', {
+          fetch('https://script.google.com/macros/s/AKfycbxFylcaWg3yvrwA3fInDP95wYabAuSdfsAjdvGdST4GOgEb5UlRhXzblJhefCva1yti/exec', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -2084,14 +2412,17 @@
             body: formParams
           })
           .then(function (response) {
+            if (!response.ok) {
+              throw new Error('Request failed');
+            }
             return response.text();
           })
           .then(function () {
-            setStatus('Form submitted successfully!', 'success');
             form.reset();
+            showToast('success', 'Message sent', 'Thank you, we will respond soon.');
           })
           .catch(function () {
-            setStatus('Failed to submit form. Please try again later.', 'error');
+            showToast('error', 'Submission failed', 'Something went wrong. Please try again.');
           })
           .finally(function () {
             if (submitBtn) {
@@ -2159,5 +2490,59 @@
       });
     })();
   </script>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var privacyModal = document.getElementById('privacy-modal');
+      var privacyOverlay = document.getElementById('privacy-modal-overlay');
+      var privacyClose = document.getElementById('privacy-modal-close');
+      var footerPrivacyLink = document.getElementById('footer-privacy-link');
+      var formPrivacyLink = document.getElementById('open-privacy-modal');
+      var lastPrivacyTrigger = null;
+
+      function openPrivacyModal(trigger) {
+        lastPrivacyTrigger = trigger || null;
+        privacyModal.classList.add('active');
+        privacyOverlay.classList.add('active');
+        privacyOverlay.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        privacyClose.focus();
+      }
+
+      function closePrivacyModal() {
+        privacyModal.classList.remove('active');
+        privacyOverlay.classList.remove('active');
+        privacyOverlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        if (lastPrivacyTrigger) lastPrivacyTrigger.focus();
+      }
+
+      if (footerPrivacyLink) {
+        footerPrivacyLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          openPrivacyModal(footerPrivacyLink);
+        });
+      }
+
+      if (formPrivacyLink) {
+        formPrivacyLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          openPrivacyModal(formPrivacyLink);
+        });
+      }
+
+      if (privacyClose) privacyClose.addEventListener('click', closePrivacyModal);
+      if (privacyOverlay) privacyOverlay.addEventListener('click', closePrivacyModal);
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && privacyModal.classList.contains('active')) {
+          closePrivacyModal();
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>

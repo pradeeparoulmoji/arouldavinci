@@ -1,40 +1,60 @@
 [
+  
+  {
+    "folder": "nowords",
+    "title": "No Words, Just Us",
+    "genre": "R&B",
+    "tag": ["Chris Brown","Back To Sleep","R&B"],
+    "bpm": "87",
+    "key": "C# Min",
+    "listenCount": 340,
+    "buyUrl": "https://www.beatstars.com/beat/no-words-just-us-23473960"
+  },
+  {
+    "folder": "godspeed",
+    "title": "godspeed forever",
+    "genre": "POP",
+    "tag": ["Camilla Cabelo","Godspeed","Pop"],
+    "bpm": "",
+    "listenCount": 755,
+    "buyUrl": "https://www.beatstars.com/beat/godspeed-forever-23489531"
+  },
+  {
+    "folder": "woman",
+    "title": "W O M A N",
+    "tag": ["PARTYNEXTDOOR","W O M A N","R&B"],
+    "genre": "R&B",
+    "bpm": "90",
+    "key": "C# Min",
+    "listenCount": 432,
+    "buyUrl": "https://www.beatstars.com/beat/w-o-m-a-n-23474305"
+  },
+  {
+    "folder": "cura",
+    "title": "La cura dentro",
+    "tag": ["Giorgia","Ariana Grande","Pop"],
+    "genre": "POP",
+    "bpm": "76",
+    "key": "F# Min",
+    "listenCount": 551,
+    "buyUrl": "https://www.beatstars.com/beat/la-cura-dentro-23474343"
+  },
+  {
+    "folder": "boyfriend",
+    "title": "your boyfriend",
+    "tag": ["Justin Bieber","Boyfriend","Pop"],
+    "genre": "POP",
+    "bpm": "",
+    "listenCount": 152,
+    "buyUrl": "https://www.beatstars.com/beat/your-boyfriend-23542509"
+  },
   {
     "folder": "juno",
     "title": "Jiunoo",
     "key": "F# Min",
     "tag": ["Sabrina Carpenter","Feather","Pop"],
     "bpm": "88",
-    "buyUrl": "https://www.beatstars.com/aroulking/beat/midnight-drive"
-  },
-  {
-    "folder": "no-words-just-us",
-    "title": "No Words, Just Us",
-    "genre": "R&B",
-    "bpm": "87"
-  },
-  {
-    "folder": "godspeed-forever",
-    "title": "godspeed forever",
-    "genre": "POP",
-    "bpm": ""
-  },
-  {
-    "folder": "woman",
-    "title": "W O M A N",
-    "genre": "R&B",
-    "bpm": "90"
-  },
-  {
-    "folder": "la-cura-dentro",
-    "title": "La cura dentro",
-    "genre": "POP",
-    "bpm": "76"
-  },
-  {
-    "folder": "your-boyfriend",
-    "title": "your boyfriend",
-    "genre": "POP",
-    "bpm": ""
+    "listenCount": 321,
+    "buyUrl": "https://www.beatstars.com/beat/godspeed-forever-23489531"
   }
 ]
