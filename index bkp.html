@@ -1353,6 +1353,35 @@
     }
 
     @media (max-width: 640px) {
+
+
+      body.floating-player-visible {
+        padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+      }
+
+      .floating-player {
+        left: 10px;
+        right: 10px;
+        bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+        padding: 10px 12px;
+        gap: 10px;
+      }
+
+      .floating-player-artwork {
+        width: 46px;
+        height: 46px;
+        border-radius: 10px;
+      }
+
+      .floating-player-title {
+        font-size: 13px;
+      }
+
+      .floating-player-toggle,
+      .floating-player-close {
+        width: 40px;
+        height: 40px;
+      }
       .beat-player-main {
         padding: 18px 16px;
       }
@@ -1516,6 +1545,194 @@
         width: auto;
       }
     }
+  
+
+    body.floating-player-visible {
+      padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .floating-player {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      z-index: 10001;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: rgba(12, 12, 12, 0.96);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.38);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .floating-player.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .floating-player-artwork {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #222;
+    }
+
+    .floating-player-main {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .floating-player-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .floating-player-title {
+      font-size: 15px;
+      line-height: 1.15;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .floating-player-times {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 11px;
+      color: rgba(255,255,255,0.58);
+      text-transform: uppercase;
+    }
+
+    .floating-player-progress {
+      width: 100%;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      overflow: hidden;
+    }
+
+    .floating-player-progress-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--accent);
+      border-radius: inherit;
+      transition: width 0.12s linear;
+      pointer-events: none;
+    }
+
+    .floating-player-seek {
+      width: 100%;
+      margin: 0;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 16px;
+      background: transparent;
+      cursor: pointer;
+      position: absolute;
+      inset: 50% 0 auto 0;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .floating-player-seek::-webkit-slider-runnable-track {
+      height: 4px;
+      background: transparent;
+      border-radius: 999px;
+    }
+
+    .floating-player-seek::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 0;
+      margin-top: -5px;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.25);
+    }
+
+    .floating-player-seek::-moz-range-track {
+      height: 4px;
+      background: transparent;
+      border: 0;
+      border-radius: 999px;
+    }
+
+    .floating-player-seek::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 0;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.25);
+    }
+
+    .floating-player-progress-wrap {
+      position: relative;
+      width: 100%;
+      height: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    .floating-player-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .floating-player-toggle,
+    .floating-player-close {
+      width: 46px;
+      height: 46px;
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease, opacity 0.2s ease;
+    }
+
+    .floating-player-toggle {
+      background: var(--accent);
+      color: #000;
+      font-size: 16px;
+    }
+
+    .floating-player-close {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 14px;
+    }
+
+    .floating-player-toggle:hover,
+    .floating-player-close:hover {
+      opacity: 0.88;
+      transform: scale(1.04);
+    }
+
   </style>
 </head>
 <body>
@@ -2710,5 +2927,252 @@
       });
     })();
   </script>
+
+  <div class="floating-player" id="floating-player" aria-hidden="true">
+    <img class="floating-player-artwork" id="floating-player-artwork" src="./music/default-cover.jpg" alt="Current track artwork" />
+    <div class="floating-player-main">
+      <div class="floating-player-label">Now Playing</div>
+      <div class="floating-player-title" id="floating-player-title">Select a beat</div>
+      <div class="floating-player-times">
+        <span id="floating-player-current-time">0:00</span>
+        <span>•</span>
+        <span id="floating-player-duration">0:00</span>
+      </div>
+      <div class="floating-player-progress-wrap">
+        <div class="floating-player-progress" aria-hidden="true">
+          <div class="floating-player-progress-fill" id="floating-player-progress-fill"></div>
+        </div>
+        <input
+          type="range"
+          class="floating-player-seek"
+          id="floating-player-seek"
+          min="0"
+          max="1000"
+          step="1"
+          value="0"
+          aria-label="Seek current track"
+        />
+      </div>
+    </div>
+    <div class="floating-player-controls">
+      <button class="floating-player-toggle" id="floating-player-toggle" type="button" aria-label="Play or pause current track">
+        <i class="fas fa-play"></i>
+      </button>
+      <button class="floating-player-close" id="floating-player-close" type="button" aria-label="Close player">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      function ready(fn) {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', fn, { once: true });
+        } else {
+          fn();
+        }
+      }
+
+      ready(function () {
+        var audio = document.getElementById('audio-player');
+        var tracklist = document.getElementById('beat-tracklist');
+        var playerArtwork = document.getElementById('player-artwork');
+        var playerTitle = document.getElementById('player-title');
+        var playerCurrent = document.getElementById('player-current-time');
+        var playerDuration = document.getElementById('player-duration');
+        var mainPlayBtn = document.getElementById('player-play-btn');
+
+        var floating = document.getElementById('floating-player');
+        var floatingArtwork = document.getElementById('floating-player-artwork');
+        var floatingTitle = document.getElementById('floating-player-title');
+        var floatingCurrent = document.getElementById('floating-player-current-time');
+        var floatingDuration = document.getElementById('floating-player-duration');
+        var floatingProgress = document.getElementById('floating-player-progress-fill');
+        var floatingSeek = document.getElementById('floating-player-seek');
+        var floatingToggle = document.getElementById('floating-player-toggle');
+        var floatingClose = document.getElementById('floating-player-close');
+        var floatingToggleIcon = floatingToggle ? floatingToggle.querySelector('i') : null;
+
+        if (!audio || !tracklist || !floating || !floatingToggle || !floatingClose || !floatingSeek) return;
+
+        var activated = false;
+        var isFloatingSeeking = false;
+
+        function showFloating() {
+          activated = true;
+          floating.classList.add('active');
+          floating.setAttribute('aria-hidden', 'false');
+          document.body.classList.add('floating-player-visible');
+        }
+
+        function hideFloating() {
+          activated = false;
+          floating.classList.remove('active');
+          floating.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('floating-player-visible');
+        }
+
+        function setToggleState() {
+          if (!floatingToggleIcon) return;
+          floatingToggleIcon.className = audio.paused ? 'fas fa-play' : 'fas fa-pause';
+        }
+
+        function syncFromMainPlayer() {
+          if (playerArtwork && playerArtwork.src) floatingArtwork.src = playerArtwork.src;
+          if (playerTitle) floatingTitle.textContent = playerTitle.textContent || 'Select a beat';
+          if (playerCurrent) floatingCurrent.textContent = playerCurrent.textContent || '0:00';
+          if (playerDuration) floatingDuration.textContent = playerDuration.textContent || '0:00';
+          setToggleState();
+        }
+
+        function syncProgress() {
+          var current = audio.currentTime || 0;
+          var duration = audio.duration || 0;
+          var pct = duration > 0 ? (current / duration) * 100 : 0;
+          if (playerCurrent) floatingCurrent.textContent = playerCurrent.textContent || '0:00';
+          else floatingCurrent.textContent = '0:00';
+          if (playerDuration) floatingDuration.textContent = playerDuration.textContent || '0:00';
+          else floatingDuration.textContent = '0:00';
+          floatingProgress.style.width = Math.max(0, Math.min(100, pct)) + '%';
+          if (!isFloatingSeeking) {
+            floatingSeek.value = Math.max(0, Math.min(1000, Math.round(pct * 10)));
+          }
+          setToggleState();
+        }
+
+        function handleTrackActivation() {
+          window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(function () {
+              syncFromMainPlayer();
+              syncProgress();
+              showFloating();
+            });
+          });
+        }
+
+        tracklist.addEventListener('click', function (event) {
+          var actionBtn = event.target.closest('.buy-btn, .download-btn');
+          if (actionBtn) return;
+
+          var item = event.target.closest('.beat-track-item');
+          if (!item) return;
+
+          handleTrackActivation();
+        });
+
+        floatingToggle.addEventListener('click', function () {
+          if (!activated) {
+            syncFromMainPlayer();
+            showFloating();
+          }
+          if (audio.paused) {
+            audio.play().catch(function () {});
+          } else {
+            audio.pause();
+          }
+        });
+
+        floatingClose.addEventListener('click', function () {
+          audio.pause();
+          hideFloating();
+          setToggleState();
+        });
+
+        floatingSeek.addEventListener('input', function () {
+          isFloatingSeeking = true;
+          var duration = audio.duration || 0;
+          var ratio = Number(floatingSeek.value || 0) / 1000;
+          var previewTime = duration > 0 ? duration * ratio : 0;
+          floatingCurrent.textContent = (playerCurrent && !Number.isNaN(previewTime))
+            ? (function () {
+                var m = Math.floor(previewTime / 60);
+                var s = Math.floor(previewTime % 60);
+                return m + ':' + (s < 10 ? '0' + s : s);
+              })()
+            : '0:00';
+          floatingProgress.style.width = Math.max(0, Math.min(100, ratio * 100)) + '%';
+        });
+
+        function commitFloatingSeek() {
+          var duration = audio.duration || 0;
+          var ratio = Number(floatingSeek.value || 0) / 1000;
+          if (duration > 0) {
+            audio.currentTime = duration * ratio;
+          }
+          isFloatingSeeking = false;
+          syncProgress();
+        }
+
+        floatingSeek.addEventListener('change', commitFloatingSeek);
+        floatingSeek.addEventListener('mouseup', commitFloatingSeek);
+        floatingSeek.addEventListener('touchend', commitFloatingSeek);
+        floatingSeek.addEventListener('keyup', function (event) {
+          if (event.key === 'ArrowLeft' || event.key === 'ArrowRight' || event.key === 'Home' || event.key === 'End') {
+            commitFloatingSeek();
+          }
+        });
+
+        if (mainPlayBtn) {
+          mainPlayBtn.addEventListener('click', function () {
+            if (activated) {
+              window.requestAnimationFrame(syncFromMainPlayer);
+              window.requestAnimationFrame(syncProgress);
+            }
+          });
+        }
+
+        audio.addEventListener('play', function () {
+          if (activated) {
+            syncFromMainPlayer();
+            syncProgress();
+            showFloating();
+          }
+        });
+
+        audio.addEventListener('pause', function () {
+          if (activated) syncProgress();
+        });
+
+        audio.addEventListener('loadedmetadata', function () {
+          if (activated) {
+            syncFromMainPlayer();
+            syncProgress();
+          }
+        });
+
+        audio.addEventListener('timeupdate', function () {
+          if (activated) syncProgress();
+        });
+
+        audio.addEventListener('ended', function () {
+          if (activated) syncProgress();
+        });
+
+        var observerTargets = [playerTitle, playerArtwork, playerCurrent, playerDuration].filter(Boolean);
+        if (observerTargets.length) {
+          var observer = new MutationObserver(function () {
+            if (activated) {
+              syncFromMainPlayer();
+              syncProgress();
+            }
+          });
+
+          observerTargets.forEach(function (node) {
+            observer.observe(node, {
+              childList: true,
+              characterData: true,
+              subtree: true,
+              attributes: node === playerArtwork,
+              attributeFilter: node === playerArtwork ? ['src'] : undefined
+            });
+          });
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
