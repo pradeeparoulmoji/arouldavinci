@@ -24,6 +24,8 @@
       --radius-12: 12px;
       --pill-radius: 999px;
       --container-max: 1280px;
+      --panel-bg: rgba(15, 15, 15, 0.94);
+      --panel-border: rgba(255,255,255,0.08);
     }
 
     * { box-sizing: border-box; }
@@ -40,7 +42,7 @@
 
     body.modal-open { overflow: hidden; }
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; height: auto; }
+    img { max-width: 100%; height: auto; display: block; }
     :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     .bg-video {
@@ -232,7 +234,7 @@
     }
 
     .content-section p {
-      max-width: 700px;
+      max-width: 760px;
       margin: 0 auto 30px;
       font-size: clamp(15px, 2.4vw, 18px);
       line-height: 1.6;
@@ -312,35 +314,38 @@
       border-color: var(--accent);
     }
 
+    /* BEATS */
     .beat-player-wrapper {
       width: min(100%, 1240px);
       margin: 0 auto;
+      text-align: left;
     }
 
     .beat-player-main {
       background: rgba(20, 20, 20, 0.92);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 24px 24px 0 0;
-      padding: clamp(28px, 4vw, 46px);
-      margin-bottom: 0;
+      border-radius: 24px;
+      padding: clamp(28px, 4vw, 42px);
+      margin-bottom: 18px;
     }
 
     .beat-player-top {
       display: grid;
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: clamp(200px, 24vw, 320px) minmax(0, 1fr) auto;
       gap: 28px;
       align-items: center;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .beat-artwork {
-      width: clamp(130px, 16vw, 180px);
-      height: clamp(130px, 16vw, 180px);
-      border-radius: 16px;
+      width: clamp(200px, 24vw, 320px);
+      height: clamp(200px, 24vw, 320px);
+      border-radius: 22px;
       object-fit: cover;
       flex-shrink: 0;
       background: #222;
       border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.34);
     }
 
     .beat-info-block {
@@ -354,16 +359,17 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: rgba(255, 255, 255, 0.4);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .beat-now-title {
-      font-size: clamp(28px, 4vw, 40px);
-      line-height: 1.15;
-      margin: 0 0 12px 0;
+      font-size: clamp(34px, 4.2vw, 52px);
+      line-height: 1.04;
+      margin: 0 0 14px 0;
       white-space: normal;
       overflow: visible;
       text-overflow: unset;
+      overflow-wrap: anywhere;
     }
 
     .beat-meta-row {
@@ -410,19 +416,20 @@
     }
 
     .beat-play-btn {
-      width: 88px;
-      height: 88px;
+      width: 92px;
+      height: 92px;
       border-radius: 50%;
       border: none;
       background: var(--accent);
       color: #000;
-      font-size: 32px;
+      font-size: 34px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
       transition: transform 0.15s ease, opacity 0.2s ease;
+      box-shadow: 0 18px 45px rgba(197, 216, 230, 0.18);
     }
 
     .beat-play-btn:hover {
@@ -505,7 +512,7 @@
     }
 
     .beat-volume-slider {
-      width: 140px;
+      width: 160px;
       height: 5px;
       -webkit-appearance: none;
       appearance: none;
@@ -532,16 +539,23 @@
       border: none;
     }
 
+    .beat-list-panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+    }
+
     .beat-filter-bar {
       display: flex;
       align-items: center;
       gap: 12px;
       margin: 0;
-      padding: 18px 18px 0;
+      padding: 18px;
       flex-wrap: wrap;
       background: rgba(15, 15, 15, 0.92);
-      border-left: 1px solid rgba(255, 255, 255, 0.08);
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .beat-filter-input {
@@ -590,54 +604,132 @@
 
     .beat-filter-status {
       margin: 0;
-      padding: 0 18px 18px;
+      padding: 0 18px 12px;
       font-size: 13px;
       color: rgba(255,255,255,0.55);
       text-transform: uppercase;
       letter-spacing: 0.04em;
       text-align: left;
       background: rgba(15, 15, 15, 0.92);
-      border-left: 1px solid rgba(255, 255, 255, 0.08);
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    .beat-tracklist {
-      background: rgba(15, 15, 15, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-top: none;
-      border-radius: 0 0 var(--radius-12) var(--radius-12);
-      overflow: hidden;
-      padding: 10px 18px 18px;
+    .beat-scroll-hint {
+      position: sticky;
+      top: 0;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 10px 16px;
+      background: linear-gradient(to bottom, rgba(197,216,230,0.20), rgba(15,15,15,0.98));
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(197,216,230,0.18);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .beat-scroll-hint.hidden {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+
+    .beat-scroll-hint i {
+      font-size: 12px;
+      animation: beatScrollArrow 1.3s ease-in-out infinite;
+    }
+
+    @keyframes beatScrollArrow {
+      0%, 100% { transform: translateY(0); opacity: 0.8; }
+      50% { transform: translateY(4px); opacity: 1; }
     }
 
     .beat-tracklist-header {
       display: grid;
-      grid-template-columns: 52px 56px minmax(0, 1fr) 200px;
+      grid-template-columns: 44px 70px minmax(0, 1fr) 90px 90px 210px;
       align-items: center;
       gap: 14px;
-      padding: 14px 16px 10px;
-      font-size: 13px;
+      padding: 14px 18px;
+      font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       color: rgba(255, 255, 255, 0.35);
+      background: rgba(18, 18, 18, 0.97);
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      margin-bottom: 12px;
+    }
+
+    .beat-tracklist-shell {
+      position: relative;
+    }
+
+    .beat-tracklist-fade-top,
+    .beat-tracklist-fade-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 42px;
+      pointer-events: none;
+      z-index: 5;
+      opacity: 1;
+      transition: opacity 0.2s ease;
+    }
+
+    .beat-tracklist-fade-top {
+      top: 0;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.95), rgba(10,10,10,0));
+    }
+
+    .beat-tracklist-fade-bottom {
+      bottom: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.95), rgba(10,10,10,0));
+    }
+
+    .beat-tracklist-fade-top.hidden,
+    .beat-tracklist-fade-bottom.hidden {
+      opacity: 0;
+    }
+
+    .beat-tracklist-scroll {
+      max-height: min(60vh, 760px);
+      overflow-y: auto;
+      padding: 10px 12px 14px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(197,216,230,0.45) rgba(255,255,255,0.04);
+    }
+
+    .beat-tracklist-scroll::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .beat-tracklist-scroll::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.04);
+      border-radius: 999px;
+    }
+
+    .beat-tracklist-scroll::-webkit-scrollbar-thumb {
+      background: rgba(197,216,230,0.45);
+      border-radius: 999px;
     }
 
     .beat-track-item {
       display: grid;
-      grid-template-columns: 52px 56px minmax(0, 1fr) auto;
+      grid-template-columns: 44px 70px minmax(0, 1fr) 90px 90px 210px;
       gap: 14px;
       align-items: center;
-      padding: 16px;
+      padding: 12px 14px;
       border: 1px solid transparent;
-      border-radius: 18px;
+      border-radius: 16px;
       background: rgba(255,255,255,0.02);
       cursor: pointer;
       transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
     }
 
-    .beat-track-item + .beat-track-item { margin-top: 12px; }
+    .beat-track-item + .beat-track-item { margin-top: 8px; }
 
     .beat-track-item:hover {
       background: rgba(255, 255, 255, 0.05);
@@ -651,15 +743,15 @@
     }
 
     .track-play-icon {
-      width: 52px;
-      height: 52px;
+      width: 44px;
+      height: 44px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.08);
-      font-size: 14px;
+      font-size: 12px;
       color: var(--primary);
       transition: background 0.15s ease;
     }
@@ -670,9 +762,9 @@
     }
 
     .track-thumb {
-      width: 56px;
-      height: 56px;
-      border-radius: 12px;
+      width: 70px;
+      height: 70px;
+      border-radius: 14px;
       object-fit: cover;
       flex-shrink: 0;
       background: #222;
@@ -683,73 +775,32 @@
       text-align: left;
     }
 
-    .track-title-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      justify-content: space-between;
-    }
-
     .track-title {
       font-size: 17px;
       line-height: 1.2;
-      white-space: normal;
-      overflow: visible;
-      text-overflow: unset;
-      overflow-wrap: anywhere;
-    }
-
-    .track-listens-inline {
-      color: rgba(255,255,255,0.45);
-      font-size: 12px;
-      text-transform: uppercase;
       white-space: nowrap;
-      flex-shrink: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #fff;
     }
 
-    .track-genre {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.35);
-      margin-top: 4px;
+    .track-subline {
+      margin-top: 5px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
       text-transform: uppercase;
       letter-spacing: 0.04em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .track-meta-inline {
-      display: none;
-    }
-
-    .track-detail-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .track-detail {
-      min-width: 0;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .track-detail-label {
-      display: block;
-      color: rgba(255,255,255,0.38);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 6px;
-    }
-
-    .track-detail-value {
-      display: block;
+    .track-col {
       font-size: 12px;
-      color: rgba(255,255,255,0.90);
-      line-height: 1.35;
-      word-break: break-word;
+      color: rgba(255,255,255,0.82);
       text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
     }
 
     .track-actions {
@@ -778,13 +829,13 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      min-width: 130px;
+      min-width: 96px;
       white-space: nowrap;
     }
 
     .download-btn {
       text-decoration: none;
-      min-width: 150px;
+      min-width: 122px;
     }
 
     .buy-btn:hover,
@@ -1233,36 +1284,41 @@
       opacity: 0.82;
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1180px) {
+      .beat-tracklist-header,
       .beat-track-item {
-        grid-template-columns: 52px 56px minmax(0, 1fr);
-      }
-
-      .track-actions {
-        grid-column: 1 / -1;
-        justify-content: flex-start;
+        grid-template-columns: 44px 64px minmax(0, 1fr) 78px 78px 190px;
       }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 980px) {
       .beat-player-top {
-        grid-template-columns: 100px 1fr;
+        grid-template-columns: 140px 1fr;
       }
 
       .beat-play-btn {
         grid-column: 1 / -1;
         width: 100%;
-        height: 56px;
+        height: 58px;
         border-radius: 999px;
       }
 
-      .track-detail-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .beat-tracklist-header {
+        display: none;
       }
 
-      .buy-btn,
-      .download-btn {
-        flex: 1;
+      .beat-track-item {
+        grid-template-columns: 44px 56px minmax(0, 1fr);
+      }
+
+      .track-col {
+        display: none;
+      }
+
+      .track-actions {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+        padding-left: 114px;
       }
     }
 
@@ -1287,7 +1343,6 @@
         order: 3;
       }
 
-      .beat-tracklist-header { display: none; }
       .service-grid { grid-template-columns: 1fr; }
 
       .service-modal-header,
@@ -1317,7 +1372,14 @@
         font-size: 22px;
       }
 
-      .beat-tracklist {
+      .beat-scroll-hint {
+        min-height: 40px;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+      }
+
+      .beat-tracklist-scroll {
+        max-height: 52vh;
         padding: 10px 10px 12px;
       }
 
@@ -1345,34 +1407,14 @@
         min-width: 0;
       }
 
-      .track-title-row {
-        display: block;
-      }
-
       .track-title {
         font-size: 14px;
         line-height: 1.15;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
 
-      .track-listens-inline,
-      .track-genre,
-      .track-detail-grid {
-        display: none;
-      }
-
-      .track-meta-inline {
-        display: block;
+      .track-subline {
         margin-top: 3px;
         font-size: 10px;
-        line-height: 1.2;
-        color: rgba(255, 255, 255, 0.48);
-        text-transform: uppercase;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
 
       .track-actions {
@@ -1380,6 +1422,7 @@
         justify-content: flex-end;
         flex-wrap: nowrap;
         gap: 6px;
+        padding-left: 0;
       }
 
       .buy-btn,
@@ -1526,12 +1569,13 @@
 
       <section id="beats" class="content-section">
         <h2>Beats</h2>
-        <p>Listen to my latest tracks. Ready to purchase? Click "Buy" to head to BeatStars or "Download" to save the MP3.</p>
+        <p>Listen to my latest tracks. The player stays on top, and the beat list under it has a strong scroll cue so users instantly notice there are more tracks available.</p>
 
         <div class="beat-player-wrapper">
           <div class="beat-player-main">
             <div class="beat-player-top">
               <img class="beat-artwork" id="player-artwork" src="./music/default-cover.jpg" alt="Track artwork" />
+
               <div class="beat-info-block">
                 <div class="beat-now-playing-label">Now Playing</div>
                 <h3 class="beat-now-title" id="player-title">Loading beats...</h3>
@@ -1542,6 +1586,7 @@
                   <span class="beat-now-listens" id="player-listens"></span>
                 </div>
               </div>
+
               <button class="beat-play-btn" id="player-play-btn" type="button" aria-label="Play / Pause">
                 <i class="fas fa-play"></i>
               </button>
@@ -1559,27 +1604,43 @@
             </div>
           </div>
 
-          <div class="beat-filter-bar">
-            <input
-              type="text"
-              id="beat-tag-search"
-              class="beat-filter-input"
-              placeholder="Search by tag keyword... (example: dark, trap, melodic)"
-              aria-label="Search tracks by tag keyword"
-            />
-            <button type="button" id="beat-filter-clear" class="beat-filter-clear">Clear</button>
-          </div>
+          <div class="beat-list-panel">
+            <div class="beat-filter-bar">
+              <input
+                type="text"
+                id="beat-tag-search"
+                class="beat-filter-input"
+                placeholder="Search by title, genre, key, bpm or tags"
+                aria-label="Search tracks by tag keyword"
+              />
+              <button type="button" id="beat-filter-clear" class="beat-filter-clear">Clear</button>
+            </div>
 
-          <div class="beat-filter-status" id="beat-filter-status">Showing all tracks</div>
+            <div class="beat-filter-status" id="beat-filter-status">Showing all tracks</div>
 
-          <div class="beat-tracklist" id="beat-tracklist">
+            <div class="beat-scroll-hint" id="beat-scroll-hint" aria-hidden="true">
+              <span>More beats below</span>
+              <i class="fas fa-arrow-down"></i>
+              <span>Scroll</span>
+            </div>
+
             <div class="beat-tracklist-header">
               <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-              <span>Track Details</span>
+              <span>Cover</span>
+              <span>Track</span>
+              <span>Key</span>
+              <span>BPM</span>
               <span style="text-align:right;">Actions</span>
             </div>
-            <div class="beat-loading">Loading tracks...</div>
+
+            <div class="beat-tracklist-shell">
+              <div class="beat-tracklist-fade-top hidden" id="beat-tracklist-fade-top" aria-hidden="true"></div>
+              <div class="beat-tracklist-fade-bottom" id="beat-tracklist-fade-bottom" aria-hidden="true"></div>
+
+              <div class="beat-tracklist-scroll" id="beat-tracklist">
+                <div class="beat-loading">Loading tracks...</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1804,7 +1865,7 @@
     <footer id="site-footer">
       <div class="footer-legal">
         <div class="flex flex-wrap legal-row">
-          <span>&copy; 2026 Aroul Da Vinci. All rights reserved for original music and audio content created by Your Artist Name. Visual materials, videos, images, and other third-party content belong to their respective owners.</span>
+          <span>&copy; 2026 Aroul Da Vinci. All rights reserved for original music and audio content created by Aroul Da Vinci. Visual materials, videos, images, and other third-party content belong to their respective owners.</span>
           <a class="legal-link" href="#" id="footer-privacy-link">Privacy</a>
         </div>
       </div>
@@ -1880,6 +1941,9 @@
       var tagSearchInput = document.getElementById('beat-tag-search');
       var clearFilterBtn = document.getElementById('beat-filter-clear');
       var filterStatusEl = document.getElementById('beat-filter-status');
+      var scrollHintEl = document.getElementById('beat-scroll-hint');
+      var fadeTopEl = document.getElementById('beat-tracklist-fade-top');
+      var fadeBottomEl = document.getElementById('beat-tracklist-fade-bottom');
 
       var BEAT_TRACKS = [];
       var FILTERED_TRACKS = [];
@@ -1888,6 +1952,42 @@
       var isUserSeeking = false;
       var wasPlayingBeforeSeek = false;
       var currentFilter = '';
+      var trackDuration = 0;
+      var currentObjectUrl = null;
+      var loadRequestId = 0;
+
+      function resolveRealDuration(onReady) {
+        if (isFinite(audio.duration) && audio.duration > 0) {
+          trackDuration = audio.duration;
+          onReady();
+          return;
+        }
+
+        var settled = false;
+        var savedTime = audio.currentTime;
+
+        function finish() {
+          if (settled) return;
+          settled = true;
+          audio.removeEventListener('timeupdate', onTimeUpdate);
+          audio.removeEventListener('durationchange', onDurationChange);
+          clearTimeout(timeoutId);
+          trackDuration = isFinite(audio.duration) ? audio.duration : 0;
+          audio.currentTime = savedTime || 0;
+          onReady();
+        }
+
+        function onTimeUpdate() { finish(); }
+        function onDurationChange() {
+          if (isFinite(audio.duration) && audio.duration > 0) finish();
+        }
+
+        audio.addEventListener('timeupdate', onTimeUpdate);
+        audio.addEventListener('durationchange', onDurationChange);
+
+        var timeoutId = setTimeout(finish, 4000);
+        audio.currentTime = 1e101;
+      }
 
       function escapeHtml(str) {
         return String(str)
@@ -1919,8 +2019,7 @@
       }
 
       function clearTrackItems() {
-        var items = tracklistEl.querySelectorAll('.beat-track-item, .beat-loading, .beat-error, .beat-empty');
-        items.forEach(function (item) { item.remove(); });
+        tracklistEl.innerHTML = '';
       }
 
       function setMessage(className, text) {
@@ -1929,6 +2028,7 @@
         div.className = className;
         div.textContent = text;
         tracklistEl.appendChild(div);
+        updateScrollIndicators();
       }
 
       function joinPath(base, fileName) {
@@ -1953,13 +2053,21 @@
         var folder = item.folder || item.slug || item.id || item.title || 'beat';
         var cleanFolder = String(folder).replace(/^\/+|\/+$/g, '');
         var base = './music/' + cleanFolder;
-        var rawTags = Array.isArray(item.tags) ? item.tags : Array.isArray(item.tag) ? item.tag : item.tag ? String(item.tag).split(',') : [];
+        var rawTags = Array.isArray(item.tags)
+          ? item.tags
+          : Array.isArray(item.tag)
+            ? item.tag
+            : item.tag
+              ? String(item.tag).split(',')
+              : [];
         var tags = rawTags.map(function (t) { return String(t).trim(); }).filter(Boolean).slice(0, 10);
         var audioPath = item.audio ? joinPath(base, item.audio) : joinPath(base, 'beat.mp3');
         var downloadPath = item.download ? joinPath(base, item.download) : audioPath;
+
         return {
           id: cleanFolder || item.title || Math.random().toString(36).slice(2),
           title: item.title || cleanFolder || 'Untitled Beat',
+          artist: item.artist || item.producer || '',
           genre: item.genre || '',
           bpm: item.bpm || '',
           key: item.key || '',
@@ -2024,15 +2132,20 @@
       function setPlayerMeta(track) {
         setArtworkWithFallback(artworkEl, track.artworkCandidates);
         titleEl.textContent = track.title;
+
         var joinedTags = track.tags.join(' • ');
         tagsEl.textContent = joinedTags;
         tagsEl.style.display = joinedTags ? 'inline-flex' : 'none';
+
         keyEl.textContent = track.key;
         keyEl.style.display = track.key ? 'inline-flex' : 'none';
+
         bpmEl.textContent = track.bpm ? track.bpm + ' BPM' : '';
         bpmEl.style.display = track.bpm ? 'inline-flex' : 'none';
+
         listensEl.textContent = formatNumber(track.listenCount) + ' listens';
         listensEl.style.display = 'inline-flex';
+
         currentTimeEl.textContent = '0:00';
         durationEl.textContent = track.duration || '0:00';
         setSeekBarUI(0);
@@ -2056,10 +2169,40 @@
 
       function matchesTagFilter(track, query) {
         if (!query) return true;
-        var searchableTags = track.tags.join(' ').toLowerCase();
-        var keywords = query.toLowerCase().split(' ').map(function (word) { return word.trim(); }).filter(Boolean);
+
+        var searchable = [
+          track.title || '',
+          track.artist || '',
+          track.genre || '',
+          track.key || '',
+          String(track.bpm || ''),
+          track.duration || '',
+          track.tags.join(' '),
+          formatNumber(track.listenCount)
+        ].join(' ').toLowerCase();
+
+        var keywords = query
+          .toLowerCase()
+          .split(' ')
+          .map(function (word) { return word.trim(); })
+          .filter(Boolean);
+
         if (!keywords.length) return true;
-        return keywords.every(function (word) { return searchableTags.indexOf(word) !== -1; });
+        return keywords.every(function (word) {
+          return searchable.indexOf(word) !== -1;
+        });
+      }
+
+      function updateScrollIndicators() {
+        if (!tracklistEl || !scrollHintEl || !fadeTopEl || !fadeBottomEl) return;
+
+        var hasOverflow = tracklistEl.scrollHeight > tracklistEl.clientHeight + 4;
+        var atTop = tracklistEl.scrollTop <= 4;
+        var atBottom = tracklistEl.scrollTop + tracklistEl.clientHeight >= tracklistEl.scrollHeight - 4;
+
+        scrollHintEl.classList.toggle('hidden', !hasOverflow || !atTop);
+        fadeTopEl.classList.toggle('hidden', !hasOverflow || atTop);
+        fadeBottomEl.classList.toggle('hidden', !hasOverflow || atBottom);
       }
 
       function renderTrackList() {
@@ -2067,7 +2210,7 @@
         updateFilterStatus();
 
         if (!FILTERED_TRACKS.length) {
-          setMessage('beat-empty', currentFilter ? 'No beats match that tag search.' : 'No beats found.');
+          setMessage('beat-empty', currentFilter ? 'No beats match that search.' : 'No beats found.');
           return;
         }
 
@@ -2076,59 +2219,31 @@
           item.className = 'beat-track-item';
           item.setAttribute('data-index', i);
 
-          var tagsText = track.tags && track.tags.length ? track.tags.join(' • ') : '--';
           var safeFileName = (track.title || 'beat')
             .replace(/[<>:"/\\|?*\x00-\x1F]/g, '')
             .replace(/\s+/g, ' ')
             .trim() || 'beat';
 
-          var metaInline = [
+          var subline = [
             track.genre || '',
-            track.key || '--',
-            track.bpm ? track.bpm + ' BPM' : '--',
-            track.duration || '--'
+            track.tags && track.tags.length ? track.tags.slice(0, 3).join(' • ') : '',
+            formatNumber(track.listenCount) + ' listens'
           ].filter(Boolean).join(' • ');
 
           item.innerHTML = `
             <div class="track-play-icon"><i class="fas fa-play"></i></div>
-
             <img class="track-thumb" src="${escapeHtml(track.artwork)}" alt="">
-
             <div class="track-main">
-              <div class="track-title-row">
-                <div class="track-title">${escapeHtml(track.title)}</div>
-                <div class="track-listens-inline">${escapeHtml(formatNumber(track.listenCount))} listens</div>
-              </div>
-
-              <div class="track-genre">${escapeHtml(track.genre || '')}</div>
-              <div class="track-meta-inline">${escapeHtml(metaInline)}</div>
-
-              <div class="track-detail-grid">
-                <div class="track-detail">
-                  <span class="track-detail-label">Tags</span>
-                  <span class="track-detail-value">${escapeHtml(tagsText)}</span>
-                </div>
-                <div class="track-detail">
-                  <span class="track-detail-label">Key</span>
-                  <span class="track-detail-value">${escapeHtml(track.key || '--')}</span>
-                </div>
-                <div class="track-detail">
-                  <span class="track-detail-label">BPM</span>
-                  <span class="track-detail-value">${escapeHtml(track.bpm || '--')}</span>
-                </div>
-                <div class="track-detail">
-                  <span class="track-detail-label">Length</span>
-                  <span class="track-detail-value">${escapeHtml(track.duration || '--')}</span>
-                </div>
-              </div>
+              <div class="track-title">${escapeHtml(track.title)}</div>
+              <div class="track-subline">${escapeHtml(subline)}</div>
             </div>
-
+            <div class="track-col">${escapeHtml(track.key || '--')}</div>
+            <div class="track-col">${escapeHtml(track.bpm ? track.bpm + ' BPM' : '--')}</div>
             <div class="track-actions">
               <button class="buy-btn" type="button" aria-label="Buy">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Buy</span>
               </button>
-
               <a
                 class="download-btn"
                 href="${escapeHtml(track.download)}"
@@ -2168,6 +2283,7 @@
         });
 
         updateActiveTrackUI();
+        requestAnimationFrame(updateScrollIndicators);
       }
 
       function applyFilter(preserveCurrentTrack) {
@@ -2187,6 +2303,7 @@
           currentIndex = -1;
           updatePlayUI(false);
           resetPlayerFallback('No matching beats');
+          updateScrollIndicators();
           return;
         }
 
@@ -2194,35 +2311,65 @@
           var foundIndex = FILTERED_TRACKS.findIndex(function (track) {
             return getTrackIdentity(track) === previousIdentity;
           });
+
           if (foundIndex !== -1) {
             currentIndex = foundIndex;
             setPlayerMeta(FILTERED_TRACKS[currentIndex]);
             updateActiveTrackUI();
+            requestAnimationFrame(updateScrollIndicators);
             return;
           }
         }
 
         currentIndex = 0;
-        setPlayerMeta(FILTERED_TRACKS[0]);
-        audio.pause();
-        audio.src = FILTERED_TRACKS[0].audio;
-        audio.load();
+        loadTrack(0, false);
         updatePlayUI(false);
-        updateActiveTrackUI();
+        requestAnimationFrame(updateScrollIndicators);
       }
 
       function loadTrack(index, autoplay) {
         if (!FILTERED_TRACKS[index]) return;
+
         currentIndex = index;
         var track = FILTERED_TRACKS[index];
+        trackDuration = 0;
+        var myRequestId = ++loadRequestId;
+
         audio.pause();
         audio.removeAttribute('src');
         audio.load();
+
+        if (currentObjectUrl) {
+          URL.revokeObjectURL(currentObjectUrl);
+          currentObjectUrl = null;
+        }
+
         setPlayerMeta(track);
-        audio.src = track.audio;
-        audio.load();
         updateActiveTrackUI();
-        if (autoplay) audio.play().catch(function () {});
+
+        function playIfNeeded() {
+          if (autoplay && myRequestId === loadRequestId) audio.play().catch(function () {});
+        }
+
+        fetch(track.audio)
+          .then(function (response) {
+            if (!response.ok) throw new Error('audio fetch failed: ' + response.status);
+            return response.blob();
+          })
+          .then(function (blob) {
+            if (myRequestId !== loadRequestId) return;
+            var objectUrl = URL.createObjectURL(blob);
+            currentObjectUrl = objectUrl;
+            audio.src = objectUrl;
+            audio.load();
+            playIfNeeded();
+          })
+          .catch(function () {
+            if (myRequestId !== loadRequestId) return;
+            audio.src = track.audio;
+            audio.load();
+            playIfNeeded();
+          });
       }
 
       function selectTrack(index, autoplay) {
@@ -2231,11 +2378,14 @@
 
       function togglePlay() {
         if (!FILTERED_TRACKS.length) return;
+
         if (currentIndex === -1) {
           selectTrack(0, true);
           return;
         }
+
         if (!audio.src) loadTrack(currentIndex, false);
+
         if (isPlaying) audio.pause();
         else audio.play().catch(function () {});
       }
@@ -2259,13 +2409,12 @@
 
           if (FILTERED_TRACKS.length) {
             currentIndex = 0;
-            setPlayerMeta(FILTERED_TRACKS[0]);
-            audio.src = FILTERED_TRACKS[0].audio;
-            audio.load();
-            updateActiveTrackUI();
+            loadTrack(0, false);
           } else {
             resetPlayerFallback('No beats found');
           }
+
+          requestAnimationFrame(updateScrollIndicators);
         } catch (error) {
           console.error(error);
           resetPlayerFallback('Could not load beats');
@@ -2284,22 +2433,27 @@
       });
 
       audio.addEventListener('ended', function () {
-        if (currentIndex < FILTERED_TRACKS.length - 1) selectTrack(currentIndex + 1, true);
-        else {
+        if (currentIndex < FILTERED_TRACKS.length - 1) {
+          selectTrack(currentIndex + 1, true);
+        } else {
           updatePlayUI(false);
           setSeekBarUI(1000);
         }
       });
 
       audio.addEventListener('loadedmetadata', function () {
-        durationEl.textContent = formatTime(audio.duration);
-        if (!isUserSeeking) setSeekBarUI(audio.duration ? (audio.currentTime / audio.duration) * 1000 : 0);
+        resolveRealDuration(function () {
+          durationEl.textContent = formatTime(trackDuration);
+          if (!isUserSeeking) {
+            setSeekBarUI(trackDuration ? (audio.currentTime / trackDuration) * 1000 : 0);
+          }
+        });
       });
 
       audio.addEventListener('timeupdate', function () {
-        if (!audio.duration || isUserSeeking) return;
+        if (!trackDuration || isUserSeeking) return;
         currentTimeEl.textContent = formatTime(audio.currentTime);
-        setSeekBarUI((audio.currentTime / audio.duration) * 1000);
+        setSeekBarUI((audio.currentTime / trackDuration) * 1000);
       });
 
       seekBar.addEventListener('pointerdown', function () {
@@ -2308,9 +2462,9 @@
       });
 
       seekBar.addEventListener('input', function () {
-        if (!audio.duration) return;
+        if (!trackDuration) return;
         isUserSeeking = true;
-        var t = (Number(this.value) / 1000) * audio.duration;
+        var t = (Number(this.value) / 1000) * trackDuration;
         audio.currentTime = t;
         currentTimeEl.textContent = formatTime(t);
         setSeekBarUI(this.value);
@@ -2331,8 +2485,8 @@
       });
       seekBar.addEventListener('keyup', function (e) {
         if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Home' || e.key === 'End') {
-          if (audio.duration) {
-            var t = (Number(seekBar.value) / 1000) * audio.duration;
+          if (trackDuration) {
+            var t = (Number(seekBar.value) / 1000) * trackDuration;
             audio.currentTime = t;
             currentTimeEl.textContent = formatTime(t);
           }
@@ -2355,6 +2509,9 @@
         applyFilter(true);
         tagSearchInput.focus();
       });
+
+      tracklistEl.addEventListener('scroll', updateScrollIndicators);
+      window.addEventListener('resize', updateScrollIndicators);
 
       audio.volume = 0.8;
       setSeekBarUI(0);
