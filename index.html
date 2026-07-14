@@ -1564,7 +1564,7 @@
               type="text"
               id="beat-tag-search"
               class="beat-filter-input"
-              placeholder="Search by tag keyword... (example: dark, trap, melodic)"
+              placeholder="Search by name artist or genre or title"
               aria-label="Search tracks by tag keyword"
             />
             <button type="button" id="beat-filter-clear" class="beat-filter-clear">Clear</button>
@@ -1888,6 +1888,52 @@
       var isUserSeeking = false;
       var wasPlayingBeforeSeek = false;
       var currentFilter = '';
+      var trackDuration = 0;
+      var currentObjectUrl = null;
+      var loadRequestId = 0;
+
+      // Some MP3s (exported/re-encoded without a proper Xing/VBR header) report
+      // audio.duration as Infinity until the browser has scanned the whole file.
+      // Seeking with an Infinity duration breaks the math and makes the browser
+      // jump to the real end of the file to measure it, then snap back to 0 -
+      // which looks like the track "restarting". This forces the real duration
+      // to be resolved once per track before we trust it for seeking.
+      function resolveRealDuration(onReady) {
+        if (isFinite(audio.duration) && audio.duration > 0) {
+          trackDuration = audio.duration;
+          onReady();
+          return;
+        }
+
+        var settled = false;
+        var savedTime = audio.currentTime;
+
+        function finish() {
+          if (settled) return;
+          settled = true;
+          audio.removeEventListener('timeupdate', onTimeUpdate);
+          audio.removeEventListener('durationchange', onDurationChange);
+          clearTimeout(timeoutId);
+          trackDuration = isFinite(audio.duration) ? audio.duration : 0;
+          audio.currentTime = savedTime || 0;
+          onReady();
+        }
+
+        function onTimeUpdate() { finish(); }
+        function onDurationChange() {
+          if (isFinite(audio.duration) && audio.duration > 0) finish();
+        }
+
+        audio.addEventListener('timeupdate', onTimeUpdate);
+        audio.addEventListener('durationchange', onDurationChange);
+
+        // Safety net: if neither event fires (some browsers/files never
+        // resolve a finite duration this way), don't hang forever - fall
+        // back to whatever duration is known after a few seconds.
+        var timeoutId = setTimeout(finish, 4000);
+
+        audio.currentTime = 1e101;
+      }
 
       function escapeHtml(str) {
         return String(str)
@@ -2203,26 +2249,57 @@
         }
 
         currentIndex = 0;
-        setPlayerMeta(FILTERED_TRACKS[0]);
-        audio.pause();
-        audio.src = FILTERED_TRACKS[0].audio;
-        audio.load();
+        loadTrack(0, false);
         updatePlayUI(false);
-        updateActiveTrackUI();
       }
 
       function loadTrack(index, autoplay) {
         if (!FILTERED_TRACKS[index]) return;
         currentIndex = index;
         var track = FILTERED_TRACKS[index];
+        trackDuration = 0;
+
+        var myRequestId = ++loadRequestId;
+
         audio.pause();
         audio.removeAttribute('src');
         audio.load();
+
+        if (currentObjectUrl) {
+          URL.revokeObjectURL(currentObjectUrl);
+          currentObjectUrl = null;
+        }
+
         setPlayerMeta(track);
-        audio.src = track.audio;
-        audio.load();
         updateActiveTrackUI();
-        if (autoplay) audio.play().catch(function () {});
+
+        function playIfNeeded() {
+          if (autoplay && myRequestId === loadRequestId) audio.play().catch(function () {});
+        }
+
+        // Fetching the whole file as a blob first means the browser knows the
+        // real, finite duration the moment metadata loads - no Infinity-duration
+        // bug, no seek-hack needed, works consistently on first load.
+        fetch(track.audio)
+          .then(function (response) {
+            if (!response.ok) throw new Error('audio fetch failed: ' + response.status);
+            return response.blob();
+          })
+          .then(function (blob) {
+            if (myRequestId !== loadRequestId) return; // user switched tracks meanwhile
+            var objectUrl = URL.createObjectURL(blob);
+            currentObjectUrl = objectUrl;
+            audio.src = objectUrl;
+            audio.load();
+            playIfNeeded();
+          })
+          .catch(function (err) {
+            console.error('Falling back to direct stream for', track.audio, err);
+            if (myRequestId !== loadRequestId) return;
+            audio.src = track.audio;
+            audio.load();
+            playIfNeeded();
+          });
       }
 
       function selectTrack(index, autoplay) {
@@ -2259,10 +2336,7 @@
 
           if (FILTERED_TRACKS.length) {
             currentIndex = 0;
-            setPlayerMeta(FILTERED_TRACKS[0]);
-            audio.src = FILTERED_TRACKS[0].audio;
-            audio.load();
-            updateActiveTrackUI();
+            loadTrack(0, false);
           } else {
             resetPlayerFallback('No beats found');
           }
@@ -2292,14 +2366,16 @@
       });
 
       audio.addEventListener('loadedmetadata', function () {
-        durationEl.textContent = formatTime(audio.duration);
-        if (!isUserSeeking) setSeekBarUI(audio.duration ? (audio.currentTime / audio.duration) * 1000 : 0);
+        resolveRealDuration(function () {
+          durationEl.textContent = formatTime(trackDuration);
+          if (!isUserSeeking) setSeekBarUI(trackDuration ? (audio.currentTime / trackDuration) * 1000 : 0);
+        });
       });
 
       audio.addEventListener('timeupdate', function () {
-        if (!audio.duration || isUserSeeking) return;
+        if (!trackDuration || isUserSeeking) return;
         currentTimeEl.textContent = formatTime(audio.currentTime);
-        setSeekBarUI((audio.currentTime / audio.duration) * 1000);
+        setSeekBarUI((audio.currentTime / trackDuration) * 1000);
       });
 
       seekBar.addEventListener('pointerdown', function () {
@@ -2308,9 +2384,9 @@
       });
 
       seekBar.addEventListener('input', function () {
-        if (!audio.duration) return;
+        if (!trackDuration) return;
         isUserSeeking = true;
-        var t = (Number(this.value) / 1000) * audio.duration;
+        var t = (Number(this.value) / 1000) * trackDuration;
         audio.currentTime = t;
         currentTimeEl.textContent = formatTime(t);
         setSeekBarUI(this.value);
@@ -2331,8 +2407,8 @@
       });
       seekBar.addEventListener('keyup', function (e) {
         if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Home' || e.key === 'End') {
-          if (audio.duration) {
-            var t = (Number(seekBar.value) / 1000) * audio.duration;
+          if (trackDuration) {
+            var t = (Number(seekBar.value) / 1000) * trackDuration;
             audio.currentTime = t;
             currentTimeEl.textContent = formatTime(t);
           }
