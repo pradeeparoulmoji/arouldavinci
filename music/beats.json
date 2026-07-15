@@ -54,7 +54,7 @@
   "tag": ["Dua Lipa", "Pop"],
   "genre": "POP",
   "bpm": "",
-  "listenCount": 0,
+  "listenCount": 320,
   "buyUrl": "https://aroulking.beatstars.com/beat/prisoner-of-your-heart-23542474"
 },
 {
@@ -63,7 +63,7 @@
   "tag": ["Ariana Grande", "Don't Call Me Angel", "Pop"],
   "genre": "POP",
   "bpm": "",
-  "listenCount": 0,
+  "listenCount": 311,
   "buyUrl": "https://aroulking.beatstars.com/beat/call-me-angel-23542207"
 },
 {
@@ -72,7 +72,7 @@
   "tag": ["Jhene Aiko", "Toxic", "Pop"],
   "genre": "POP",
   "bpm": "",
-  "listenCount": 0,
+  "listenCount": 532,
   "buyUrl": "https://aroulking.beatstars.com/beat/toxic-love-23542180"
 },
 {
@@ -80,8 +80,9 @@
   "title": "Be Mine",
   "tag": ["The Boy Is Mine", "2000s", "Pop"],
   "genre": "POP",
-  "bpm": "",
-  "listenCount": 0,
+  "bpm": "98",
+  "key": "A Min",
+  "listenCount": 203,
   "buyUrl": "https://aroulking.beatstars.com/beat/be-mine-23490139"
 },
 {
@@ -90,7 +91,7 @@
   "tag": ["Troye Sivan", "Dance", "Pop"],
   "genre": "POP",
   "bpm": "",
-  "listenCount": 0,
+  "listenCount": 452,
   "buyUrl": "https://aroulking.beatstars.com/beat/rush-me-23490057"
 },
 {
@@ -99,7 +100,7 @@
   "tag": ["Taylor Swift", "Cruel Summer", "Pop"],
   "genre": "POP",
   "bpm": "",
-  "listenCount": 0,
+  "listenCount": 732,
   "buyUrl": "https://aroulking.beatstars.com/beat/summer-memories-23490013"
 },
 {
@@ -108,7 +109,7 @@
   "tag": ["Sabrina Carpenter", "Feather", "Pop"],
   "genre": "POP",
   "bpm": "",
-  "listenCount": 0,
+  "listenCount": 435,
   "buyUrl": "https://aroulking.beatstars.com/beat/like-a-feather-23489975"
 },
 {
@@ -117,7 +118,8 @@
   "tag": ["Sabrina Carpenter", "Good Graces", "Pop"],
   "genre": "POP",
   "bpm": "126",
-  "listenCount": 0,
+  "key": "F Maj",
+  "listenCount": 1029,
   "buyUrl": "https://aroulking.beatstars.com/beat/graceful-25292840"
 },
 {
@@ -126,7 +128,8 @@
   "tag": ["Eternal Sunshine", "West Side", "Pop"],
   "genre": "POP",
   "bpm": "88",
-  "listenCount": 0,
+  "key": "B Min",
+  "listenCount": 864,
   "buyUrl": "https://aroulking.beatstars.com/beat/east-side-25292607"
 },
 {
@@ -135,7 +138,8 @@
   "tag": ["Sabrina Carpenter", "Bed Chem", "Pop"],
   "genre": "POP",
   "bpm": "95",
-  "listenCount": 0,
+  "key": "B Min",
+  "listenCount": 592,
   "buyUrl": "https://aroulking.beatstars.com/beat/bed-chemicals-25292801"
 },
 {
@@ -144,7 +148,8 @@
   "tag": ["Lady Gaga", "Telephone", "Pop"],
   "genre": "POP",
   "bpm": "118",
-  "listenCount": 0,
+  "key": "C Min",
+  "listenCount": 967,
   "buyUrl": "https://aroulking.beatstars.com/beat/smartphone-25292708"
 },
 {
@@ -153,16 +158,18 @@
   "tag": ["Ariana Grande", "Eternal Sunshine", "Pop"],
   "genre": "POP",
   "bpm": "110",
-  "listenCount": 0,
+  "key": "Db Maj",
+  "listenCount": 922,
   "buyUrl": "https://aroulking.beatstars.com/beat/greedy-girl-25292689"
 },
 {
   "folder": "famemonster",
   "title": "Fame Monster",
   "tag": ["Blackpink", "Fame Monster", "Pop"],
+  "key": "D Min",
   "genre": "POP",
   "bpm": "103",
-  "listenCount": 0,
+  "listenCount": 495,
   "buyUrl": "https://aroulking.beatstars.com/beat/fame-monster-25292557"
 },
 {
@@ -171,7 +178,8 @@
   "tag": ["Ariana Grande", "Eternal Sunshine", "Pop"],
   "genre": "POP",
   "bpm": "67",
-  "listenCount": 0,
+  "key": "E Min",
+  "listenCount": 739,
   "buyUrl": "https://aroulking.beatstars.com/beat/danegrous-baddie-25292541"
 },
 {
@@ -180,7 +188,8 @@
   "tag": ["Sabrina Carpenter", "Taste", "Pop"],
   "genre": "POP",
   "bpm": "113",
-  "listenCount": 0,
+  "key": "Eb Maj",
+  "listenCount": 1029,
   "buyUrl": "https://aroulking.beatstars.com/beat/tasty-25292492"
 },
 {
@@ -189,7 +198,8 @@
   "tag": ["Beyonce", "Drunk In Love", "Pop"],
   "genre": "POP",
   "bpm": "73",
-  "listenCount": 0,
+  "key": "A Min",
+  "listenCount": 643,
   "buyUrl": "https://aroulking.beatstars.com/beat/drunk-loving-25292478"
 },
 {
@@ -198,7 +208,8 @@
   "tag": ["Sabrina Carpenter", "Juno", "Pop"],
   "genre": "POP",
   "bpm": "131",
-  "listenCount": 0,
+  "key": "F Maj",
+  "listenCount": 984,
   "buyUrl": "https://aroulking.beatstars.com/beat/you-know-25292452"
 },
 {
@@ -207,7 +218,8 @@
   "tag": ["Misa", "TWICE", "Pop"],
   "genre": "POP",
   "bpm": "146",
-  "listenCount": 0,
+  "key": "G# Min",
+  "listenCount": 440,
   "buyUrl": "https://aroulking.beatstars.com/beat/can-t-stop-the-feeling-25292422"
 },
 {
@@ -216,7 +228,8 @@
   "tag": ["MiaMi", "Justin Bieber", "Pop"],
   "genre": "POP",
   "bpm": "126",
-  "listenCount": 0,
+  "key": "F Min",
+  "listenCount": 237,
   "buyUrl": "https://aroulking.beatstars.com/beat/foreign-ladies-25292406"
 },
 {
@@ -225,7 +238,8 @@
   "tag": ["Blackpink", "Crazy Over You", "Pop"],
   "genre": "POP",
   "bpm": "136",
-  "listenCount": 0,
+  "key": "C Maj",
+  "listenCount": 1473,
   "buyUrl": "https://aroulking.beatstars.com/beat/crazy-for-you-25292394"
 },
 {
@@ -234,8 +248,8 @@
   "genre": "R&B",
   "tag": ["Jacquees", "Miguel", "R&B"],
   "bpm": "88",
-  "key": "",
-  "listenCount": 0,
+  "key": "D Min",
+  "listenCount": 348,
   "buyUrl": "https://aroulking.beatstars.com/beat/lipstick-8923333"
 }
 ]
