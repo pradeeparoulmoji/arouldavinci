@@ -307,5 +307,25 @@
   "key": "Ab Maj",
   "listenCount": 1389,
   "buyUrl": "https://www.beatstars.com/beat/hot-stuff-23542711"
+},
+{
+  "folder": "nostalgia",
+  "title": "Nostalgia",
+  "genre": "Reggaeton",
+  "tag": ["Rauw Alejandro", "Nostalgico", "Reggaeton"],
+  "bpm": "98",
+  "key": "A Min",
+  "listenCount": 389,
+  "buyUrl": "https://www.beatstars.com/beat/nostalgia-25292366"
+},
+{
+  "folder": "watermelon",
+  "title": "Watermelon Passion",
+  "genre": "Reggaeton",
+  "tag": ["Harry Styles", "Watermelon Sugar", "Pop"],
+  "bpm": "96",
+  "key": "A Min",
+  "listenCount": 922,
+  "buyUrl": "https://www.beatstars.com/beat/watermelon-passion-25080087"
 }
 ]
