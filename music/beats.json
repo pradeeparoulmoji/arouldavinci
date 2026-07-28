@@ -1,331 +1,329 @@
 [
-  
   {
-    "folder": "nowords",
-    "title": "No Words, Just Us",
-    "genre": "R&B",
-    "tag": ["Chris Brown","Back To Sleep","R&B"],
-    "bpm": "87",
-    "key": "C# Min",
-    "listenCount": 340,
-    "buyUrl": "https://www.beatstars.com/beat/no-words-just-us-23473960"
+    "folder": "crazyforyou",
+    "title": "Crazy for You",
+    "genre": "POP",
+    "tag": ["Blackpink", "Crazy Over You", "Pop"],
+    "bpm": "136",
+    "key": "C Maj",
+    "listenCount": 1473,
+    "buyUrl": "https://aroulking.beatstars.com/beat/crazy-for-you-25292394"
   },
-  
+  {
+    "folder": "uptown",
+    "title": "Hot Stuff",
+    "genre": "Pop",
+    "tag": ["Camila Cabello", "Hot Uptown", "Pop"],
+    "bpm": "128",
+    "key": "Ab Maj",
+    "listenCount": 1389,
+    "buyUrl": "https://www.beatstars.com/beat/hot-stuff-23542711"
+  },
+  {
+    "folder": "thanku",
+    "title": "thank u,love u",
+    "genre": "Pop",
+    "tag": ["Ariana Grande", "than u,next", "Pop"],
+    "bpm": "107",
+    "key": "Db Maj",
+    "listenCount": 1274,
+    "buyUrl": "https://www.beatstars.com/beat/thank-u-love-u-23542623"
+  },
+  {
+    "folder": "graceful",
+    "title": "Graceful",
+    "genre": "POP",
+    "tag": ["Sabrina Carpenter", "Good Graces", "Pop"],
+    "bpm": "126",
+    "key": "F Maj",
+    "listenCount": 1029,
+    "buyUrl": "https://aroulking.beatstars.com/beat/graceful-25292840"
+  },
+  {
+    "folder": "tasty",
+    "title": "Tasty",
+    "genre": "POP",
+    "tag": ["Sabrina Carpenter", "Taste", "Pop"],
+    "bpm": "113",
+    "key": "Eb Maj",
+    "listenCount": 1029,
+    "buyUrl": "https://aroulking.beatstars.com/beat/tasty-25292492"
+  },
+  {
+    "folder": "youknow",
+    "title": "You Know",
+    "genre": "POP",
+    "tag": ["Sabrina Carpenter", "Juno", "Pop"],
+    "bpm": "131",
+    "key": "F Maj",
+    "listenCount": 984,
+    "buyUrl": "https://aroulking.beatstars.com/beat/you-know-25292452"
+  },
+  {
+    "folder": "smartphone",
+    "title": "Smartphone",
+    "genre": "POP",
+    "tag": ["Lady Gaga", "Telephone", "Pop"],
+    "bpm": "118",
+    "key": "C Min",
+    "listenCount": 967,
+    "buyUrl": "https://aroulking.beatstars.com/beat/smartphone-25292708"
+  },
+  {
+    "folder": "lovebetter",
+    "title": "Love me Better",
+    "genre": "Pop",
+    "tag": ["Ariana Grande", "Love Me harder", "The Weeknd"],
+    "bpm": "88",
+    "key": "D Maj",
+    "listenCount": 963,
+    "buyUrl": "https://www.beatstars.com/beat/love-me-better-23542729"
+  },
+  {
+    "folder": "greedygirl",
+    "title": "Greedy Girl",
+    "genre": "POP",
+    "tag": ["Ariana Grande", "Eternal Sunshine", "Pop"],
+    "bpm": "110",
+    "key": "Db Maj",
+    "listenCount": 922,
+    "buyUrl": "https://aroulking.beatstars.com/beat/greedy-girl-25292689"
+  },
+  {
+    "folder": "watermelon",
+    "title": "Watermelon Passion",
+    "genre": "Pop",
+    "tag": ["Harry Styles", "Watermelon Sugar", "Pop"],
+    "bpm": "96",
+    "key": "A Min",
+    "listenCount": 922,
+    "buyUrl": "https://www.beatstars.com/beat/watermelon-passion-25080087"
+  },
+  {
+    "folder": "eastside",
+    "title": "East Side",
+    "genre": "POP",
+    "tag": ["Eternal Sunshine", "West Side", "Pop"],
+    "bpm": "88",
+    "key": "B Min",
+    "listenCount": 864,
+    "buyUrl": "https://aroulking.beatstars.com/beat/east-side-25292607"
+  },
   {
     "folder": "godspeed",
     "title": "godspeed forever",
     "genre": "POP",
-    "tag": ["Camilla Cabelo","Godspeed","Pop"],
+    "tag": ["Camilla Cabelo", "Godspeed", "Pop"],
     "bpm": "",
     "listenCount": 755,
     "buyUrl": "https://www.beatstars.com/beat/godspeed-forever-23489531"
   },
   {
-    "folder": "woman",
-    "title": "W O M A N",
-    "tag": ["PARTYNEXTDOOR","W O M A N","R&B"],
-    "genre": "R&B",
-    "bpm": "90",
-    "key": "C# Min",
-    "listenCount": 432,
-    "buyUrl": "https://www.beatstars.com/beat/w-o-m-a-n-23474305"
+    "folder": "danegrousbaddie",
+    "title": "Danegrous Baddie",
+    "genre": "POP",
+    "tag": ["Ariana Grande", "Eternal Sunshine", "Pop"],
+    "bpm": "67",
+    "key": "E Min",
+    "listenCount": 739,
+    "buyUrl": "https://aroulking.beatstars.com/beat/danegrous-baddie-25292541"
+  },
+  {
+    "folder": "summermemories",
+    "title": "Summer Memories",
+    "genre": "POP",
+    "tag": ["Taylor Swift", "Cruel Summer", "Pop"],
+    "bpm": "89",
+    "key": "A Maj",
+    "listenCount": 732,
+    "buyUrl": "https://aroulking.beatstars.com/beat/summer-memories-23490013"
+  },
+  {
+    "folder": "drunkloving",
+    "title": "Drunk loving",
+    "genre": "POP",
+    "tag": ["Beyonce", "Drunk In Love", "Pop"],
+    "bpm": "73",
+    "key": "A Min",
+    "listenCount": 643,
+    "buyUrl": "https://aroulking.beatstars.com/beat/drunk-loving-25292478"
+  },
+  {
+    "folder": "bedchemicals",
+    "title": "Bed Chemicals",
+    "genre": "POP",
+    "tag": ["Sabrina Carpenter", "Bed Chem", "Pop"],
+    "bpm": "95",
+    "key": "B Min",
+    "listenCount": 592,
+    "buyUrl": "https://aroulking.beatstars.com/beat/bed-chemicals-25292801"
+  },
+  {
+    "folder": "positions",
+    "title": "Favorite Position",
+    "genre": "Pop",
+    "tag": ["Ariana Grande", "Positions", "R&B"],
+    "bpm": "",
+    "key": "",
+    "listenCount": 575,
+    "buyUrl": "https://www.beatstars.com/beat/favorite-position-23542651"
   },
   {
     "folder": "cura",
     "title": "La cura dentro",
-    "tag": ["Giorgia","Ariana Grande","Pop"],
     "genre": "POP",
+    "tag": ["Giorgia", "Ariana Grande", "Pop"],
     "bpm": "76",
     "key": "F# Min",
     "listenCount": 551,
     "buyUrl": "https://www.beatstars.com/beat/la-cura-dentro-23474343"
   },
   {
-    "folder": "boyfriend",
-    "title": "your boyfriend",
-    "tag": ["Justin Bieber","Boyfriend","Pop"],
+    "folder": "toxiclove",
+    "title": "Toxic Love",
     "genre": "POP",
-    "bpm": "",
-    "listenCount": 152,
-    "buyUrl": "https://www.beatstars.com/beat/your-boyfriend-23542509"
+    "tag": ["Summer Walker", "Toxic", "Pop"],
+    "bpm": "124",
+    "key": "G Min",
+    "listenCount": 532,
+    "buyUrl": "https://aroulking.beatstars.com/beat/toxic-love-23542180"
   },
   {
-  "folder": "prisoner",
-  "title": "Prisoner of your Heart",
-  "tag": ["Dua Lipa", "Pop"],
-  "genre": "POP",
-  "bpm": "125",
-  "key": "Eb Min",
-  "listenCount": 320,
-  "buyUrl": "https://aroulking.beatstars.com/beat/prisoner-of-your-heart-23542474"
-},
-{
-  "folder": "callangel",
-  "title": "Call me Angel",
-  "tag": ["Ariana Grande", "Don't Call Me Angel", "Pop"],
-  "genre": "POP",
-  "bpm": "",
-  "listenCount": 311,
-  "buyUrl": "https://aroulking.beatstars.com/beat/call-me-angel-23542207"
-},
-{
-  "folder": "toxiclove",
-  "title": "Toxic Love",
-  "tag": ["Summer Walker", "Toxic", "Pop"],
-  "genre": "POP",
-  "bpm": "124",
-  "key": "G Min",
-  "listenCount": 532,
-  "buyUrl": "https://aroulking.beatstars.com/beat/toxic-love-23542180"
-},
-{
-  "folder": "beminee",
-  "title": "Be Mine",
-  "tag": ["The Boy Is Mine", "2000s", "Pop"],
-  "genre": "POP",
-  "bpm": "98",
-  "key": "A Min",
-  "listenCount": 203,
-  "buyUrl": "https://aroulking.beatstars.com/beat/be-mine-23490139"
-},
-{
-  "folder": "rushme",
-  "title": "Rush Me",
-  "tag": ["Troye Sivan", "Dance", "Pop"],
-  "genre": "POP",
-  "bpm": "126",
-  "key": "Ab Maj",
-  "listenCount": 452,
-  "buyUrl": "https://aroulking.beatstars.com/beat/rush-me-23490057"
-},
-{
-  "folder": "summermemories",
-  "title": "Summer Memories",
-  "tag": ["Taylor Swift", "Cruel Summer", "Pop"],
-  "genre": "POP",
-  "bpm": "89",
-  "key": "A Maj",
-  "listenCount": 732,
-  "buyUrl": "https://aroulking.beatstars.com/beat/summer-memories-23490013"
-},
-{
-  "folder": "likefeather",
-  "title": "Like a Feather",
-  "tag": ["Sabrina Carpenter", "Feather", "Pop"],
-  "genre": "POP",
-  "bpm": "124",
-  "key": "A Maj",
-  "listenCount": 435,
-  "buyUrl": "https://aroulking.beatstars.com/beat/like-a-feather-23489975"
-},
-{
-  "folder": "graceful",
-  "title": "Graceful",
-  "tag": ["Sabrina Carpenter", "Good Graces", "Pop"],
-  "genre": "POP",
-  "bpm": "126",
-  "key": "F Maj",
-  "listenCount": 1029,
-  "buyUrl": "https://aroulking.beatstars.com/beat/graceful-25292840"
-},
-{
-  "folder": "eastside",
-  "title": "East Side",
-  "tag": ["Eternal Sunshine", "West Side", "Pop"],
-  "genre": "POP",
-  "bpm": "88",
-  "key": "B Min",
-  "listenCount": 864,
-  "buyUrl": "https://aroulking.beatstars.com/beat/east-side-25292607"
-},
-{
-  "folder": "bedchemicals",
-  "title": "Bed Chemicals",
-  "tag": ["Sabrina Carpenter", "Bed Chem", "Pop"],
-  "genre": "POP",
-  "bpm": "95",
-  "key": "B Min",
-  "listenCount": 592,
-  "buyUrl": "https://aroulking.beatstars.com/beat/bed-chemicals-25292801"
-},
-{
-  "folder": "smartphone",
-  "title": "Smartphone",
-  "tag": ["Lady Gaga", "Telephone", "Pop"],
-  "genre": "POP",
-  "bpm": "118",
-  "key": "C Min",
-  "listenCount": 967,
-  "buyUrl": "https://aroulking.beatstars.com/beat/smartphone-25292708"
-},
-{
-  "folder": "greedygirl",
-  "title": "Greedy Girl",
-  "tag": ["Ariana Grande", "Eternal Sunshine", "Pop"],
-  "genre": "POP",
-  "bpm": "110",
-  "key": "Db Maj",
-  "listenCount": 922,
-  "buyUrl": "https://aroulking.beatstars.com/beat/greedy-girl-25292689"
-},
-{
-  "folder": "famemonster",
-  "title": "Fame Monster",
-  "tag": ["Blackpink", "Fame Monster", "Pop"],
-  "key": "D Min",
-  "genre": "POP",
-  "bpm": "103",
-  "listenCount": 495,
-  "buyUrl": "https://aroulking.beatstars.com/beat/fame-monster-25292557"
-},
-{
-  "folder": "danegrousbaddie",
-  "title": "Danegrous Baddie",
-  "tag": ["Ariana Grande", "Eternal Sunshine", "Pop"],
-  "genre": "POP",
-  "bpm": "67",
-  "key": "E Min",
-  "listenCount": 739,
-  "buyUrl": "https://aroulking.beatstars.com/beat/danegrous-baddie-25292541"
-},
-{
-  "folder": "tasty",
-  "title": "Tasty",
-  "tag": ["Sabrina Carpenter", "Taste", "Pop"],
-  "genre": "POP",
-  "bpm": "113",
-  "key": "Eb Maj",
-  "listenCount": 1029,
-  "buyUrl": "https://aroulking.beatstars.com/beat/tasty-25292492"
-},
-{
-  "folder": "drunkloving",
-  "title": "Drunk loving",
-  "tag": ["Beyonce", "Drunk In Love", "Pop"],
-  "genre": "POP",
-  "bpm": "73",
-  "key": "A Min",
-  "listenCount": 643,
-  "buyUrl": "https://aroulking.beatstars.com/beat/drunk-loving-25292478"
-},
-{
-  "folder": "youknow",
-  "title": "You Know",
-  "tag": ["Sabrina Carpenter", "Juno", "Pop"],
-  "genre": "POP",
-  "bpm": "131",
-  "key": "F Maj",
-  "listenCount": 984,
-  "buyUrl": "https://aroulking.beatstars.com/beat/you-know-25292452"
-},
-{
-  "folder": "cantstop",
-  "title": "Can't stop the Feeling",
-  "tag": ["Misa", "TWICE", "Pop"],
-  "genre": "POP",
-  "bpm": "146",
-  "key": "G# Min",
-  "listenCount": 440,
-  "buyUrl": "https://aroulking.beatstars.com/beat/can-t-stop-the-feeling-25292422"
-},
-{
-  "folder": "foreignladies",
-  "title": "Foreign Ladies",
-  "tag": ["MiaMi", "Justin Bieber", "Pop"],
-  "genre": "POP",
-  "bpm": "126",
-  "key": "F Min",
-  "listenCount": 237,
-  "buyUrl": "https://aroulking.beatstars.com/beat/foreign-ladies-25292406"
-},
-{
-  "folder": "crazyforyou",
-  "title": "Crazy for You",
-  "tag": ["Blackpink", "Crazy Over You", "Pop"],
-  "genre": "POP",
-  "bpm": "136",
-  "key": "C Maj",
-  "listenCount": 1473,
-  "buyUrl": "https://aroulking.beatstars.com/beat/crazy-for-you-25292394"
-},
-{
-  "folder": "lipstick",
-  "title": "Lipstick",
-  "genre": "R&B",
-  "tag": ["Jacquees", "Miguel", "R&B"],
-  "bpm": "88",
-  "key": "D Min",
-  "listenCount": 348,
-  "buyUrl": "https://aroulking.beatstars.com/beat/lipstick-8923333"
-},
-{
-  "folder": "bornsavage",
-  "title": "Born Savage",
-  "genre": "R&B",
-  "tag": ["Beyoncé", "Meghan Thee Stallion", "R&B"],
-  "bpm": "83",
-  "key": "C Maj",
-  "listenCount": 425,
-  "buyUrl": "https://www.beatstars.com/beat/born-savage-23542555"
-},
-{
-  "folder": "positions",
-  "title": "Favorite Position",
-  "genre": "Pop",
-  "tag": ["Ariana Grande", "Positions", "R&B"],
-  "bpm": "",
-  "key": "",
-  "listenCount": 575,
-  "buyUrl": "https://www.beatstars.com/beat/favorite-position-23542651"
-},
-{
-  "folder": "thanku",
-  "title": "thank u,love u",
-  "genre": "Pop",
-  "tag": ["Ariana Grande", "than u,next", "Pop"],
-  "bpm": "107",
-  "key": "Db Maj",
-  "listenCount": 1274,
-  "buyUrl": "https://www.beatstars.com/beat/thank-u-love-u-23542623"
-},
-{
-  "folder": "lovebetter",
-  "title": "Love me Better",
-  "genre": "Pop",
-  "tag": ["Ariana Grande", "Love Me harder", "The Weeknd"],
-  "bpm": "88",
-  "key": "D Maj",
-  "listenCount": 963,
-  "buyUrl": "https://www.beatstars.com/beat/love-me-better-23542729"
-},
-{
-  "folder": "uptown",
-  "title": "Hot Stuff",
-  "genre": "Pop",
-  "tag": ["Camila Cabello", "Hot Uptown", "Pop"],
-  "bpm": "128",
-  "key": "Ab Maj",
-  "listenCount": 1389,
-  "buyUrl": "https://www.beatstars.com/beat/hot-stuff-23542711"
-},
-{
-  "folder": "nostalgia",
-  "title": "Nostalgia",
-  "genre": "Reggaeton",
-  "tag": ["Rauw Alejandro", "Nostalgico", "Reggaeton"],
-  "bpm": "98",
-  "key": "A Min",
-  "listenCount": 389,
-  "buyUrl": "https://www.beatstars.com/beat/nostalgia-25292366"
-},
-{
-  "folder": "watermelon",
-  "title": "Watermelon Passion",
-  "genre": "Reggaeton",
-  "tag": ["Harry Styles", "Watermelon Sugar", "Pop"],
-  "bpm": "96",
-  "key": "A Min",
-  "listenCount": 922,
-  "buyUrl": "https://www.beatstars.com/beat/watermelon-passion-25080087"
-}
+    "folder": "famemonster",
+    "title": "Fame Monster",
+    "genre": "POP",
+    "tag": ["Blackpink", "Fame Monster", "Pop"],
+    "bpm": "103",
+    "key": "D Min",
+    "listenCount": 495,
+    "buyUrl": "https://aroulking.beatstars.com/beat/fame-monster-25292557"
+  },
+  {
+    "folder": "rushme",
+    "title": "Rush Me",
+    "genre": "POP",
+    "tag": ["Troye Sivan", "Dance", "Pop"],
+    "bpm": "126",
+    "key": "Ab Maj",
+    "listenCount": 452,
+    "buyUrl": "https://aroulking.beatstars.com/beat/rush-me-23490057"
+  },
+  {
+    "folder": "likefeather",
+    "title": "Like a Feather",
+    "genre": "POP",
+    "tag": ["Sabrina Carpenter", "Feather", "Pop"],
+    "bpm": "124",
+    "key": "A Maj",
+    "listenCount": 435,
+    "buyUrl": "https://aroulking.beatstars.com/beat/like-a-feather-23489975"
+  },
+  {
+    "folder": "woman",
+    "title": "W O M A N",
+    "genre": "R&B",
+    "tag": ["PARTYNEXTDOOR", "W O M A N", "R&B"],
+    "bpm": "90",
+    "key": "C# Min",
+    "listenCount": 432,
+    "buyUrl": "https://www.beatstars.com/beat/w-o-m-a-n-23474305"
+  },
+  {
+    "folder": "bornsavage",
+    "title": "Born Savage",
+    "genre": "R&B",
+    "tag": ["Beyoncé", "Meghan Thee Stallion", "R&B"],
+    "bpm": "83",
+    "key": "C Maj",
+    "listenCount": 425,
+    "buyUrl": "https://www.beatstars.com/beat/born-savage-23542555"
+  },
+  {
+    "folder": "cantstop",
+    "title": "Can't stop the Feeling",
+    "genre": "POP",
+    "tag": ["Misa", "TWICE", "Pop"],
+    "bpm": "146",
+    "key": "G# Min",
+    "listenCount": 440,
+    "buyUrl": "https://aroulking.beatstars.com/beat/can-t-stop-the-feeling-25292422"
+  },
+  {
+    "folder": "nostalgia",
+    "title": "Nostalgia",
+    "genre": "Reggaeton",
+    "tag": ["Rauw Alejandro", "Nostalgico", "Reggaeton"],
+    "bpm": "98",
+    "key": "A Min",
+    "listenCount": 389,
+    "buyUrl": "https://www.beatstars.com/beat/nostalgia-25292366"
+  },
+  {
+    "folder": "lipstick",
+    "title": "Lipstick",
+    "genre": "R&B",
+    "tag": ["Jacquees", "Miguel", "R&B"],
+    "bpm": "88",
+    "key": "D Min",
+    "listenCount": 348,
+    "buyUrl": "https://aroulking.beatstars.com/beat/lipstick-8923333"
+  },
+  {
+    "folder": "nowords",
+    "title": "No Words, Just Us",
+    "genre": "R&B",
+    "tag": ["Chris Brown", "Back To Sleep", "R&B"],
+    "bpm": "87",
+    "key": "C# Min",
+    "listenCount": 340,
+    "buyUrl": "https://www.beatstars.com/beat/no-words-just-us-23473960"
+  },
+  {
+    "folder": "prisoner",
+    "title": "Prisoner of your Heart",
+    "genre": "POP",
+    "tag": ["Dua Lipa", "Pop"],
+    "bpm": "125",
+    "key": "Eb Min",
+    "listenCount": 320,
+    "buyUrl": "https://aroulking.beatstars.com/beat/prisoner-of-your-heart-23542474"
+  },
+  {
+    "folder": "callangel",
+    "title": "Call me Angel",
+    "genre": "POP",
+    "tag": ["Ariana Grande", "Don't Call Me Angel", "Pop"],
+    "bpm": "",
+    "listenCount": 311,
+    "buyUrl": "https://aroulking.beatstars.com/beat/call-me-angel-23542207"
+  },
+  {
+    "folder": "foreignladies",
+    "title": "Foreign Ladies",
+    "genre": "POP",
+    "tag": ["MiaMi", "Justin Bieber", "Pop"],
+    "bpm": "126",
+    "key": "F Min",
+    "listenCount": 237,
+    "buyUrl": "https://aroulking.beatstars.com/beat/foreign-ladies-25292406"
+  },
+  {
+    "folder": "beminee",
+    "title": "Be Mine",
+    "genre": "POP",
+    "tag": ["The Boy Is Mine", "2000s", "Pop"],
+    "bpm": "98",
+    "key": "A Min",
+    "listenCount": 203,
+    "buyUrl": "https://aroulking.beatstars.com/beat/be-mine-23490139"
+  },
+  {
+    "folder": "boyfriend",
+    "title": "your boyfriend",
+    "genre": "POP",
+    "tag": ["Justin Bieber", "Boyfriend", "Pop"],
+    "bpm": "",
+    "listenCount": 152,
+    "buyUrl": "https://aroulking.beatstars.com/beat/your-boyfriend-23542509"
+  }
 ]
