@@ -10,6 +10,7 @@
     "listenCount": 340,
     "buyUrl": "https://www.beatstars.com/beat/no-words-just-us-23473960"
   },
+  
   {
     "folder": "godspeed",
     "title": "godspeed forever",
@@ -53,7 +54,8 @@
   "title": "Prisoner of your Heart",
   "tag": ["Dua Lipa", "Pop"],
   "genre": "POP",
-  "bpm": "",
+  "bpm": "125",
+  "key": "Eb Min",
   "listenCount": 320,
   "buyUrl": "https://aroulking.beatstars.com/beat/prisoner-of-your-heart-23542474"
 },
@@ -69,9 +71,10 @@
 {
   "folder": "toxiclove",
   "title": "Toxic Love",
-  "tag": ["Jhene Aiko", "Toxic", "Pop"],
+  "tag": ["Summer Walker", "Toxic", "Pop"],
   "genre": "POP",
-  "bpm": "",
+  "bpm": "124",
+  "key": "G Min",
   "listenCount": 532,
   "buyUrl": "https://aroulking.beatstars.com/beat/toxic-love-23542180"
 },
@@ -90,7 +93,8 @@
   "title": "Rush Me",
   "tag": ["Troye Sivan", "Dance", "Pop"],
   "genre": "POP",
-  "bpm": "",
+  "bpm": "126",
+  "key": "Ab Maj",
   "listenCount": 452,
   "buyUrl": "https://aroulking.beatstars.com/beat/rush-me-23490057"
 },
@@ -99,7 +103,8 @@
   "title": "Summer Memories",
   "tag": ["Taylor Swift", "Cruel Summer", "Pop"],
   "genre": "POP",
-  "bpm": "",
+  "bpm": "89",
+  "key": "A Maj",
   "listenCount": 732,
   "buyUrl": "https://aroulking.beatstars.com/beat/summer-memories-23490013"
 },
@@ -108,7 +113,8 @@
   "title": "Like a Feather",
   "tag": ["Sabrina Carpenter", "Feather", "Pop"],
   "genre": "POP",
-  "bpm": "",
+  "bpm": "124",
+  "key": "A Maj",
   "listenCount": 435,
   "buyUrl": "https://aroulking.beatstars.com/beat/like-a-feather-23489975"
 },
@@ -251,5 +257,55 @@
   "key": "D Min",
   "listenCount": 348,
   "buyUrl": "https://aroulking.beatstars.com/beat/lipstick-8923333"
+},
+{
+  "folder": "bornsavage",
+  "title": "Born Savage",
+  "genre": "R&B",
+  "tag": ["Beyoncé", "Meghan Thee Stallion", "R&B"],
+  "bpm": "83",
+  "key": "C Maj",
+  "listenCount": 425,
+  "buyUrl": "https://www.beatstars.com/beat/born-savage-23542555"
+},
+{
+  "folder": "positions",
+  "title": "Favorite Position",
+  "genre": "Pop",
+  "tag": ["Ariana Grande", "Positions", "R&B"],
+  "bpm": "",
+  "key": "",
+  "listenCount": 575,
+  "buyUrl": "https://www.beatstars.com/beat/favorite-position-23542651"
+},
+{
+  "folder": "thanku",
+  "title": "thank u,love u",
+  "genre": "Pop",
+  "tag": ["Ariana Grande", "than u,next", "Pop"],
+  "bpm": "107",
+  "key": "Db Maj",
+  "listenCount": 1274,
+  "buyUrl": "https://www.beatstars.com/beat/thank-u-love-u-23542623"
+},
+{
+  "folder": "lovebetter",
+  "title": "Love me Better",
+  "genre": "Pop",
+  "tag": ["Ariana Grande", "Love Me harder", "The Weeknd"],
+  "bpm": "88",
+  "key": "D Maj",
+  "listenCount": 963,
+  "buyUrl": "https://www.beatstars.com/beat/love-me-better-23542729"
+},
+{
+  "folder": "uptown",
+  "title": "Hot Stuff",
+  "genre": "Pop",
+  "tag": ["Camila Cabello", "Hot Uptown", "Pop"],
+  "bpm": "128",
+  "key": "Ab Maj",
+  "listenCount": 1389,
+  "buyUrl": "https://www.beatstars.com/beat/hot-stuff-23542711"
 }
 ]
