@@ -163,8 +163,8 @@
     "title": "Favorite Position",
     "genre": "Pop",
     "tag": ["Ariana Grande", "Positions", "R&B"],
-    "bpm": "",
-    "key": "",
+    "bpm": "132",
+    "key": "Ab Min",
     "listenCount": 575,
     "buyUrl": "https://www.beatstars.com/beat/favorite-position-23542651"
   },
@@ -242,7 +242,7 @@
     "folder": "cantstop",
     "title": "Can't stop the Feeling",
     "genre": "POP",
-    "tag": ["Misa", "TWICE", "Pop"],
+    "tag": ["TWICE", "Can't Stop Me Now", "Pop"],
     "bpm": "146",
     "key": "G# Min",
     "listenCount": 440,
@@ -293,7 +293,8 @@
     "title": "Call me Angel",
     "genre": "POP",
     "tag": ["Ariana Grande", "Don't Call Me Angel", "Pop"],
-    "bpm": "",
+    "bpm": "103",
+    "key": "F Min",
     "listenCount": 311,
     "buyUrl": "https://aroulking.beatstars.com/beat/call-me-angel-23542207"
   },
@@ -322,7 +323,8 @@
     "title": "your boyfriend",
     "genre": "POP",
     "tag": ["Justin Bieber", "Boyfriend", "Pop"],
-    "bpm": "",
+    "bpm": "94",
+    "key": "Db Maj",
     "listenCount": 152,
     "buyUrl": "https://aroulking.beatstars.com/beat/your-boyfriend-23542509"
   }

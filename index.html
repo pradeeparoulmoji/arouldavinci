@@ -419,7 +419,6 @@
       border-color: var(--accent);
     }
 
-    /* BEATS */
     .beat-player-wrapper {
       width: min(100%, 1240px);
       margin: 0 auto;
@@ -1389,6 +1388,192 @@
       opacity: 0.82;
     }
 
+    body.floating-player-visible {
+      padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .floating-player {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      z-index: 10001;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: rgba(12, 12, 12, 0.96);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.38);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .floating-player.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .floating-player-artwork {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #222;
+    }
+
+    .floating-player-main {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .floating-player-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .floating-player-title {
+      font-size: 15px;
+      line-height: 1.15;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .floating-player-times {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 11px;
+      color: rgba(255,255,255,0.58);
+      text-transform: uppercase;
+    }
+
+    .floating-player-progress {
+      width: 100%;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      overflow: hidden;
+    }
+
+    .floating-player-progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--accent);
+      border-radius: inherit;
+      transition: width 0.12s linear;
+      pointer-events: none;
+    }
+
+    .floating-player-seek {
+      width: 100%;
+      margin: 0;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 16px;
+      background: transparent;
+      cursor: pointer;
+      position: absolute;
+      inset: 50% 0 auto 0;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .floating-player-seek::-webkit-slider-runnable-track {
+      height: 4px;
+      background: transparent;
+      border-radius: 999px;
+    }
+
+    .floating-player-seek::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 0;
+      margin-top: -5px;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.25);
+    }
+
+    .floating-player-seek::-moz-range-track {
+      height: 4px;
+      background: transparent;
+      border: 0;
+      border-radius: 999px;
+    }
+
+    .floating-player-seek::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 0;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.25);
+    }
+
+    .floating-player-progress-wrap {
+      position: relative;
+      width: 100%;
+      height: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    .floating-player-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .floating-player-toggle,
+    .floating-player-close {
+      width: 46px;
+      height: 46px;
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease, opacity 0.2s ease;
+    }
+
+    .floating-player-toggle {
+      background: var(--accent);
+      color: #000;
+      font-size: 16px;
+    }
+
+    .floating-player-close {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 14px;
+    }
+
+    .floating-player-toggle:hover,
+    .floating-player-close:hover {
+      opacity: 0.88;
+      transform: scale(1.04);
+    }
+
     @media (max-width: 1180px) {
       .beat-tracklist-header,
       .beat-track-item {
@@ -1454,6 +1639,7 @@
         margin-top: 8px;
         letter-spacing: 0.06em;
       }
+
       .header-row {
         flex-direction: column;
         align-items: center;
@@ -1484,8 +1670,6 @@
     }
 
     @media (max-width: 640px) {
-
-
       body.floating-player-visible {
         padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
       }
@@ -1513,6 +1697,7 @@
         width: 40px;
         height: 40px;
       }
+
       .beat-player-main {
         padding: 18px 16px;
       }
@@ -1676,200 +1861,12 @@
         width: auto;
       }
     }
-  
-
-    body.floating-player-visible {
-      padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
-    }
-
-    .floating-player {
-      position: fixed;
-      left: 16px;
-      right: 16px;
-      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-      z-index: 10001;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px 16px;
-      background: rgba(12, 12, 12, 0.96);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.38);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      opacity: 0;
-      transform: translateY(20px);
-      pointer-events: none;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .floating-player.active {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .floating-player-artwork {
-      width: 58px;
-      height: 58px;
-      border-radius: 14px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: #222;
-    }
-
-    .floating-player-main {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .floating-player-label {
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-    }
-
-    .floating-player-title {
-      font-size: 15px;
-      line-height: 1.15;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .floating-player-times {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      font-size: 11px;
-      color: rgba(255,255,255,0.58);
-      text-transform: uppercase;
-    }
-
-    .floating-player-progress {
-      width: 100%;
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.10);
-      overflow: hidden;
-    }
-
-    .floating-player-progress-fill {
-      width: 0%;
-      height: 100%;
-      background: var(--accent);
-      border-radius: inherit;
-      transition: width 0.12s linear;
-      pointer-events: none;
-    }
-
-    .floating-player-seek {
-      width: 100%;
-      margin: 0;
-      -webkit-appearance: none;
-      appearance: none;
-      height: 16px;
-      background: transparent;
-      cursor: pointer;
-      position: absolute;
-      inset: 50% 0 auto 0;
-      transform: translateY(-50%);
-      z-index: 2;
-    }
-
-    .floating-player-seek::-webkit-slider-runnable-track {
-      height: 4px;
-      background: transparent;
-      border-radius: 999px;
-    }
-
-    .floating-player-seek::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--accent);
-      border: 0;
-      margin-top: -5px;
-      box-shadow: 0 0 0 2px rgba(0,0,0,0.25);
-    }
-
-    .floating-player-seek::-moz-range-track {
-      height: 4px;
-      background: transparent;
-      border: 0;
-      border-radius: 999px;
-    }
-
-    .floating-player-seek::-moz-range-thumb {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--accent);
-      border: 0;
-      box-shadow: 0 0 0 2px rgba(0,0,0,0.25);
-    }
-
-    .floating-player-progress-wrap {
-      position: relative;
-      width: 100%;
-      height: 16px;
-      display: flex;
-      align-items: center;
-    }
-
-    .floating-player-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .floating-player-toggle,
-    .floating-player-close {
-      width: 46px;
-      height: 46px;
-      border: 0;
-      border-radius: 50%;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.15s ease, opacity 0.2s ease;
-    }
-
-    .floating-player-toggle {
-      background: var(--accent);
-      color: #000;
-      font-size: 16px;
-    }
-
-    .floating-player-close {
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 14px;
-    }
-
-    .floating-player-toggle:hover,
-    .floating-player-close:hover {
-      opacity: 0.88;
-      transform: scale(1.04);
-    }
-
   </style>
 </head>
 <body>
   <div class="bg-video" aria-hidden="true">
     <video class="bg-video__src" autoplay muted loop playsinline poster="./poster.jpg" preload="metadata">
-      <source src="./hero-video.mp4" type="video/mp4">
+      <source src="./hero-video.mp4" type="video/mp4" />
     </video>
   </div>
 
@@ -1881,10 +1878,9 @@
         </div>
 
         <div class="flex-item center flex">
-          <a href="/" aria-label="Aroul Da Vinci home">
+          <a href="#" aria-label="Aroul Da Vinci home">
             <h1 class="wordmark">Aroul Da Vinci</h1>
           </a>
-
           <nav class="main-nav" aria-label="Primary navigation">
             <a href="#beats">Beats</a>
             <a href="#services">Services</a>
@@ -1904,7 +1900,7 @@
       <div id="home">
         <section class="promo home">
           <div class="promo-inner">
-            <button class="promo-button" type="button" onclick="document.getElementById('beats').scrollIntoView({behavior:'smooth'})">
+            <button class="promo-button" type="button" onclick="document.getElementById('beats').scrollIntoView({ behavior: 'smooth' })">
               Beats Out Now
             </button>
           </div>
@@ -1913,308 +1909,316 @@
         <section id="home-custom-html-section">
           <div class="hero-cred-wrap">
             <div class="hero-cred-box">
-              <div class="hero-cred-pill">10M+ Streams</div>
-              <p class="hero-cred-text">Producer, Songwriter & Ghostwriter</p>
+              <div class="hero-cred-pill">10M Streams</div>
+              <p class="hero-cred-text">Producer, Songwriter &amp; Ghostwriter</p>
               <p class="hero-cred-signature">I build records with artists who want their sound to feel intentional from day one</p>
               <p class="hero-cred-subtext">Trusted across more than 10 million streams</p>
             </div>
           </div>
         </section>
-      </div>
 
-      <section id="beats" class="content-section">
-        <h2>Beats</h2>
-        <p>Listen to my latest tracks. The player stays on top, and the beat list under it has a strong scroll cue so users instantly notice there are more tracks available.</p>
+        <section id="beats" class="content-section">
+          <h2>Beats</h2>
+          <p>
+            Listen to my latest tracks. The player, track rows, and bottom floating bar now all use one shared playback system.
+          </p>
 
-        <div class="beat-player-wrapper">
-          <div class="beat-player-main">
-            <div class="beat-player-top">
-              <img class="beat-artwork" id="player-artwork" src="./music/default-cover.jpg" alt="Track artwork" />
+          <div class="beat-player-wrapper">
+            <div class="beat-player-main">
+              <div class="beat-player-top">
+                <img class="beat-artwork" id="player-artwork" src="./music/default-cover.jpg" alt="Track artwork" />
 
-              <div class="beat-info-block">
-                <div class="beat-now-playing-label">Now Playing</div>
-                <h3 class="beat-now-title" id="player-title">Loading beats...</h3>
-                <div class="beat-meta-row">
-                  <span class="beat-now-tag" id="player-tags"></span>
-                  <span class="beat-now-key" id="player-key"></span>
-                  <span class="beat-now-bpm" id="player-bpm"></span>
-                  <span class="beat-now-listens" id="player-listens"></span>
+                <div class="beat-info-block">
+                  <div class="beat-now-playing-label">Now Playing</div>
+                  <h3 class="beat-now-title" id="player-title">Loading beats...</h3>
+                  <div class="beat-meta-row">
+                    <span class="beat-now-tag" id="player-tags" style="display:none;"></span>
+                    <span class="beat-now-key" id="player-key" style="display:none;"></span>
+                    <span class="beat-now-bpm" id="player-bpm" style="display:none;"></span>
+                    <span class="beat-now-listens" id="player-listens">0 listens</span>
+                  </div>
+                </div>
+
+                <button class="beat-play-btn" id="player-play-btn" type="button" aria-label="Play or pause current track">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+
+              <div class="beat-progress-row">
+                <span class="beat-current-time" id="player-current-time">0:00</span>
+                <input type="range" class="beat-seek-bar" id="player-seek-bar" min="0" max="1000" step="1" value="0" aria-label="Seek through track" />
+                <span class="beat-duration" id="player-duration">0:00</span>
+              </div>
+
+              <div class="beat-volume-row">
+                <i class="fas fa-volume-up beat-volume-icon"></i>
+                <input type="range" class="beat-volume-slider" id="player-volume" min="0" max="100" value="80" aria-label="Volume" />
+              </div>
+            </div>
+
+            <div class="beat-list-panel">
+              <div class="beat-filter-bar">
+                <input type="text" id="beat-tag-search" class="beat-filter-input" placeholder="Search by title, genre, key, bpm or tags" aria-label="Search tracks by tag keyword" />
+                <button type="button" id="beat-filter-clear" class="beat-filter-clear">Clear</button>
+              </div>
+
+              <div class="beat-filter-status" id="beat-filter-status">Showing all tracks</div>
+
+              <div class="beat-scroll-hint" id="beat-scroll-hint" aria-hidden="true">
+                <span>More beats below</span>
+                <i class="fas fa-arrow-down"></i>
+                <span>Scroll</span>
+              </div>
+
+              <div class="beat-tracklist-header">
+                <span aria-hidden="true"></span>
+                <span>Cover</span>
+                <span>Track</span>
+                <span>Key</span>
+                <span>BPM</span>
+                <span style="text-align:right;">Actions</span>
+              </div>
+
+              <div class="beat-tracklist-shell">
+                <div class="beat-tracklist-fade-top hidden" id="beat-tracklist-fade-top" aria-hidden="true"></div>
+                <div class="beat-tracklist-fade-bottom" id="beat-tracklist-fade-bottom" aria-hidden="true"></div>
+
+                <div class="beat-tracklist-scroll" id="beat-tracklist">
+                  <div class="beat-loading">Loading tracks...</div>
                 </div>
               </div>
+            </div>
+          </div>
 
-              <button class="beat-play-btn" id="player-play-btn" type="button" aria-label="Play / Pause">
-                <i class="fas fa-play"></i>
+          <audio id="audio-player" preload="metadata"></audio>
+        </section>
+
+        <section id="services" class="content-section">
+          <h2>Services</h2>
+          <p>Custom Music Production Services tailored to bring your ideas to life, from concept to finished release.</p>
+
+          <div class="service-grid">
+            <article class="service-card">
+              <h3>Full Song Production</h3>
+              <p class="card-price">Starting Price 150</p>
+              <ul class="card-list">
+                <li>Composition</li>
+                <li>Vocal arrangement</li>
+                <li>Mixing &amp; mastering</li>
+                <li>Optional publishing support</li>
+              </ul>
+              <button
+                class="card-button service-info-btn"
+                type="button"
+                data-title="Full Song Production"
+                data-price="Starting Price 150"
+                data-paragraph-one="Our Full Song Production service covers everything you need to bring your track to life. From initial composition and vocal arrangement to professional mixing and mastering, we handle it all to ensure your song sounds polished and ready for release."
+                data-paragraph-two="Optional publishing services are also available to help you collect royalties and protect your work. Once your track is completed, we'll discuss the best licensing options for you, including leasing or exclusive rights."
+              >
+                More Info
               </button>
-            </div>
+            </article>
 
-            <div class="beat-progress-row">
-              <span class="beat-current-time" id="player-current-time">0:00</span>
-              <input type="range" class="beat-seek-bar" id="player-seek-bar" min="0" max="1000" step="1" value="0" aria-label="Seek through track" />
-              <span class="beat-duration" id="player-duration">0:00</span>
-            </div>
+            <article class="service-card">
+              <h3>Mid Song Production</h3>
+              <p class="card-price">Starting Price 100</p>
+              <ul class="card-list">
+                <li>Composition</li>
+                <li>Vocal arrangement</li>
+                <li>Creative direction</li>
+                <li>Built around your style</li>
+              </ul>
+              <button
+                class="card-button service-info-btn"
+                type="button"
+                data-title="Mid Song Production"
+                data-price="Starting Price 100"
+                data-paragraph-one="Ideal for artists seeking a strong musical foundation with professional vocal arrangement. This package focuses on crafting the core composition and arranging vocals to suit your style, giving you a quality track to build on."
+                data-paragraph-two="After the production process, we will review available licensing options such as leasing or exclusive rights tailored to your needs."
+              >
+                More Info
+              </button>
+            </article>
 
-            <div class="beat-volume-row">
-              <i class="fas fa-volume-up beat-volume-icon"></i>
-              <input type="range" class="beat-volume-slider" id="player-volume" min="0" max="100" value="80" aria-label="Volume" />
+            <article class="service-card">
+              <h3>Custom Production</h3>
+              <p class="card-price">Starting Price 75</p>
+              <ul class="card-list">
+                <li>Tailored composition</li>
+                <li>Flexible structure</li>
+                <li>Artist-focused workflow</li>
+                <li>Custom creative support</li>
+              </ul>
+              <button
+                class="card-button service-info-btn"
+                type="button"
+                data-title="Custom Production"
+                data-price="Starting Price 75"
+                data-paragraph-one="For those wanting a unique, tailored sound, our Custom Production service offers bespoke compositions crafted specifically to your vision. Perfect for artists seeking an original and personalized sound."
+                data-paragraph-two="Once your custom production is complete, we'll explore leasing or exclusive licensing options together."
+              >
+                More Info
+              </button>
+            </article>
+          </div>
+        </section>
+
+        <section id="leasing" class="content-section">
+          <h2>Leasing</h2>
+          <p>Explore our diverse range of purchasing and leasing options.</p>
+
+          <div class="service-grid">
+            <article class="service-card">
+              <h3>MP3 Standard License</h3>
+              <p class="card-price">30</p>
+              <ul class="card-list">
+                <li>All streaming platforms</li>
+                <li>Up to 100,000 streams</li>
+                <li>1 year term duration</li>
+                <li>MP3 file</li>
+                <li>No tags</li>
+              </ul>
+              <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
+            </article>
+
+            <article class="service-card">
+              <h3>WAV Premium License</h3>
+              <p class="card-price">50</p>
+              <ul class="card-list">
+                <li>All streaming platforms</li>
+                <li>Up to 500,000 streams</li>
+                <li>3 year term duration</li>
+                <li>MP3 WAV file</li>
+                <li>No tags</li>
+              </ul>
+              <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
+            </article>
+
+            <article class="service-card">
+              <h3>WAV Stems Premium</h3>
+              <p class="card-price">75</p>
+              <ul class="card-list">
+                <li>Tracked out files for mixing and rearranging</li>
+                <li>All streaming platforms</li>
+                <li>Up to 1 million streams</li>
+                <li>3 year term duration</li>
+                <li>MP3 WAV stems</li>
+              </ul>
+              <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
+            </article>
+
+            <article class="service-card">
+              <h3>Exclusive License</h3>
+              <p class="card-price">Starting from 150</p>
+              <ul class="card-list">
+                <li>Tracked out files for mixing and rearranging</li>
+                <li>Unlimited streams</li>
+                <li>Unlimited term duration</li>
+                <li>MP3 WAV stems</li>
+                <li>No tags</li>
+              </ul>
+              <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
+            </article>
+          </div>
+        </section>
+
+        <section id="production" class="content-section">
+          <h2>Production</h2>
+          <p>Need help building stronger beats? I offer hands-on support with melodies, drums, beat feedback, and creative tools to help you move faster and produce with more confidence.</p>
+
+          <div class="service-grid">
+            <article class="service-card">
+              <h3>Melody Drum Help</h3>
+              <p class="card-price">Production Support</p>
+              <ul class="card-list">
+                <li>Melody development and drum arrangement in one service</li>
+                <li>Better bounce, groove, and musical direction</li>
+                <li>Support with structure, layering, and sound choice</li>
+                <li>Built to fit your genre and production style</li>
+              </ul>
+            </article>
+
+            <article class="service-card">
+              <h3>Beat Review</h3>
+              <p class="card-price">Detailed Feedback</p>
+              <ul class="card-list">
+                <li>Honest review of your beat's strengths and weak points</li>
+                <li>Feedback on melody, drums, arrangement, and overall energy</li>
+                <li>Suggestions to improve bounce, clarity, and replay value</li>
+                <li>Actionable advice you can apply in your next revision</li>
+              </ul>
+            </article>
+
+            <article class="service-card">
+              <h3>Drum Kits</h3>
+              <p class="card-price">Premium Packs</p>
+              <ul class="card-list">
+                <li>Professional-grade sounds ready for instant use</li>
+                <li>Kicks, snares, hi-hats, 808s, and textures</li>
+                <li>Designed for multiple genres and modern production</li>
+                <li>Easy drag-and-drop workflow in any DAW</li>
+              </ul>
+            </article>
+
+            <article class="service-card">
+              <h3>MIDI Packs</h3>
+              <p class="card-price">Workflow Tool</p>
+              <ul class="card-list">
+                <li>Melody and chord ideas to speed up creation</li>
+                <li>Useful starting points when inspiration is low</li>
+                <li>Fully editable files for custom arrangements</li>
+                <li>Great for building songs faster across genres</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="contact" class="content-section">
+          <h2>Contact</h2>
+          <p>Let's make something great together. Reach out via social media or the form below.</p>
+
+          <div class="footer-links" style="margin-bottom:30px;">
+            <div class="flex flex-wrap social-row">
+              <a class="social-link" href="https://www.instagram.com/arouldavinci" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a class="social-link" href="https://x.com/aroulking" target="_blank" rel="noopener" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+              <a class="social-link" href="https://www.beatstars.com/aroulking/tracks" target="_blank" rel="noopener" aria-label="BeatStars"><i class="fas fa-music"></i></a>
+              <a class="social-link" href="mailto:aroulkingproduction@gmail.com" aria-label="Email"><i class="far fa-envelope"></i></a>
             </div>
           </div>
 
-          <div class="beat-list-panel">
-            <div class="beat-filter-bar">
-              <input
-                type="text"
-                id="beat-tag-search"
-                class="beat-filter-input"
-                placeholder="Search by title, genre, key, bpm or tags"
-                aria-label="Search tracks by tag keyword"
-              />
-              <button type="button" id="beat-filter-clear" class="beat-filter-clear">Clear</button>
-            </div>
+          <button class="newsletter-button" onclick="window.open('https://arouldavinci.beehiiv.com/subscribe', '_blank')">Subscribe to Newsletter</button>
 
-            <div class="beat-filter-status" id="beat-filter-status">Showing all tracks</div>
+          <div class="contact-form-container">
+            <form id="contact-form" class="contact-form" novalidate>
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required autocomplete="name" />
 
-            <div class="beat-scroll-hint" id="beat-scroll-hint" aria-hidden="true">
-              <span>More beats below</span>
-              <i class="fas fa-arrow-down"></i>
-              <span>Scroll</span>
-            </div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
 
-            <div class="beat-tracklist-header">
-              <span aria-hidden="true"></span>
-              <span>Cover</span>
-              <span>Track</span>
-              <span>Key</span>
-              <span>BPM</span>
-              <span style="text-align:right;">Actions</span>
-            </div>
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required />
 
-            <div class="beat-tracklist-shell">
-              <div class="beat-tracklist-fade-top hidden" id="beat-tracklist-fade-top" aria-hidden="true"></div>
-              <div class="beat-tracklist-fade-bottom" id="beat-tracklist-fade-bottom" aria-hidden="true"></div>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" required spellcheck="true"></textarea>
 
-              <div class="beat-tracklist-scroll" id="beat-tracklist">
-                <div class="beat-loading">Loading tracks...</div>
+              <div class="privacy-consent">
+                <label class="checkbox-label" for="privacy-consent">
+                  <input class="checkbox-input" type="checkbox" id="privacy-consent" name="privacy-consent" required />
+                  <span class="checkbox-custom" aria-hidden="true"></span>
+                  <span class="checkbox-text">
+                    I have read and accept the
+                    <button type="button" id="open-privacy-modal" class="inline-privacy-link">Privacy Policy</button>.
+                  </span>
+                </label>
               </div>
-            </div>
+
+              <button type="submit">Submit</button>
+              <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+            </form>
           </div>
-        </div>
-
-        <audio id="audio-player" preload="auto"></audio>
-      </section>
-
-      <section id="services" class="content-section">
-        <h2>Services</h2>
-        <p>Custom Music Production Services tailored to bring your ideas to life, from concept to finished release.</p>
-
-        <div class="service-grid">
-          <article class="service-card">
-            <h3>Full Song Production</h3>
-            <p class="card-price">Starting Price: $150</p>
-            <ul class="card-list">
-              <li>Composition</li>
-              <li>Vocal arrangement</li>
-              <li>Mixing &amp; mastering</li>
-              <li>Optional publishing support</li>
-            </ul>
-            <button class="card-button service-info-btn" type="button"
-              data-title="Full Song Production"
-              data-price="Starting Price: $150"
-              data-paragraph-one="Our Full Song Production service covers everything you need to bring your track to life. From initial composition and vocal arrangement to professional mixing and mastering, we handle it all to ensure your song sounds polished and ready for release."
-              data-paragraph-two="Optional publishing services are also available to help you collect royalties and protect your work. Once your track is completed, we’ll discuss the best licensing options for you, including leasing or exclusive rights.">
-              More Info
-            </button>
-          </article>
-
-          <article class="service-card">
-            <h3>Mid Song Production</h3>
-            <p class="card-price">Starting Price: $100</p>
-            <ul class="card-list">
-              <li>Composition</li>
-              <li>Vocal arrangement</li>
-              <li>Creative direction</li>
-              <li>Built around your style</li>
-            </ul>
-            <button class="card-button service-info-btn" type="button"
-              data-title="Mid Song Production"
-              data-price="Starting Price: $100"
-              data-paragraph-one="Ideal for artists seeking a strong musical foundation with professional vocal arrangement. This package focuses on crafting the core composition and arranging vocals to suit your style, giving you a quality track to build on."
-              data-paragraph-two="After the production process, we will review available licensing options such as leasing or exclusive rights tailored to your needs.">
-              More Info
-            </button>
-          </article>
-
-          <article class="service-card">
-            <h3>Custom Production</h3>
-            <p class="card-price">Starting Price: $75</p>
-            <ul class="card-list">
-              <li>Tailored composition</li>
-              <li>Flexible structure</li>
-              <li>Artist-focused workflow</li>
-              <li>Custom creative support</li>
-            </ul>
-            <button class="card-button service-info-btn" type="button"
-              data-title="Custom Production"
-              data-price="Starting Price: $75"
-              data-paragraph-one="For those wanting a unique, tailored sound, our Custom Production service offers bespoke compositions crafted specifically to your vision. Perfect for artists seeking an original and personalized sound."
-              data-paragraph-two="Once your custom production is complete, we’ll explore leasing or exclusive licensing options together.">
-              More Info
-            </button>
-          </article>
-        </div>
-      </section>
-
-      <section id="leasing" class="content-section">
-        <h2>Leasing</h2>
-        <p>Explore our diverse range of purchasing and leasing options.</p>
-
-        <div class="service-grid">
-          <article class="service-card">
-            <h3>MP3 Standard License</h3>
-            <p class="card-price">$30</p>
-            <ul class="card-list">
-              <li>All streaming platforms</li>
-              <li>Up to 100,000 streams</li>
-              <li>1 year term duration</li>
-              <li>MP3 file</li>
-              <li>No tags</li>
-            </ul>
-            <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
-          </article>
-
-          <article class="service-card">
-            <h3>WAV Premium License</h3>
-            <p class="card-price">$50</p>
-            <ul class="card-list">
-              <li>All streaming platforms</li>
-              <li>Up to 500,000 streams</li>
-              <li>3 year term duration</li>
-              <li>MP3 + WAV file</li>
-              <li>No tags</li>
-            </ul>
-            <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
-          </article>
-
-          <article class="service-card">
-            <h3>WAV Stems Premium</h3>
-            <p class="card-price">$75</p>
-            <ul class="card-list">
-              <li>Tracked out files for mixing and rearranging</li>
-              <li>All streaming platforms</li>
-              <li>Up to 1 million streams</li>
-              <li>3 year term duration</li>
-              <li>MP3 + WAV stems</li>
-            </ul>
-            <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
-          </article>
-
-          <article class="service-card">
-            <h3>Exclusive License</h3>
-            <p class="card-price">Starting from $150</p>
-            <ul class="card-list">
-              <li>Tracked out files for mixing and rearranging</li>
-              <li>Unlimited streams</li>
-              <li>Unlimited term duration</li>
-              <li>MP3 + WAV stems</li>
-              <li>No tags</li>
-            </ul>
-            <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
-          </article>
-        </div>
-      </section>
-
-      <section id="production" class="content-section">
-        <h2>Production</h2>
-        <p>Need help building stronger beats? I offer hands-on support with melodies, drums, beat feedback, and creative tools to help you move faster and produce with more confidence.</p>
-
-        <div class="service-grid">
-          <article class="service-card">
-            <h3>Melody Drum Help</h3>
-            <p class="card-price">Production Support</p>
-            <ul class="card-list">
-              <li>Melody development and drum arrangement in one service</li>
-              <li>Better bounce, groove, and musical direction</li>
-              <li>Support with structure, layering, and sound choice</li>
-              <li>Built to fit your genre and production style</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <h3>Beat Review</h3>
-            <p class="card-price">Detailed Feedback</p>
-            <ul class="card-list">
-              <li>Honest review of your beat’s strengths and weak points</li>
-              <li>Feedback on melody, drums, arrangement, and overall energy</li>
-              <li>Suggestions to improve bounce, clarity, and replay value</li>
-              <li>Actionable advice you can apply in your next revision</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <h3>Drum Kits</h3>
-            <p class="card-price">Premium Packs</p>
-            <ul class="card-list">
-              <li>Professional-grade sounds ready for instant use</li>
-              <li>Kicks, snares, hi-hats, 808s, and textures</li>
-              <li>Designed for multiple genres and modern production</li>
-              <li>Easy drag-and-drop workflow in any DAW</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <h3>MIDI Packs</h3>
-            <p class="card-price">Workflow Tool</p>
-            <ul class="card-list">
-              <li>Melody and chord ideas to speed up creation</li>
-              <li>Useful starting points when inspiration is low</li>
-              <li>Fully editable files for custom arrangements</li>
-              <li>Great for building songs faster across genres</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="contact" class="content-section">
-        <h2>Contact</h2>
-        <p>Lets make something great together. Reach out via social media or the form below.</p>
-
-        <div class="footer-links" style="margin-bottom:30px;">
-          <div class="flex flex-wrap social-row">
-            <a class="social-link" href="https://www.instagram.com/arouldavinci" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a class="social-link" href="https://x.com/aroulking" target="_blank" rel="noopener" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-            <a class="social-link" href="https://www.beatstars.com/aroulking/tracks" target="_blank" rel="noopener" aria-label="BeatStars"><i class="fas fa-music"></i></a>
-            <a class="social-link" href="mailto:aroulkingproduction@gmail.com" aria-label="Email"><i class="far fa-envelope"></i></a>
-          </div>
-        </div>
-
-        <button class="newsletter-button" onclick="window.open('https://arouldavinci.beehiiv.com/subscribe', '_blank')">Subscribe to Newsletter</button>
-
-        <div class="contact-form-container">
-          <form id="contact-form" class="contact-form" novalidate>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required autocomplete="name" />
-
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required autocomplete="email" />
-
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject" required />
-
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="4" required spellcheck="true"></textarea>
-
-            <div class="privacy-consent">
-              <label class="checkbox-label" for="privacy-consent">
-                <input class="checkbox-input" type="checkbox" id="privacy-consent" name="privacy-consent" required />
-                <span class="checkbox-custom" aria-hidden="true"></span>
-                <span class="checkbox-text">I have read and accept the <button type="button" id="open-privacy-modal" class="inline-privacy-link">Privacy Policy</button>.</span>
-              </label>
-            </div>
-
-            <button type="submit">Submit</button>
-            <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
-          </form>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
 
     <footer id="site-footer">
@@ -2272,7 +2276,47 @@
       <div class="toast-title" id="toast-title">Success</div>
       <div class="toast-message" id="toast-message">Thank you, we will respond soon.</div>
     </div>
-    <button class="toast-close" id="toast-close" type="button" aria-label="Close notification"><i class="fas fa-xmark"></i></button>
+    <button class="toast-close" id="toast-close" type="button" aria-label="Close notification">
+      <i class="fas fa-xmark"></i>
+    </button>
+  </div>
+
+  <div class="floating-player" id="floating-player" aria-hidden="true">
+    <img class="floating-player-artwork" id="floating-player-artwork" src="./music/default-cover.jpg" alt="Current track artwork" />
+
+    <div class="floating-player-main">
+      <div class="floating-player-label">Now Playing</div>
+      <div class="floating-player-title" id="floating-player-title">Select a beat</div>
+      <div class="floating-player-times">
+        <span id="floating-player-current-time">0:00</span>
+        <span>•</span>
+        <span id="floating-player-duration">0:00</span>
+      </div>
+      <div class="floating-player-progress-wrap">
+        <div class="floating-player-progress" aria-hidden="true">
+          <div class="floating-player-progress-fill" id="floating-player-progress-fill"></div>
+        </div>
+        <input
+          type="range"
+          class="floating-player-seek"
+          id="floating-player-seek"
+          min="0"
+          max="1000"
+          step="1"
+          value="0"
+          aria-label="Seek current track"
+        />
+      </div>
+    </div>
+
+    <div class="floating-player-controls">
+      <button class="floating-player-toggle" id="floating-player-toggle" type="button" aria-label="Play or pause current track">
+        <i class="fas fa-play"></i>
+      </button>
+      <button class="floating-player-close" id="floating-player-close" type="button" aria-label="Hide floating player">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
   </div>
 
   <script>
@@ -2300,49 +2344,52 @@
       var fadeTopEl = document.getElementById('beat-tracklist-fade-top');
       var fadeBottomEl = document.getElementById('beat-tracklist-fade-bottom');
 
-      var BEAT_TRACKS = [];
+      var floating = document.getElementById('floating-player');
+      var floatingArtwork = document.getElementById('floating-player-artwork');
+      var floatingTitle = document.getElementById('floating-player-title');
+      var floatingCurrent = document.getElementById('floating-player-current-time');
+      var floatingDuration = document.getElementById('floating-player-duration');
+      var floatingProgressFill = document.getElementById('floating-player-progress-fill');
+      var floatingSeek = document.getElementById('floating-player-seek');
+      var floatingToggle = document.getElementById('floating-player-toggle');
+      var floatingToggleIcon = floatingToggle.querySelector('i');
+      var floatingClose = document.getElementById('floating-player-close');
+
+      var serviceButtons = document.querySelectorAll('.service-info-btn');
+      var serviceModal = document.getElementById('service-modal');
+      var serviceModalOverlay = document.getElementById('service-modal-overlay');
+      var serviceModalClose = document.getElementById('service-modal-close');
+      var serviceModalTitle = document.getElementById('service-modal-title');
+      var serviceModalPrice = document.getElementById('service-modal-price');
+      var serviceModalTextOne = document.getElementById('service-modal-text-one');
+      var serviceModalTextTwo = document.getElementById('service-modal-text-two');
+
+      var privacyModal = document.getElementById('privacy-modal');
+      var privacyModalOverlay = document.getElementById('privacy-modal-overlay');
+      var privacyModalClose = document.getElementById('privacy-modal-close');
+      var openPrivacyModalBtn = document.getElementById('open-privacy-modal');
+      var footerPrivacyLink = document.getElementById('footer-privacy-link');
+
+      var contactForm = document.getElementById('contact-form');
+      var formStatus = document.getElementById('form-status');
+
+      var toast = document.getElementById('toast');
+      var toastTitle = document.getElementById('toast-title');
+      var toastMessage = document.getElementById('toast-message');
+      var toastIcon = document.getElementById('toast-icon');
+      var toastClose = document.getElementById('toast-close');
+
+      var ALL_TRACKS = [];
       var FILTERED_TRACKS = [];
       var currentIndex = -1;
-      var isPlaying = false;
-      var isUserSeeking = false;
-      var wasPlayingBeforeSeek = false;
       var currentFilter = '';
-      var trackDuration = 0;
-      var currentObjectUrl = null;
-      var loadRequestId = 0;
-
-      function resolveRealDuration(onReady) {
-        if (isFinite(audio.duration) && audio.duration > 0) {
-          trackDuration = audio.duration;
-          onReady();
-          return;
-        }
-
-        var settled = false;
-        var savedTime = audio.currentTime;
-
-        function finish() {
-          if (settled) return;
-          settled = true;
-          audio.removeEventListener('timeupdate', onTimeUpdate);
-          audio.removeEventListener('durationchange', onDurationChange);
-          clearTimeout(timeoutId);
-          trackDuration = isFinite(audio.duration) ? audio.duration : 0;
-          audio.currentTime = savedTime || 0;
-          onReady();
-        }
-
-        function onTimeUpdate() { finish(); }
-        function onDurationChange() {
-          if (isFinite(audio.duration) && audio.duration > 0) finish();
-        }
-
-        audio.addEventListener('timeupdate', onTimeUpdate);
-        audio.addEventListener('durationchange', onDurationChange);
-
-        var timeoutId = setTimeout(finish, 4000);
-        audio.currentTime = 1e101;
-      }
+      var isMainSeeking = false;
+      var isFloatingSeeking = false;
+      var wasPlayingBeforeMainSeek = false;
+      var wasPlayingBeforeFloatingSeek = false;
+      var hideFloatingOnly = false;
+      var toastTimer = null;
+      var lastFocusedBeforeModal = null;
 
       function escapeHtml(str) {
         return String(str)
@@ -2354,7 +2401,8 @@
       }
 
       function formatTime(sec) {
-        if (isNaN(sec) || sec < 0) return '0:00';
+        sec = Number(sec);
+        if (!isFinite(sec) || sec < 0) return '0:00';
         var m = Math.floor(sec / 60);
         var s = Math.floor(sec % 60);
         return m + ':' + (s < 10 ? '0' + s : s);
@@ -2366,40 +2414,20 @@
         return n.toLocaleString();
       }
 
-      function setSeekBarUI(value) {
-        var safeValue = Math.max(0, Math.min(1000, Number(value) || 0));
-        seekBar.value = safeValue;
-        var pct = (safeValue / 1000) * 100;
-        seekBar.style.background = 'linear-gradient(to right, var(--accent) 0%, var(--accent) ' + pct + '%, rgba(255,255,255,0.12) ' + pct + '%, rgba(255,255,255,0.12) 100%)';
-      }
-
-      function clearTrackItems() {
-        tracklistEl.innerHTML = '';
-      }
-
-      function setMessage(className, text) {
-        clearTrackItems();
-        var div = document.createElement('div');
-        div.className = className;
-        div.textContent = text;
-        tracklistEl.appendChild(div);
-        updateScrollIndicators();
-      }
-
       function joinPath(base, fileName) {
         return base + '/' + String(fileName).replace(/^\/+/, '');
       }
 
       function buildArtworkCandidates(base, item) {
-        var candidates = [];
-        if (item.artwork) candidates.push(joinPath(base, item.artwork));
-        if (item.coverArt) candidates.push(joinPath(base, item.coverArt));
-        if (item.cover) candidates.push(joinPath(base, item.cover));
-        candidates.push(joinPath(base, 'cover.jpg'));
-        candidates.push(joinPath(base, 'cover.jpeg'));
-        candidates.push(joinPath(base, 'cover.png'));
-        candidates.push(joinPath(base, 'cover.webp'));
-        return candidates.filter(function (src, index, arr) {
+        var list = [];
+        if (item.artwork) list.push(joinPath(base, item.artwork));
+        if (item.coverArt) list.push(joinPath(base, item.coverArt));
+        if (item.cover) list.push(joinPath(base, item.cover));
+        list.push(joinPath(base, 'cover.jpg'));
+        list.push(joinPath(base, 'cover.jpeg'));
+        list.push(joinPath(base, 'cover.png'));
+        list.push(joinPath(base, 'cover.webp'));
+        return list.filter(function (src, index, arr) {
           return src && arr.indexOf(src) === index;
         });
       }
@@ -2408,6 +2436,7 @@
         var folder = item.folder || item.slug || item.id || item.title || 'beat';
         var cleanFolder = String(folder).replace(/^\/+|\/+$/g, '');
         var base = './music/' + cleanFolder;
+
         var rawTags = Array.isArray(item.tags)
           ? item.tags
           : Array.isArray(item.tag)
@@ -2415,12 +2444,17 @@
             : item.tag
               ? String(item.tag).split(',')
               : [];
-        var tags = rawTags.map(function (t) { return String(t).trim(); }).filter(Boolean).slice(0, 10);
+
+        var tags = rawTags.map(function (t) {
+          return String(t).trim();
+        }).filter(Boolean).slice(0, 10);
+
         var audioPath = item.audio ? joinPath(base, item.audio) : joinPath(base, 'beat.mp3');
         var downloadPath = item.download ? joinPath(base, item.download) : audioPath;
+        var artworkCandidates = buildArtworkCandidates(base, item);
 
         return {
-          id: cleanFolder || item.title || Math.random().toString(36).slice(2),
+          id: cleanFolder || Math.random().toString(36).slice(2),
           title: item.title || cleanFolder || 'Untitled Beat',
           artist: item.artist || item.producer || '',
           genre: item.genre || '',
@@ -2428,8 +2462,8 @@
           key: item.key || '',
           tags: tags,
           duration: item.duration || '',
-          artworkCandidates: buildArtworkCandidates(base, item),
-          artwork: buildArtworkCandidates(base, item)[0] || './music/default-cover.jpg',
+          artwork: artworkCandidates[0] || './music/default-cover.jpg',
+          artworkCandidates: artworkCandidates,
           audio: audioPath,
           download: downloadPath,
           buyUrl: item.buyUrl || '',
@@ -2437,8 +2471,33 @@
         };
       }
 
-      function getTrackIdentity(track) {
-        return [track.title, track.audio, track.download].join('|');
+      function setArtworkWithFallback(img, candidates) {
+        var list = Array.isArray(candidates) && candidates.length ? candidates.slice() : ['./music/default-cover.jpg'];
+        var index = 0;
+
+        function tryNext() {
+          if (index >= list.length) {
+            img.onerror = null;
+            img.src = './music/default-cover.jpg';
+            return;
+          }
+          img.onerror = tryNext;
+          img.src = list[index++];
+        }
+
+        tryNext();
+      }
+
+      function setSeekBackground(input, value) {
+        var safe = Math.max(0, Math.min(1000, Number(value) || 0));
+        var pct = (safe / 1000) * 100;
+        input.value = safe;
+        input.style.background =
+          'linear-gradient(to right, var(--accent) 0%, var(--accent) ' +
+          pct +
+          '%, rgba(255,255,255,0.12) ' +
+          pct +
+          '%, rgba(255,255,255,0.12) 100%)';
       }
 
       function getCurrentTrack() {
@@ -2446,47 +2505,56 @@
         return FILTERED_TRACKS[currentIndex];
       }
 
-      function updateFilterStatus() {
-        if (!filterStatusEl) return;
-        if (!currentFilter) {
-          filterStatusEl.textContent = 'Showing all tracks (' + FILTERED_TRACKS.length + ')';
+      function showFloating() {
+        if (hideFloatingOnly) return;
+        floating.classList.add('active');
+        floating.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('floating-player-visible');
+      }
+
+      function hideFloating() {
+        floating.classList.remove('active');
+        floating.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('floating-player-visible');
+      }
+
+      function updateScrollIndicators() {
+        var el = tracklistEl;
+        if (!el || !scrollHintEl || !fadeTopEl || !fadeBottomEl) return;
+
+        var maxScroll = el.scrollHeight - el.clientHeight;
+        var atTop = el.scrollTop <= 4;
+        var atBottom = el.scrollTop >= maxScroll - 4 || maxScroll <= 4;
+
+        fadeTopEl.classList.toggle('hidden', atTop);
+        fadeBottomEl.classList.toggle('hidden', atBottom);
+        scrollHintEl.classList.toggle('hidden', !atTop || atBottom || maxScroll <= 4);
+      }
+
+      function syncMeta(track) {
+        if (!track) {
+          titleEl.textContent = 'No track selected';
+          tagsEl.style.display = 'none';
+          keyEl.style.display = 'none';
+          bpmEl.style.display = 'none';
+          listensEl.textContent = '0 listens';
+          artworkEl.src = './music/default-cover.jpg';
+          floatingArtwork.src = './music/default-cover.jpg';
+          floatingTitle.textContent = 'Select a beat';
+          currentTimeEl.textContent = '0:00';
+          durationEl.textContent = '0:00';
+          floatingCurrent.textContent = '0:00';
+          floatingDuration.textContent = '0:00';
+          setSeekBackground(seekBar, 0);
+          floatingSeek.value = 0;
+          floatingProgressFill.style.width = '0%';
           return;
         }
-        filterStatusEl.textContent = 'Showing ' + FILTERED_TRACKS.length + ' result' + (FILTERED_TRACKS.length === 1 ? '' : 's') + ' for "' + currentFilter + '"';
-      }
 
-      function updateActiveTrackUI() {
-        var items = tracklistEl.querySelectorAll('.beat-track-item');
-        items.forEach(function (el, i) {
-          el.classList.toggle('active', i === currentIndex);
-          var icon = el.querySelector('.track-play-icon i');
-          if (!icon) return;
-          if (i === currentIndex && isPlaying) icon.className = 'fas fa-pause';
-          else icon.className = 'fas fa-play';
-        });
-      }
-
-      function setArtworkWithFallback(imgEl, candidates) {
-        var list = Array.isArray(candidates) && candidates.length ? candidates.slice() : ['./music/default-cover.jpg'];
-        var index = 0;
-
-        function tryNext() {
-          if (index >= list.length) {
-            imgEl.onerror = null;
-            imgEl.src = './music/default-cover.jpg';
-            return;
-          }
-          var nextSrc = list[index++];
-          imgEl.onerror = tryNext;
-          imgEl.src = nextSrc;
-        }
-
-        tryNext();
-      }
-
-      function setPlayerMeta(track) {
         setArtworkWithFallback(artworkEl, track.artworkCandidates);
+        setArtworkWithFallback(floatingArtwork, track.artworkCandidates);
         titleEl.textContent = track.title;
+        floatingTitle.textContent = track.title;
 
         var joinedTags = track.tags.join(' • ');
         tagsEl.textContent = joinedTags;
@@ -2499,30 +2567,58 @@
         bpmEl.style.display = track.bpm ? 'inline-flex' : 'none';
 
         listensEl.textContent = formatNumber(track.listenCount) + ' listens';
-        listensEl.style.display = 'inline-flex';
-
-        currentTimeEl.textContent = '0:00';
-        durationEl.textContent = track.duration || '0:00';
-        setSeekBarUI(0);
       }
 
-      function resetPlayerFallback(messageText) {
-        titleEl.textContent = messageText;
-        tagsEl.textContent = '';
-        tagsEl.style.display = 'none';
-        keyEl.textContent = '';
-        keyEl.style.display = 'none';
-        bpmEl.textContent = '';
-        bpmEl.style.display = 'none';
-        listensEl.textContent = '0 listens';
-        listensEl.style.display = 'inline-flex';
-        artworkEl.src = './music/default-cover.jpg';
-        currentTimeEl.textContent = '0:00';
-        durationEl.textContent = '0:00';
-        setSeekBarUI(0);
+      function updatePlayIcons() {
+        var isPlaying = !audio.paused && !audio.ended;
+        playIcon.className = isPlaying ? 'fas fa-pause' : 'fas fa-play';
+        floatingToggleIcon.className = isPlaying ? 'fas fa-pause' : 'fas fa-play';
+
+        var items = tracklistEl.querySelectorAll('.beat-track-item');
+        items.forEach(function (item, i) {
+          var active = i === currentIndex;
+          item.classList.toggle('active', active);
+          var icon = item.querySelector('.track-play-icon i');
+          if (!icon) return;
+          icon.className = active && isPlaying ? 'fas fa-pause' : 'fas fa-play';
+        });
       }
 
-      function matchesTagFilter(track, query) {
+      function syncProgress() {
+        var duration = audio.duration || 0;
+        var current = audio.currentTime || 0;
+        var ratio = duration > 0 ? current / duration : 0;
+        var value = Math.max(0, Math.min(1000, Math.round(ratio * 1000)));
+
+        currentTimeEl.textContent = formatTime(current);
+        durationEl.textContent = formatTime(duration);
+        floatingCurrent.textContent = formatTime(current);
+        floatingDuration.textContent = formatTime(duration);
+
+        if (!isMainSeeking) setSeekBackground(seekBar, value);
+        if (!isFloatingSeeking) floatingSeek.value = value;
+
+        floatingProgressFill.style.width = (ratio * 100) + '%';
+        updatePlayIcons();
+      }
+
+      function updateFilterStatus() {
+        if (!currentFilter) {
+          filterStatusEl.textContent = 'Showing all tracks (' + FILTERED_TRACKS.length + ')';
+          return;
+        }
+
+        filterStatusEl.textContent =
+          'Showing ' +
+          FILTERED_TRACKS.length +
+          ' result' +
+          (FILTERED_TRACKS.length === 1 ? '' : 's') +
+          ' for "' +
+          currentFilter +
+          '"';
+      }
+
+      function matchesFilter(track, query) {
         if (!query) return true;
 
         var searchable = [
@@ -2536,44 +2632,28 @@
           formatNumber(track.listenCount)
         ].join(' ').toLowerCase();
 
-        var keywords = query
+        return query
           .toLowerCase()
           .split(' ')
-          .map(function (word) { return word.trim(); })
-          .filter(Boolean);
-
-        if (!keywords.length) return true;
-        return keywords.every(function (word) {
-          return searchable.indexOf(word) !== -1;
-        });
-      }
-
-      function updateScrollIndicators() {
-        if (!tracklistEl || !scrollHintEl || !fadeTopEl || !fadeBottomEl) return;
-
-        var hasOverflow = tracklistEl.scrollHeight > tracklistEl.clientHeight + 4;
-        var atTop = tracklistEl.scrollTop <= 4;
-        var atBottom = tracklistEl.scrollTop + tracklistEl.clientHeight >= tracklistEl.scrollHeight - 4;
-
-        scrollHintEl.classList.toggle('hidden', !hasOverflow || !atTop);
-        fadeTopEl.classList.toggle('hidden', !hasOverflow || atTop);
-        fadeBottomEl.classList.toggle('hidden', !hasOverflow || atBottom);
+          .map(function (w) { return w.trim(); })
+          .filter(Boolean)
+          .every(function (word) {
+            return searchable.indexOf(word) !== -1;
+          });
       }
 
       function renderTrackList() {
-        clearTrackItems();
+        tracklistEl.innerHTML = '';
         updateFilterStatus();
 
         if (!FILTERED_TRACKS.length) {
-          setMessage('beat-empty', currentFilter ? 'No beats match that search.' : 'No beats found.');
+          tracklistEl.innerHTML = '<div class="beat-empty">No beats match that search.</div>';
+          updatePlayIcons();
+          updateScrollIndicators();
           return;
         }
 
         FILTERED_TRACKS.forEach(function (track, i) {
-          var item = document.createElement('div');
-          item.className = 'beat-track-item';
-          item.setAttribute('data-index', i);
-
           var safeFileName = (track.title || 'beat')
             .replace(/[<>:"/\\|?*\x00-\x1F]/g, '')
             .replace(/\s+/g, ' ')
@@ -2581,9 +2661,13 @@
 
           var subline = [
             track.genre || '',
-            track.tags && track.tags.length ? track.tags.slice(0, 3).join(' • ') : '',
+            track.tags.length ? track.tags.slice(0, 3).join(' • ') : '',
             formatNumber(track.listenCount) + ' listens'
           ].filter(Boolean).join(' • ');
+
+          var item = document.createElement('div');
+          item.className = 'beat-track-item';
+          if (i === currentIndex) item.classList.add('active');
 
           item.innerHTML = `
             <div class="track-play-icon"><i class="fas fa-play"></i></div>
@@ -2599,12 +2683,7 @@
                 <i class="fas fa-shopping-cart"></i>
                 <span>Buy</span>
               </button>
-              <a
-                class="download-btn"
-                href="${escapeHtml(track.download)}"
-                download="${escapeHtml(safeFileName)}.mp3"
-                aria-label="Download"
-              >
+              <a class="download-btn" href="${escapeHtml(track.download)}" download="${escapeHtml(safeFileName)}.mp3" aria-label="Download">
                 <i class="fas fa-download"></i>
                 <span>Download</span>
               </a>
@@ -2617,7 +2696,11 @@
           item.addEventListener('click', function (e) {
             if (e.target.closest('.buy-btn')) {
               e.stopPropagation();
-              if (track.buyUrl) window.open(track.buyUrl, '_blank');
+              if (track.buyUrl) {
+                window.open(track.buyUrl, '_blank');
+              } else {
+                showToast('Info', 'No buy link available for this beat.', 'info');
+              }
               return;
             }
 
@@ -2626,691 +2709,379 @@
               return;
             }
 
-            if (i === currentIndex) {
-              togglePlay();
-              return;
-            }
+            hideFloatingOnly = false;
 
-            selectTrack(i, true);
+            if (i === currentIndex) {
+              togglePlayback();
+            } else {
+              playTrackByIndex(i);
+            }
           });
 
           tracklistEl.appendChild(item);
         });
 
-        updateActiveTrackUI();
-        requestAnimationFrame(updateScrollIndicators);
+        updatePlayIcons();
+        updateScrollIndicators();
       }
 
-      function applyFilter(preserveCurrentTrack) {
-        var previousTrack = preserveCurrentTrack ? getCurrentTrack() : null;
-        var previousIdentity = previousTrack ? getTrackIdentity(previousTrack) : null;
+      function loadTrack(index, keepTime) {
+        var track = FILTERED_TRACKS[index];
+        if (!track) return;
 
-        FILTERED_TRACKS = BEAT_TRACKS.filter(function (track) {
-          return matchesTagFilter(track, currentFilter);
-        });
-
-        renderTrackList();
-
-        if (!FILTERED_TRACKS.length) {
-          audio.pause();
-          audio.removeAttribute('src');
-          audio.load();
-          currentIndex = -1;
-          updatePlayUI(false);
-          resetPlayerFallback('No matching beats');
-          updateScrollIndicators();
-          return;
-        }
-
-        if (previousIdentity) {
-          var foundIndex = FILTERED_TRACKS.findIndex(function (track) {
-            return getTrackIdentity(track) === previousIdentity;
-          });
-
-          if (foundIndex !== -1) {
-            currentIndex = foundIndex;
-            setPlayerMeta(FILTERED_TRACKS[currentIndex]);
-            updateActiveTrackUI();
-            requestAnimationFrame(updateScrollIndicators);
-            return;
-          }
-        }
-
-        currentIndex = 0;
-        loadTrack(0, false);
-        updatePlayUI(false);
-        requestAnimationFrame(updateScrollIndicators);
-      }
-
-      function loadTrack(index, autoplay) {
-        if (!FILTERED_TRACKS[index]) return;
+        var sameTrack = currentIndex === index && audio.dataset.src === track.audio;
+        var savedTime = keepTime ? audio.currentTime || 0 : 0;
 
         currentIndex = index;
-        var track = FILTERED_TRACKS[index];
-        trackDuration = 0;
-        var myRequestId = ++loadRequestId;
+        syncMeta(track);
 
-        audio.pause();
-        audio.removeAttribute('src');
-        audio.load();
-
-        if (currentObjectUrl) {
-          URL.revokeObjectURL(currentObjectUrl);
-          currentObjectUrl = null;
+        if (!sameTrack) {
+          audio.src = track.audio;
+          audio.dataset.src = track.audio;
+          audio.load();
         }
 
-        setPlayerMeta(track);
-        updateActiveTrackUI();
-
-        function playIfNeeded() {
-          if (autoplay && myRequestId === loadRequestId) audio.play().catch(function () {});
+        if (keepTime && savedTime > 0) {
+          var restore = function () {
+            try { audio.currentTime = savedTime; } catch (e) {}
+            audio.removeEventListener('loadedmetadata', restore);
+          };
+          audio.addEventListener('loadedmetadata', restore);
         }
 
-        fetch(track.audio)
-          .then(function (response) {
-            if (!response.ok) throw new Error('audio fetch failed: ' + response.status);
-            return response.blob();
-          })
-          .then(function (blob) {
-            if (myRequestId !== loadRequestId) return;
-            var objectUrl = URL.createObjectURL(blob);
-            currentObjectUrl = objectUrl;
-            audio.src = objectUrl;
-            audio.load();
-            playIfNeeded();
-          })
-          .catch(function () {
-            if (myRequestId !== loadRequestId) return;
-            audio.src = track.audio;
-            audio.load();
-            playIfNeeded();
-          });
+        updatePlayIcons();
+        showFloating();
       }
 
-      function selectTrack(index, autoplay) {
-        loadTrack(index, autoplay);
+      async function safePlay() {
+        try {
+          await audio.play();
+        } catch (err) {
+          console.warn('Play blocked or failed:', err);
+        }
       }
 
-      function togglePlay() {
+      async function playTrackByIndex(index) {
+        hideFloatingOnly = false;
+        loadTrack(index, false);
+        await safePlay();
+      }
+
+      async function togglePlayback() {
         if (!FILTERED_TRACKS.length) return;
 
         if (currentIndex === -1) {
-          selectTrack(0, true);
+          await playTrackByIndex(0);
           return;
         }
 
-        if (!audio.src) loadTrack(currentIndex, false);
+        var track = getCurrentTrack();
+        if (!track) {
+          await playTrackByIndex(0);
+          return;
+        }
 
-        if (isPlaying) audio.pause();
-        else audio.play().catch(function () {});
+        if (!audio.dataset.src || audio.dataset.src !== track.audio) {
+          await playTrackByIndex(currentIndex);
+          return;
+        }
+
+        if (audio.paused) {
+          hideFloatingOnly = false;
+          showFloating();
+          await safePlay();
+        } else {
+          audio.pause();
+        }
       }
 
-      function updatePlayUI(playing) {
-        isPlaying = playing;
-        playIcon.className = playing ? 'fas fa-pause' : 'fas fa-play';
-        updateActiveTrackUI();
+      function applyFilter() {
+        var previousTrack = getCurrentTrack();
+        var previousAudio = previousTrack ? previousTrack.audio : '';
+
+        FILTERED_TRACKS = ALL_TRACKS.filter(function (track) {
+          return matchesFilter(track, currentFilter);
+        });
+
+        if (!FILTERED_TRACKS.length) {
+          currentIndex = -1;
+          audio.pause();
+          audio.removeAttribute('src');
+          audio.dataset.src = '';
+          renderTrackList();
+          syncMeta(null);
+          return;
+        }
+
+        renderTrackList();
+
+        var foundIndex = FILTERED_TRACKS.findIndex(function (track) {
+          return track.audio === previousAudio;
+        });
+
+        if (foundIndex !== -1) {
+          currentIndex = foundIndex;
+          syncMeta(FILTERED_TRACKS[currentIndex]);
+        } else {
+          currentIndex = 0;
+          syncMeta(FILTERED_TRACKS[0]);
+          audio.pause();
+          audio.removeAttribute('src');
+          audio.dataset.src = '';
+        }
+
+        updatePlayIcons();
       }
 
       async function loadBeats() {
         try {
           var response = await fetch('./music/beats.json', { cache: 'no-store' });
           if (!response.ok) throw new Error('Cannot load beats.json');
+
           var data = await response.json();
           if (!Array.isArray(data)) throw new Error('beats.json must be an array');
 
-          BEAT_TRACKS = data.map(normalizeTrack);
-          FILTERED_TRACKS = BEAT_TRACKS.slice();
+          ALL_TRACKS = data.map(normalizeTrack);
+          FILTERED_TRACKS = ALL_TRACKS.slice();
+
           renderTrackList();
 
           if (FILTERED_TRACKS.length) {
             currentIndex = 0;
-            loadTrack(0, false);
+            syncMeta(FILTERED_TRACKS[0]);
           } else {
-            resetPlayerFallback('No beats found');
+            syncMeta(null);
+            tracklistEl.innerHTML = '<div class="beat-empty">No beats found.</div>';
           }
-
-          requestAnimationFrame(updateScrollIndicators);
-        } catch (error) {
-          console.error(error);
-          resetPlayerFallback('Could not load beats');
-          setMessage('beat-error', 'Could not load beats. Check music/beats.json and folder names.');
+        } catch (err) {
+          console.error(err);
+          tracklistEl.innerHTML = '<div class="beat-error">Could not load beats. Check music/beats.json and folder names.</div>';
+          syncMeta(null);
+          titleEl.textContent = 'Could not load beats';
         }
       }
 
-      playBtn.addEventListener('click', togglePlay);
+      function showToast(title, message, type) {
+        clearTimeout(toastTimer);
+
+        toastTitle.textContent = title || 'Notice';
+        toastMessage.textContent = message || '';
+        toast.className = 'toast show ' + (type || 'success');
+
+        if (type === 'error') {
+          toastIcon.innerHTML = '<i class="fas fa-circle-exclamation"></i>';
+        } else if (type === 'info') {
+          toastIcon.innerHTML = '<i class="fas fa-circle-info"></i>';
+        } else {
+          toastIcon.innerHTML = '<i class="fas fa-check"></i>';
+        }
+
+        toastTimer = setTimeout(function () {
+          toast.classList.remove('show');
+        }, 3200);
+      }
+
+      function openModal(modal, overlay, focusEl) {
+        lastFocusedBeforeModal = focusEl || document.activeElement;
+        overlay.classList.add('active');
+        modal.classList.add('active');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+      }
+
+      function closeModal(modal, overlay) {
+        overlay.classList.remove('active');
+        modal.classList.remove('active');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        if (lastFocusedBeforeModal && typeof lastFocusedBeforeModal.focus === 'function') {
+          lastFocusedBeforeModal.focus();
+        }
+      }
+
+      function bindCloseModal(modal, overlay, closeBtn) {
+        closeBtn.addEventListener('click', function () {
+          closeModal(modal, overlay);
+        });
+
+        overlay.addEventListener('click', function () {
+          closeModal(modal, overlay);
+        });
+      }
+
+      playBtn.addEventListener('click', function () {
+        hideFloatingOnly = false;
+        togglePlayback();
+      });
+
+      floatingToggle.addEventListener('click', function () {
+        hideFloatingOnly = false;
+        togglePlayback();
+      });
+
+      floatingClose.addEventListener('click', function () {
+        hideFloatingOnly = true;
+        hideFloating();
+      });
 
       audio.addEventListener('play', function () {
-        updatePlayUI(true);
+        showFloating();
+        updatePlayIcons();
       });
 
       audio.addEventListener('pause', function () {
-        updatePlayUI(false);
+        updatePlayIcons();
+      });
+
+      audio.addEventListener('loadedmetadata', function () {
+        syncProgress();
+      });
+
+      audio.addEventListener('timeupdate', function () {
+        syncProgress();
       });
 
       audio.addEventListener('ended', function () {
         if (currentIndex < FILTERED_TRACKS.length - 1) {
-          selectTrack(currentIndex + 1, true);
+          playTrackByIndex(currentIndex + 1);
         } else {
-          updatePlayUI(false);
-          setSeekBarUI(1000);
+          updatePlayIcons();
+          syncProgress();
         }
-      });
-
-      audio.addEventListener('loadedmetadata', function () {
-        resolveRealDuration(function () {
-          durationEl.textContent = formatTime(trackDuration);
-          if (!isUserSeeking) {
-            setSeekBarUI(trackDuration ? (audio.currentTime / trackDuration) * 1000 : 0);
-          }
-        });
-      });
-
-      audio.addEventListener('timeupdate', function () {
-        if (!trackDuration || isUserSeeking) return;
-        currentTimeEl.textContent = formatTime(audio.currentTime);
-        setSeekBarUI((audio.currentTime / trackDuration) * 1000);
       });
 
       seekBar.addEventListener('pointerdown', function () {
-        isUserSeeking = true;
-        wasPlayingBeforeSeek = isPlaying;
+        isMainSeeking = true;
+        wasPlayingBeforeMainSeek = !audio.paused;
       });
 
       seekBar.addEventListener('input', function () {
-        if (!trackDuration) return;
-        isUserSeeking = true;
-        var t = (Number(this.value) / 1000) * trackDuration;
-        audio.currentTime = t;
+        isMainSeeking = true;
+        var duration = audio.duration || 0;
+        var t = duration * (Number(seekBar.value || 0) / 1000);
         currentTimeEl.textContent = formatTime(t);
-        setSeekBarUI(this.value);
+        setSeekBackground(seekBar, seekBar.value);
       });
 
-      function releaseSeek() {
-        isUserSeeking = false;
-        if (wasPlayingBeforeSeek && audio.paused) audio.play().catch(function () {});
-        wasPlayingBeforeSeek = false;
+      function commitMainSeek() {
+        var duration = audio.duration || 0;
+        if (duration > 0) {
+          audio.currentTime = duration * (Number(seekBar.value || 0) / 1000);
+        }
+        isMainSeeking = false;
+        if (wasPlayingBeforeMainSeek && audio.paused) safePlay();
+        wasPlayingBeforeMainSeek = false;
+        syncProgress();
       }
 
-      seekBar.addEventListener('change', releaseSeek);
-      seekBar.addEventListener('mouseup', releaseSeek);
-      seekBar.addEventListener('touchend', releaseSeek);
-      seekBar.addEventListener('pointerup', releaseSeek);
-      seekBar.addEventListener('keydown', function () {
-        wasPlayingBeforeSeek = isPlaying;
-      });
-      seekBar.addEventListener('keyup', function (e) {
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Home' || e.key === 'End') {
-          if (trackDuration) {
-            var t = (Number(seekBar.value) / 1000) * trackDuration;
-            audio.currentTime = t;
-            currentTimeEl.textContent = formatTime(t);
-          }
-          releaseSeek();
-        }
+      seekBar.addEventListener('change', commitMainSeek);
+      seekBar.addEventListener('mouseup', commitMainSeek);
+      seekBar.addEventListener('touchend', commitMainSeek);
+      seekBar.addEventListener('pointerup', commitMainSeek);
+
+      floatingSeek.addEventListener('pointerdown', function () {
+        isFloatingSeeking = true;
+        wasPlayingBeforeFloatingSeek = !audio.paused;
       });
 
+      floatingSeek.addEventListener('input', function () {
+        isFloatingSeeking = true;
+        var duration = audio.duration || 0;
+        var ratio = Number(floatingSeek.value || 0) / 1000;
+        var previewTime = duration * ratio;
+        floatingCurrent.textContent = formatTime(previewTime);
+        floatingProgressFill.style.width = (ratio * 100) + '%';
+      });
+
+      function commitFloatingSeek() {
+        var duration = audio.duration || 0;
+        if (duration > 0) {
+          audio.currentTime = duration * (Number(floatingSeek.value || 0) / 1000);
+        }
+        isFloatingSeeking = false;
+        if (wasPlayingBeforeFloatingSeek && audio.paused) safePlay();
+        wasPlayingBeforeFloatingSeek = false;
+        syncProgress();
+      }
+
+      floatingSeek.addEventListener('change', commitFloatingSeek);
+      floatingSeek.addEventListener('mouseup', commitFloatingSeek);
+      floatingSeek.addEventListener('touchend', commitFloatingSeek);
+      floatingSeek.addEventListener('pointerup', commitFloatingSeek);
+
       volumeSlider.addEventListener('input', function () {
-        audio.volume = this.value / 100;
+        audio.volume = Number(volumeSlider.value || 80) / 100;
       });
 
       tagSearchInput.addEventListener('input', function () {
-        currentFilter = this.value.trim();
-        applyFilter(true);
+        currentFilter = tagSearchInput.value.trim();
+        applyFilter();
       });
 
       clearFilterBtn.addEventListener('click', function () {
         currentFilter = '';
         tagSearchInput.value = '';
-        applyFilter(true);
+        applyFilter();
         tagSearchInput.focus();
       });
 
       tracklistEl.addEventListener('scroll', updateScrollIndicators);
       window.addEventListener('resize', updateScrollIndicators);
 
+      serviceButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          serviceModalTitle.textContent = btn.dataset.title || 'Service';
+          serviceModalPrice.textContent = btn.dataset.price || '';
+          serviceModalTextOne.textContent = btn.dataset.paragraphOne || '';
+          serviceModalTextTwo.textContent = btn.dataset.paragraphTwo || '';
+          openModal(serviceModal, serviceModalOverlay, btn);
+        });
+      });
+
+      bindCloseModal(serviceModal, serviceModalOverlay, serviceModalClose);
+      bindCloseModal(privacyModal, privacyModalOverlay, privacyModalClose);
+
+      openPrivacyModalBtn.addEventListener('click', function () {
+        openModal(privacyModal, privacyModalOverlay, openPrivacyModalBtn);
+      });
+
+      footerPrivacyLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        openModal(privacyModal, privacyModalOverlay, footerPrivacyLink);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          if (serviceModal.classList.contains('active')) closeModal(serviceModal, serviceModalOverlay);
+          if (privacyModal.classList.contains('active')) closeModal(privacyModal, privacyModalOverlay);
+        }
+      });
+
+      toastClose.addEventListener('click', function () {
+        toast.classList.remove('show');
+      });
+
+      contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        if (!contactForm.checkValidity()) {
+          formStatus.textContent = 'Please complete all required fields and accept the privacy policy.';
+          formStatus.className = 'form-status error';
+          showToast('Form Error', 'Please complete all required fields.', 'error');
+          return;
+        }
+
+        formStatus.textContent = 'Preview mode: form submission is disabled.';
+        formStatus.className = 'form-status success';
+        showToast('Preview Mode', 'Form submission is disabled in this HTML preview.', 'info');
+        contactForm.reset();
+      });
+
       audio.volume = 0.8;
-      setSeekBarUI(0);
+      audio.dataset.src = '';
+      setSeekBackground(seekBar, 0);
       loadBeats();
     })();
   </script>
-
-  <script>
-    (function () {
-      'use strict';
-
-      var form = document.getElementById('contact-form');
-      var statusEl = document.getElementById('form-status');
-      var toast = document.getElementById('toast');
-      var toastTitle = document.getElementById('toast-title');
-      var toastMessage = document.getElementById('toast-message');
-      var toastIcon = document.getElementById('toast-icon');
-      var toastClose = document.getElementById('toast-close');
-      var toastTimer;
-      var privacyCheckbox = document.getElementById('privacy-consent');
-
-      function hideToast() {
-        toast.classList.remove('show');
-      }
-
-      function showToast(type, title, message) {
-        clearTimeout(toastTimer);
-        toast.className = 'toast ' + type;
-        toastTitle.textContent = title;
-        toastMessage.textContent = message;
-        toastIcon.innerHTML = type === 'success'
-          ? '<i class="fas fa-check"></i>'
-          : '<i class="fas fa-triangle-exclamation"></i>';
-        toast.classList.add('show');
-        toastTimer = setTimeout(hideToast, 4000);
-      }
-
-      if (toastClose) {
-        toastClose.addEventListener('click', hideToast);
-      }
-
-      if (!form) return;
-
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        if (privacyCheckbox && !privacyCheckbox.checked) {
-          privacyCheckbox.focus({ preventScroll: true });
-          showToast('error', 'Privacy required', 'Please accept the Privacy Policy before submitting.');
-          return;
-        }
-
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-
-        var submitBtn = form.querySelector('button[type="submit"]');
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Submitting...';
-        }
-
-        if (statusEl) {
-          statusEl.textContent = '';
-          statusEl.className = 'form-status';
-        }
-
-        var formData = new FormData(form);
-        var formParams = new URLSearchParams(formData).toString();
-
-        fetch('https://script.google.com/macros/s/AKfycbxFylcaWg3yvrwA3fInDP95wYabAuSdfsAjdvGdST4GOgEb5UlRhXzblJhefCva1yti/exec', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: formParams
-        })
-          .then(function (response) {
-            if (!response.ok) throw new Error('Request failed');
-            return response.text();
-          })
-          .then(function () {
-            form.reset();
-            showToast('success', 'Message sent', 'Thank you, we will respond soon.');
-          })
-          .catch(function () {
-            showToast('error', 'Submission failed', 'Something went wrong. Please try again.');
-          })
-          .finally(function () {
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.textContent = 'Submit';
-            }
-          });
-      });
-    })();
-  </script>
-
-  <script>
-    (function () {
-      'use strict';
-
-      var modal = document.getElementById('service-modal');
-      var overlay = document.getElementById('service-modal-overlay');
-      var closeBtn = document.getElementById('service-modal-close');
-      var titleEl = document.getElementById('service-modal-title');
-      var priceEl = document.getElementById('service-modal-price');
-      var textOneEl = document.getElementById('service-modal-text-one');
-      var textTwoEl = document.getElementById('service-modal-text-two');
-      var infoButtons = document.querySelectorAll('.service-info-btn');
-      var lastFocusedButton = null;
-
-      function openModal(button) {
-        lastFocusedButton = button;
-        titleEl.textContent = button.getAttribute('data-title');
-        priceEl.textContent = button.getAttribute('data-price');
-        textOneEl.textContent = button.getAttribute('data-paragraph-one');
-        textTwoEl.textContent = button.getAttribute('data-paragraph-two');
-        modal.classList.add('active');
-        overlay.classList.add('active');
-        overlay.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-        closeBtn.focus();
-      }
-
-      function closeModal() {
-        modal.classList.remove('active');
-        overlay.classList.remove('active');
-        overlay.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-        if (lastFocusedButton) lastFocusedButton.focus();
-      }
-
-      infoButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-          openModal(button);
-        });
-      });
-
-      closeBtn.addEventListener('click', closeModal);
-      overlay.addEventListener('click', closeModal);
-      document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && modal.classList.contains('active')) closeModal();
-      });
-    })();
-  </script>
-
-  <script>
-    (function () {
-      'use strict';
-
-      var privacyModal = document.getElementById('privacy-modal');
-      var privacyOverlay = document.getElementById('privacy-modal-overlay');
-      var privacyClose = document.getElementById('privacy-modal-close');
-      var footerPrivacyLink = document.getElementById('footer-privacy-link');
-      var formPrivacyLink = document.getElementById('open-privacy-modal');
-      var lastPrivacyTrigger = null;
-
-      function openPrivacyModal(trigger) {
-        lastPrivacyTrigger = trigger || null;
-        privacyModal.classList.add('active');
-        privacyOverlay.classList.add('active');
-        privacyOverlay.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-        privacyClose.focus();
-      }
-
-      function closePrivacyModal() {
-        privacyModal.classList.remove('active');
-        privacyOverlay.classList.remove('active');
-        privacyOverlay.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-        if (lastPrivacyTrigger) lastPrivacyTrigger.focus();
-      }
-
-      if (footerPrivacyLink) {
-        footerPrivacyLink.addEventListener('click', function (e) {
-          e.preventDefault();
-          openPrivacyModal(footerPrivacyLink);
-        });
-      }
-
-      if (formPrivacyLink) {
-        formPrivacyLink.addEventListener('click', function (e) {
-          e.preventDefault();
-          openPrivacyModal(formPrivacyLink);
-        });
-      }
-
-      if (privacyClose) privacyClose.addEventListener('click', closePrivacyModal);
-      if (privacyOverlay) privacyOverlay.addEventListener('click', closePrivacyModal);
-
-      document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && privacyModal.classList.contains('active')) closePrivacyModal();
-      });
-    })();
-  </script>
-
-  <div class="floating-player" id="floating-player" aria-hidden="true">
-    <img class="floating-player-artwork" id="floating-player-artwork" src="./music/default-cover.jpg" alt="Current track artwork" />
-    <div class="floating-player-main">
-      <div class="floating-player-label">Now Playing</div>
-      <div class="floating-player-title" id="floating-player-title">Select a beat</div>
-      <div class="floating-player-times">
-        <span id="floating-player-current-time">0:00</span>
-        <span>•</span>
-        <span id="floating-player-duration">0:00</span>
-      </div>
-      <div class="floating-player-progress-wrap">
-        <div class="floating-player-progress" aria-hidden="true">
-          <div class="floating-player-progress-fill" id="floating-player-progress-fill"></div>
-        </div>
-        <input
-          type="range"
-          class="floating-player-seek"
-          id="floating-player-seek"
-          min="0"
-          max="1000"
-          step="1"
-          value="0"
-          aria-label="Seek current track"
-        />
-      </div>
-    </div>
-    <div class="floating-player-controls">
-      <button class="floating-player-toggle" id="floating-player-toggle" type="button" aria-label="Play or pause current track">
-        <i class="fas fa-play"></i>
-      </button>
-      <button class="floating-player-close" id="floating-player-close" type="button" aria-label="Close player">
-        <i class="fas fa-xmark"></i>
-      </button>
-    </div>
-  </div>
-
-  <script>
-    (function () {
-      'use strict';
-
-      function ready(fn) {
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', fn, { once: true });
-        } else {
-          fn();
-        }
-      }
-
-      ready(function () {
-        var audio = document.getElementById('audio-player');
-        var tracklist = document.getElementById('beat-tracklist');
-        var playerArtwork = document.getElementById('player-artwork');
-        var playerTitle = document.getElementById('player-title');
-        var playerCurrent = document.getElementById('player-current-time');
-        var playerDuration = document.getElementById('player-duration');
-        var mainPlayBtn = document.getElementById('player-play-btn');
-
-        var floating = document.getElementById('floating-player');
-        var floatingArtwork = document.getElementById('floating-player-artwork');
-        var floatingTitle = document.getElementById('floating-player-title');
-        var floatingCurrent = document.getElementById('floating-player-current-time');
-        var floatingDuration = document.getElementById('floating-player-duration');
-        var floatingProgress = document.getElementById('floating-player-progress-fill');
-        var floatingSeek = document.getElementById('floating-player-seek');
-        var floatingToggle = document.getElementById('floating-player-toggle');
-        var floatingClose = document.getElementById('floating-player-close');
-        var floatingToggleIcon = floatingToggle ? floatingToggle.querySelector('i') : null;
-
-        if (!audio || !tracklist || !floating || !floatingToggle || !floatingClose || !floatingSeek) return;
-
-        var activated = false;
-        var isFloatingSeeking = false;
-
-        function showFloating() {
-          activated = true;
-          floating.classList.add('active');
-          floating.setAttribute('aria-hidden', 'false');
-          document.body.classList.add('floating-player-visible');
-        }
-
-        function hideFloating() {
-          activated = false;
-          floating.classList.remove('active');
-          floating.setAttribute('aria-hidden', 'true');
-          document.body.classList.remove('floating-player-visible');
-        }
-
-        function setToggleState() {
-          if (!floatingToggleIcon) return;
-          floatingToggleIcon.className = audio.paused ? 'fas fa-play' : 'fas fa-pause';
-        }
-
-        function syncFromMainPlayer() {
-          if (playerArtwork && playerArtwork.src) floatingArtwork.src = playerArtwork.src;
-          if (playerTitle) floatingTitle.textContent = playerTitle.textContent || 'Select a beat';
-          if (playerCurrent) floatingCurrent.textContent = playerCurrent.textContent || '0:00';
-          if (playerDuration) floatingDuration.textContent = playerDuration.textContent || '0:00';
-          setToggleState();
-        }
-
-        function syncProgress() {
-          var current = audio.currentTime || 0;
-          var duration = audio.duration || 0;
-          var pct = duration > 0 ? (current / duration) * 100 : 0;
-          if (playerCurrent) floatingCurrent.textContent = playerCurrent.textContent || '0:00';
-          else floatingCurrent.textContent = '0:00';
-          if (playerDuration) floatingDuration.textContent = playerDuration.textContent || '0:00';
-          else floatingDuration.textContent = '0:00';
-          floatingProgress.style.width = Math.max(0, Math.min(100, pct)) + '%';
-          if (!isFloatingSeeking) {
-            floatingSeek.value = Math.max(0, Math.min(1000, Math.round(pct * 10)));
-          }
-          setToggleState();
-        }
-
-        function handleTrackActivation() {
-          window.requestAnimationFrame(function () {
-            window.requestAnimationFrame(function () {
-              syncFromMainPlayer();
-              syncProgress();
-              showFloating();
-            });
-          });
-        }
-
-        tracklist.addEventListener('click', function (event) {
-          var actionBtn = event.target.closest('.buy-btn, .download-btn');
-          if (actionBtn) return;
-
-          var item = event.target.closest('.beat-track-item');
-          if (!item) return;
-
-          handleTrackActivation();
-        });
-
-        floatingToggle.addEventListener('click', function () {
-          if (!activated) {
-            syncFromMainPlayer();
-            showFloating();
-          }
-          if (audio.paused) {
-            audio.play().catch(function () {});
-          } else {
-            audio.pause();
-          }
-        });
-
-        floatingClose.addEventListener('click', function () {
-          audio.pause();
-          hideFloating();
-          setToggleState();
-        });
-
-        floatingSeek.addEventListener('input', function () {
-          isFloatingSeeking = true;
-          var duration = audio.duration || 0;
-          var ratio = Number(floatingSeek.value || 0) / 1000;
-          var previewTime = duration > 0 ? duration * ratio : 0;
-          floatingCurrent.textContent = (playerCurrent && !Number.isNaN(previewTime))
-            ? (function () {
-                var m = Math.floor(previewTime / 60);
-                var s = Math.floor(previewTime % 60);
-                return m + ':' + (s < 10 ? '0' + s : s);
-              })()
-            : '0:00';
-          floatingProgress.style.width = Math.max(0, Math.min(100, ratio * 100)) + '%';
-        });
-
-        function commitFloatingSeek() {
-          var duration = audio.duration || 0;
-          var ratio = Number(floatingSeek.value || 0) / 1000;
-          if (duration > 0) {
-            audio.currentTime = duration * ratio;
-          }
-          isFloatingSeeking = false;
-          syncProgress();
-        }
-
-        floatingSeek.addEventListener('change', commitFloatingSeek);
-        floatingSeek.addEventListener('mouseup', commitFloatingSeek);
-        floatingSeek.addEventListener('touchend', commitFloatingSeek);
-        floatingSeek.addEventListener('keyup', function (event) {
-          if (event.key === 'ArrowLeft' || event.key === 'ArrowRight' || event.key === 'Home' || event.key === 'End') {
-            commitFloatingSeek();
-          }
-        });
-
-        if (mainPlayBtn) {
-          mainPlayBtn.addEventListener('click', function () {
-            if (activated) {
-              window.requestAnimationFrame(syncFromMainPlayer);
-              window.requestAnimationFrame(syncProgress);
-            }
-          });
-        }
-
-        audio.addEventListener('play', function () {
-          if (activated) {
-            syncFromMainPlayer();
-            syncProgress();
-            showFloating();
-          }
-        });
-
-        audio.addEventListener('pause', function () {
-          if (activated) syncProgress();
-        });
-
-        audio.addEventListener('loadedmetadata', function () {
-          if (activated) {
-            syncFromMainPlayer();
-            syncProgress();
-          }
-        });
-
-        audio.addEventListener('timeupdate', function () {
-          if (activated) syncProgress();
-        });
-
-        audio.addEventListener('ended', function () {
-          if (activated) syncProgress();
-        });
-
-        var observerTargets = [playerTitle, playerArtwork, playerCurrent, playerDuration].filter(Boolean);
-        if (observerTargets.length) {
-          var observer = new MutationObserver(function () {
-            if (activated) {
-              syncFromMainPlayer();
-              syncProgress();
-            }
-          });
-
-          observerTargets.forEach(function (node) {
-            observer.observe(node, {
-              childList: true,
-              characterData: true,
-              subtree: true,
-              attributes: node === playerArtwork,
-              attributeFilter: node === playerArtwork ? ['src'] : undefined
-            });
-          });
-        }
-      });
-    })();
-  </script>
-
 </body>
 </html>
