@@ -1865,7 +1865,7 @@
 </head>
 <body>
   <div class="bg-video" aria-hidden="true">
-    <video class="bg-video__src" autoplay muted loop playsinline poster="./poster.jpg" preload="metadata">
+    <video class="bg-video__src" autoplay muted loop playsinline preload="metadata">
       <source src="./hero-video.mp4" type="video/mp4" />
     </video>
   </div>
@@ -1874,7 +1874,7 @@
     <header id="site-header">
       <div class="header-row flex-wrap flex">
         <div class="flex-item left flex">
-          <img class="ghost-logo" src="./logo-placeholder.png" alt="" aria-hidden="true" />
+          <div class="ghost-logo" aria-hidden="true"></div>
         </div>
 
         <div class="flex-item center flex">
@@ -1891,7 +1891,7 @@
         </div>
 
         <div class="flex-item right flex">
-          <img class="ghost-logo" src="./logo-placeholder.png" alt="" aria-hidden="true" />
+          <div class="ghost-logo" aria-hidden="true"></div>
         </div>
       </div>
     </header>
@@ -1920,13 +1920,13 @@
         <section id="beats" class="content-section">
           <h2>Beats</h2>
           <p>
-            Listen to my latest tracks. The player, track rows, and bottom floating bar now all use one shared playback system.
+            Listen to my latest tracks.
           </p>
 
           <div class="beat-player-wrapper">
             <div class="beat-player-main">
               <div class="beat-player-top">
-                <img class="beat-artwork" id="player-artwork" src="./music/default-cover.jpg" alt="Track artwork" />
+                <img class="beat-artwork" id="player-artwork" alt="Track artwork" />
 
                 <div class="beat-info-block">
                   <div class="beat-now-playing-label">Now Playing</div>
@@ -2282,7 +2282,7 @@
   </div>
 
   <div class="floating-player" id="floating-player" aria-hidden="true">
-    <img class="floating-player-artwork" id="floating-player-artwork" src="./music/default-cover.jpg" alt="Current track artwork" />
+    <img class="floating-player-artwork" id="floating-player-artwork" alt="Current track artwork" />
 
     <div class="floating-player-main">
       <div class="floating-player-label">Now Playing</div>
@@ -2379,15 +2379,29 @@
       var toastIcon = document.getElementById('toast-icon');
       var toastClose = document.getElementById('toast-close');
 
+      var CONTACT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxFylcaWg3yvrwA3fInDP95wYabAuSdfsAjdvGdST4GOgEb5UlRhXzblJhefCva1yti/exec';
+
+      var DEFAULT_COVER ='data:image/svg+xml,' + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#222"/>' +
+        '<path d="M42 30v32a8 8 0 1 0 4 7V42l20-5v19a8 8 0 1 0 4 7V25z" fill="#555"/></svg>'
+      );
+
       var ALL_TRACKS = [];
       var FILTERED_TRACKS = [];
-      var currentIndex = -1;
+      var currentTrack = null;
       var currentFilter = '';
       var isMainSeeking = false;
       var isFloatingSeeking = false;
-      var wasPlayingBeforeMainSeek = false;
-      var wasPlayingBeforeFloatingSeek = false;
       var hideFloatingOnly = false;
+
+      // Cloudflare Pages ignores HTTP Range requests for static files, so the browser
+      // cannot jump to an unbuffered position and restarts from 0. When that happens we
+      // download the whole file once into a Blob URL, which is always fully seekable.
+      var rangeSupportPromise = null;
+      var blobUrl = null;
+      var blobRequestId = 0;
+      var usingBlob = false;
+      var pendingSeekTime = null;
       var toastTimer = null;
       var lastFocusedBeforeModal = null;
 
@@ -2462,7 +2476,7 @@
           key: item.key || '',
           tags: tags,
           duration: item.duration || '',
-          artwork: artworkCandidates[0] || './music/default-cover.jpg',
+          artwork: artworkCandidates[0] || DEFAULT_COVER,
           artworkCandidates: artworkCandidates,
           audio: audioPath,
           download: downloadPath,
@@ -2472,13 +2486,13 @@
       }
 
       function setArtworkWithFallback(img, candidates) {
-        var list = Array.isArray(candidates) && candidates.length ? candidates.slice() : ['./music/default-cover.jpg'];
+        var list = Array.isArray(candidates) && candidates.length ? candidates.slice() : [DEFAULT_COVER];
         var index = 0;
 
         function tryNext() {
           if (index >= list.length) {
             img.onerror = null;
-            img.src = './music/default-cover.jpg';
+            img.src = DEFAULT_COVER;
             return;
           }
           img.onerror = tryNext;
@@ -2501,8 +2515,7 @@
       }
 
       function getCurrentTrack() {
-        if (currentIndex < 0 || currentIndex >= FILTERED_TRACKS.length) return null;
-        return FILTERED_TRACKS[currentIndex];
+        return currentTrack;
       }
 
       function showFloating() {
@@ -2538,8 +2551,8 @@
           keyEl.style.display = 'none';
           bpmEl.style.display = 'none';
           listensEl.textContent = '0 listens';
-          artworkEl.src = './music/default-cover.jpg';
-          floatingArtwork.src = './music/default-cover.jpg';
+          artworkEl.src = DEFAULT_COVER;
+          floatingArtwork.src = DEFAULT_COVER;
           floatingTitle.textContent = 'Select a beat';
           currentTimeEl.textContent = '0:00';
           durationEl.textContent = '0:00';
@@ -2576,7 +2589,7 @@
 
         var items = tracklistEl.querySelectorAll('.beat-track-item');
         items.forEach(function (item, i) {
-          var active = i === currentIndex;
+          var active = !!currentTrack && FILTERED_TRACKS[i] === currentTrack;
           item.classList.toggle('active', active);
           var icon = item.querySelector('.track-play-icon i');
           if (!icon) return;
@@ -2586,8 +2599,8 @@
 
       function syncProgress() {
         var duration = audio.duration || 0;
-        var current = audio.currentTime || 0;
-        var ratio = duration > 0 ? current / duration : 0;
+        var current = pendingSeekTime !== null ? pendingSeekTime : audio.currentTime || 0;
+        var ratio = duration > 0 ? Math.min(1, current / duration) : 0;
         var value = Math.max(0, Math.min(1000, Math.round(ratio * 1000)));
 
         currentTimeEl.textContent = formatTime(current);
@@ -2667,7 +2680,7 @@
 
           var item = document.createElement('div');
           item.className = 'beat-track-item';
-          if (i === currentIndex) item.classList.add('active');
+          if (track === currentTrack) item.classList.add('active');
 
           item.innerHTML = `
             <div class="track-play-icon"><i class="fas fa-play"></i></div>
@@ -2711,10 +2724,10 @@
 
             hideFloatingOnly = false;
 
-            if (i === currentIndex) {
+            if (track === currentTrack) {
               togglePlayback();
             } else {
-              playTrackByIndex(i);
+              playTrack(track);
             }
           });
 
@@ -2725,28 +2738,108 @@
         updateScrollIndicators();
       }
 
-      function loadTrack(index, keepTime) {
-        var track = FILTERED_TRACKS[index];
+      function releaseBlob() {
+        blobRequestId++;
+        usingBlob = false;
+        pendingSeekTime = null;
+        if (blobUrl) {
+          URL.revokeObjectURL(blobUrl);
+          blobUrl = null;
+        }
+      }
+
+      function checkRangeSupport(url) {
+        if (!rangeSupportPromise) {
+          // no-store: Chrome holds a cache lock on a URL the <audio> element is still streaming.
+          rangeSupportPromise = fetch(url, { headers: { Range: 'bytes=0-1' }, cache: 'no-store' })
+            .then(function (response) {
+              if (response.body && response.body.cancel) response.body.cancel();
+              return response.status === 206;
+            })
+            .catch(function () { return false; });
+        }
+        return rangeSupportPromise;
+      }
+
+      // Swap the current track to a fully downloaded Blob URL, then jump to `time`.
+      function switchToBlob(track, time, resume) {
+        var requestId = ++blobRequestId;
+        pendingSeekTime = time;
+        syncProgress();
+
+        fetch(track.audio, { cache: 'no-store' })
+          .then(function (response) {
+            if (!response.ok) throw new Error('Audio fetch failed: ' + response.status);
+            return response.blob();
+          })
+          .then(function (blob) {
+            if (requestId !== blobRequestId || track !== currentTrack) return;
+            blobUrl = URL.createObjectURL(blob);
+            usingBlob = true;
+            audio.addEventListener('loadedmetadata', function () {
+              if (requestId !== blobRequestId) return;
+              audio.currentTime = pendingSeekTime || 0;
+              pendingSeekTime = null;
+              if (resume) safePlay();
+              syncProgress();
+            }, { once: true });
+            audio.src = blobUrl;
+            audio.load();
+          })
+          .catch(function (err) {
+            console.warn(err);
+            if (requestId !== blobRequestId) return;
+            pendingSeekTime = null;
+            try { audio.currentTime = time; } catch (e) {}
+            syncProgress();
+          });
+      }
+
+      function seekToRatio(ratio) {
+        var track = currentTrack;
+        var duration = audio.duration || 0;
+        if (!track || !(duration > 0) || audio.dataset.src !== track.audio) return;
+
+        var time = duration * Math.max(0, Math.min(1, ratio));
+
+        if (usingBlob) {
+          audio.currentTime = time;
+          return;
+        }
+
+        // A blob download for this track is already running: just retarget it.
+        if (pendingSeekTime !== null) {
+          pendingSeekTime = time;
+          return;
+        }
+
+        var resume = !audio.paused;
+        pendingSeekTime = time;
+        checkRangeSupport(track.audio).then(function (supported) {
+          if (track !== currentTrack || pendingSeekTime === null) return;
+          if (supported) {
+            audio.currentTime = pendingSeekTime;
+            pendingSeekTime = null;
+            syncProgress();
+          } else {
+            switchToBlob(track, pendingSeekTime, resume);
+          }
+        });
+      }
+
+      function loadTrack(track) {
         if (!track) return;
 
-        var sameTrack = currentIndex === index && audio.dataset.src === track.audio;
-        var savedTime = keepTime ? audio.currentTime || 0 : 0;
+        var sameTrack = track === currentTrack && audio.dataset.src === track.audio;
 
-        currentIndex = index;
+        currentTrack = track;
         syncMeta(track);
 
         if (!sameTrack) {
+          releaseBlob();
           audio.src = track.audio;
           audio.dataset.src = track.audio;
           audio.load();
-        }
-
-        if (keepTime && savedTime > 0) {
-          var restore = function () {
-            try { audio.currentTime = savedTime; } catch (e) {}
-            audio.removeEventListener('loadedmetadata', restore);
-          };
-          audio.addEventListener('loadedmetadata', restore);
         }
 
         updatePlayIcons();
@@ -2761,28 +2854,21 @@
         }
       }
 
-      async function playTrackByIndex(index) {
+      async function playTrack(track) {
         hideFloatingOnly = false;
-        loadTrack(index, false);
+        loadTrack(track);
         await safePlay();
       }
 
       async function togglePlayback() {
-        if (!FILTERED_TRACKS.length) return;
-
-        if (currentIndex === -1) {
-          await playTrackByIndex(0);
-          return;
-        }
-
         var track = getCurrentTrack();
         if (!track) {
-          await playTrackByIndex(0);
+          if (FILTERED_TRACKS.length) await playTrack(FILTERED_TRACKS[0]);
           return;
         }
 
         if (!audio.dataset.src || audio.dataset.src !== track.audio) {
-          await playTrackByIndex(currentIndex);
+          await playTrack(track);
           return;
         }
 
@@ -2796,41 +2882,19 @@
       }
 
       function applyFilter() {
-        var previousTrack = getCurrentTrack();
-        var previousAudio = previousTrack ? previousTrack.audio : '';
-
         FILTERED_TRACKS = ALL_TRACKS.filter(function (track) {
           return matchesFilter(track, currentFilter);
         });
 
-        if (!FILTERED_TRACKS.length) {
-          currentIndex = -1;
-          audio.pause();
-          audio.removeAttribute('src');
-          audio.dataset.src = '';
-          renderTrackList();
-          syncMeta(null);
-          return;
+        // Searching never interrupts the song that is already loaded. If nothing has
+        // been played yet, preview the first matching beat in the main player.
+        var hasLoadedAudio = !!audio.dataset.src;
+        if (!hasLoadedAudio && FILTERED_TRACKS.length && FILTERED_TRACKS.indexOf(currentTrack) === -1) {
+          currentTrack = FILTERED_TRACKS[0];
+          syncMeta(currentTrack);
         }
 
         renderTrackList();
-
-        var foundIndex = FILTERED_TRACKS.findIndex(function (track) {
-          return track.audio === previousAudio;
-        });
-
-        if (foundIndex !== -1) {
-          currentIndex = foundIndex;
-          syncMeta(FILTERED_TRACKS[currentIndex]);
-        } else {
-          currentIndex = 0;
-          syncMeta(FILTERED_TRACKS[0]);
-          audio.pause();
-          audio.removeAttribute('src');
-          audio.dataset.src = '';
-        }
-
-        updatePlayIcons();
       }
 
       async function loadBeats() {
@@ -2847,8 +2911,9 @@
           renderTrackList();
 
           if (FILTERED_TRACKS.length) {
-            currentIndex = 0;
-            syncMeta(FILTERED_TRACKS[0]);
+            checkRangeSupport(FILTERED_TRACKS[0].audio);
+            currentTrack = FILTERED_TRACKS[0];
+            syncMeta(currentTrack);
           } else {
             syncMeta(null);
             tracklistEl.innerHTML = '<div class="beat-empty">No beats found.</div>';
@@ -2941,9 +3006,16 @@
         syncProgress();
       });
 
+      // Safari refuses to play media from servers without Range support; fall back to a Blob.
+      audio.addEventListener('error', function () {
+        if (!currentTrack || usingBlob || pendingSeekTime !== null || !audio.dataset.src) return;
+        switchToBlob(currentTrack, 0, true);
+      });
+
       audio.addEventListener('ended', function () {
-        if (currentIndex < FILTERED_TRACKS.length - 1) {
-          playTrackByIndex(currentIndex + 1);
+        var index = FILTERED_TRACKS.indexOf(currentTrack);
+        if (index !== -1 && index < FILTERED_TRACKS.length - 1) {
+          playTrack(FILTERED_TRACKS[index + 1]);
         } else {
           updatePlayIcons();
           syncProgress();
@@ -2952,7 +3024,6 @@
 
       seekBar.addEventListener('pointerdown', function () {
         isMainSeeking = true;
-        wasPlayingBeforeMainSeek = !audio.paused;
       });
 
       seekBar.addEventListener('input', function () {
@@ -2963,25 +3034,20 @@
         setSeekBackground(seekBar, seekBar.value);
       });
 
+      // `change` and `pointerup` can both fire for one gesture; only the first one commits.
       function commitMainSeek() {
-        var duration = audio.duration || 0;
-        if (duration > 0) {
-          audio.currentTime = duration * (Number(seekBar.value || 0) / 1000);
-        }
+        if (!isMainSeeking) return;
         isMainSeeking = false;
-        if (wasPlayingBeforeMainSeek && audio.paused) safePlay();
-        wasPlayingBeforeMainSeek = false;
+        seekToRatio(Number(seekBar.value || 0) / 1000);
         syncProgress();
       }
 
       seekBar.addEventListener('change', commitMainSeek);
-      seekBar.addEventListener('mouseup', commitMainSeek);
-      seekBar.addEventListener('touchend', commitMainSeek);
       seekBar.addEventListener('pointerup', commitMainSeek);
+      seekBar.addEventListener('pointercancel', commitMainSeek);
 
       floatingSeek.addEventListener('pointerdown', function () {
         isFloatingSeeking = true;
-        wasPlayingBeforeFloatingSeek = !audio.paused;
       });
 
       floatingSeek.addEventListener('input', function () {
@@ -2994,20 +3060,15 @@
       });
 
       function commitFloatingSeek() {
-        var duration = audio.duration || 0;
-        if (duration > 0) {
-          audio.currentTime = duration * (Number(floatingSeek.value || 0) / 1000);
-        }
+        if (!isFloatingSeeking) return;
         isFloatingSeeking = false;
-        if (wasPlayingBeforeFloatingSeek && audio.paused) safePlay();
-        wasPlayingBeforeFloatingSeek = false;
+        seekToRatio(Number(floatingSeek.value || 0) / 1000);
         syncProgress();
       }
 
       floatingSeek.addEventListener('change', commitFloatingSeek);
-      floatingSeek.addEventListener('mouseup', commitFloatingSeek);
-      floatingSeek.addEventListener('touchend', commitFloatingSeek);
       floatingSeek.addEventListener('pointerup', commitFloatingSeek);
+      floatingSeek.addEventListener('pointercancel', commitFloatingSeek);
 
       volumeSlider.addEventListener('input', function () {
         audio.volume = Number(volumeSlider.value || 80) / 100;
@@ -3071,12 +3132,38 @@
           return;
         }
 
-        formStatus.textContent = 'Preview mode: form submission is disabled.';
-        formStatus.className = 'form-status success';
-        showToast('Preview Mode', 'Form submission is disabled in this HTML preview.', 'info');
-        contactForm.reset();
+        var submitBtn = contactForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+
+        fetch(CONTACT_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(contactForm)).toString()
+        })
+          .then(function (response) {
+            if (!response.ok) throw new Error('Request failed: ' + response.status);
+            contactForm.reset();
+            formStatus.textContent = 'Message sent. Thank you, we will respond soon.';
+            formStatus.className = 'form-status success';
+            showToast('Message sent', 'Thank you, we will respond soon.', 'success');
+          })
+          .catch(function (err) {
+            console.error(err);
+            formStatus.textContent = 'Something went wrong. Please try again or email aroulkingproduction@gmail.com.';
+            formStatus.className = 'form-status error';
+            showToast('Submission failed', 'Something went wrong. Please try again.', 'error');
+          })
+          .finally(function () {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit';
+          });
       });
 
+      artworkEl.src = DEFAULT_COVER;
+      floatingArtwork.src = DEFAULT_COVER;
       audio.volume = 0.8;
       audio.dataset.src = '';
       setSeekBackground(seekBar, 0);
