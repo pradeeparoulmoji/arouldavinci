@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Home - Aroul Da Vinci</title>
+  <meta name="description" content="Aroul Da Vinci: producer, songwriter and ghostwriter. Listen to beats, lease instantly, or book custom production." />
+  <meta name="theme-color" content="#000000" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Aroul Da Vinci" />
+  <meta property="og:title" content="Aroul Da Vinci | Beats &amp; Production" />
+  <meta property="og:description" content="Listen to beats, lease instantly, or book custom production." />
+  <meta property="og:image" content="https://arouldavinci.pages.dev/music/crazyforyou/cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23000'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23C5D8E6' font-family='Arial,sans-serif' font-weight='700'%3EAD%3C/text%3E%3C/svg%3E" />
 
   <link rel="preconnect" href="https://fonts.cdnfonts.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -755,7 +764,7 @@
 
     .beat-tracklist-header {
       display: grid;
-      grid-template-columns: 44px 70px minmax(0, 1fr) 90px 90px 210px;
+      grid-template-columns: 44px 70px minmax(0, 1fr) 90px 90px 290px;
       align-items: center;
       gap: 14px;
       padding: 14px 18px;
@@ -822,7 +831,7 @@
 
     .beat-track-item {
       display: grid;
-      grid-template-columns: 44px 70px minmax(0, 1fr) 90px 90px 210px;
+      grid-template-columns: 44px 70px minmax(0, 1fr) 90px 90px 290px;
       gap: 14px;
       align-items: center;
       padding: 12px 14px;
@@ -1574,10 +1583,209 @@
       transform: scale(1.04);
     }
 
+    .beat-player-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .player-action-btn,
+    .beat-skip-btn,
+    .fav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 8px 16px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--pill-radius);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      font-family: 'cxoxo', system-ui, sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .player-action-btn:hover,
+    .beat-skip-btn:hover,
+    .fav-btn:hover {
+      border-color: rgba(197, 216, 230, 0.6);
+      background: rgba(197, 216, 230, 0.12);
+    }
+
+    .player-action-btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+
+    .player-action-btn.primary:hover { opacity: 0.88; background: var(--accent); }
+
+    .player-action-btn.is-fav i,
+    .fav-btn.is-fav i,
+    .beat-fav-filter[aria-pressed="true"] i {
+      color: #ff6b81;
+    }
+
+    .beat-skip-btn {
+      width: 40px;
+      padding: 0;
+    }
+
+    .fav-btn {
+      width: 40px;
+      min-width: 40px;
+      padding: 0;
+    }
+
+    .beat-sort-select {
+      min-height: 48px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      font-family: 'cxoxo', system-ui, sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .beat-sort-select option { color: #000; }
+
+    .beat-fav-filter[aria-pressed="true"] {
+      background: rgba(197, 216, 230, 0.2);
+      border-color: var(--accent);
+    }
+
+    .beat-track-item.deep-linked {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(197, 216, 230, 0.25);
+    }
+
+    .license-note {
+      margin-top: 28px !important;
+      font-size: 14px !important;
+      color: rgba(255,255,255,0.6) !important;
+    }
+
+    .contact-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .contact-cta-row .newsletter-button {
+      margin-top: 0;
+    }
+
+    .license-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .license-actions .card-button { margin-top: 0; }
+
+    .license-doc h4 {
+      margin: 22px 0 8px;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+    }
+
+    .license-doc ol,
+    .license-doc ul {
+      margin: 0;
+      padding-left: 20px;
+      color: rgba(255,255,255,0.86);
+      font-size: 15px;
+      line-height: 1.7;
+      text-align: left;
+    }
+
+    .license-doc li + li { margin-top: 6px; }
+
+    .license-doc .license-meta {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin: 18px 0 0;
+    }
+
+    .buy-options {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .buy-option {
+      display: grid;
+      grid-template-columns: 22px 1fr auto;
+      gap: 12px;
+      align-items: start;
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .buy-option:has(input:checked) {
+      border-color: var(--accent);
+      background: rgba(197, 216, 230, 0.08);
+    }
+
+    .buy-option input { margin-top: 3px; accent-color: var(--accent); }
+    .buy-option-name { font-size: 16px; text-transform: uppercase; }
+    .buy-option-points { margin-top: 4px; font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .buy-option-price { font-size: 18px; color: var(--accent); white-space: nowrap; }
+
+    .buy-option-terms {
+      margin-top: 6px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--accent);
+      font: inherit;
+      font-size: 12px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .buy-checkout-btn { width: 100%; margin-top: 0; min-height: 50px; font-size: 15px; }
+
+    @media print {
+      body.printing-license > *:not(#license-modal) { display: none !important; }
+      body.printing-license { background: #fff !important; padding: 0 !important; }
+      body.printing-license #license-modal {
+        position: static !important;
+        transform: none !important;
+        width: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        background: #fff !important;
+        color: #000 !important;
+        border: 0 !important;
+        box-shadow: none !important;
+      }
+      body.printing-license #license-modal * { color: #000 !important; }
+      body.printing-license .service-modal-close,
+      body.printing-license .license-actions { display: none !important; }
+    }
+
     @media (max-width: 1180px) {
       .beat-tracklist-header,
       .beat-track-item {
-        grid-template-columns: 44px 64px minmax(0, 1fr) 78px 78px 190px;
+        grid-template-columns: 44px 64px minmax(0, 1fr) 70px 70px 280px;
       }
     }
 
@@ -1771,16 +1979,19 @@
       }
 
       .buy-btn,
-      .download-btn {
-        width: 34px;
-        min-width: 34px;
-        height: 34px;
-        min-height: 34px;
+      .download-btn,
+      .track-actions .fav-btn {
+        width: 32px;
+        min-width: 32px;
+        height: 32px;
+        min-height: 32px;
         padding: 0;
         border-radius: 999px;
         gap: 0;
-        flex: 0 0 34px;
+        flex: 0 0 32px;
       }
+
+      .track-actions { gap: 4px; }
 
       .buy-btn span,
       .download-btn span {
@@ -1793,15 +2004,27 @@
         margin: 0;
       }
 
-      .beat-filter-input,
-      .beat-filter-clear,
-      .beat-volume-slider {
+      .beat-filter-input {
         width: 100%;
       }
 
       .beat-volume-row {
-        display: grid;
-        grid-template-columns: 18px 1fr;
+        flex-wrap: nowrap;
+      }
+
+      .beat-volume-slider {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .beat-sort-select,
+      .beat-fav-filter {
+        flex: 1 1 140px;
+      }
+
+      .player-action-btn {
+        flex: 1 1 auto;
+        padding: 8px 12px;
       }
     }
 
@@ -1937,6 +2160,17 @@
                     <span class="beat-now-bpm" id="player-bpm" style="display:none;"></span>
                     <span class="beat-now-listens" id="player-listens">0 listens</span>
                   </div>
+                  <div class="beat-player-actions">
+                    <button type="button" class="player-action-btn primary" id="player-buy-btn">
+                      <i class="fas fa-shopping-cart"></i><span id="player-buy-label">Lease</span>
+                    </button>
+                    <button type="button" class="player-action-btn" id="player-fav-btn" aria-pressed="false">
+                      <i class="far fa-heart"></i><span>Save</span>
+                    </button>
+                    <button type="button" class="player-action-btn" id="player-share-btn">
+                      <i class="fas fa-share-nodes"></i><span>Share</span>
+                    </button>
+                  </div>
                 </div>
 
                 <button class="beat-play-btn" id="player-play-btn" type="button" aria-label="Play or pause current track">
@@ -1951,6 +2185,8 @@
               </div>
 
               <div class="beat-volume-row">
+                <button type="button" class="beat-skip-btn" id="player-prev-btn" aria-label="Previous beat"><i class="fas fa-backward-step"></i></button>
+                <button type="button" class="beat-skip-btn" id="player-next-btn" aria-label="Next beat"><i class="fas fa-forward-step"></i></button>
                 <i class="fas fa-volume-up beat-volume-icon"></i>
                 <input type="range" class="beat-volume-slider" id="player-volume" min="0" max="100" value="80" aria-label="Volume" />
               </div>
@@ -1959,6 +2195,16 @@
             <div class="beat-list-panel">
               <div class="beat-filter-bar">
                 <input type="text" id="beat-tag-search" class="beat-filter-input" placeholder="Search by title, genre, key, bpm or tags" aria-label="Search tracks by tag keyword" />
+                <select id="beat-sort" class="beat-sort-select" aria-label="Sort beats">
+                  <option value="default">Featured</option>
+                  <option value="popular">Most played</option>
+                  <option value="az">Title A–Z</option>
+                  <option value="bpm-asc">BPM low → high</option>
+                  <option value="bpm-desc">BPM high → low</option>
+                </select>
+                <button type="button" id="beat-fav-filter" class="beat-filter-clear beat-fav-filter" aria-pressed="false">
+                  <i class="far fa-heart"></i> Saved <span id="beat-fav-count">0</span>
+                </button>
                 <button type="button" id="beat-filter-clear" class="beat-filter-clear">Clear</button>
               </div>
 
@@ -2000,7 +2246,7 @@
           <div class="service-grid">
             <article class="service-card">
               <h3>Full Song Production</h3>
-              <p class="card-price">Starting Price 150</p>
+              <p class="card-price">Starting at €150</p>
               <ul class="card-list">
                 <li>Composition</li>
                 <li>Vocal arrangement</li>
@@ -2011,7 +2257,7 @@
                 class="card-button service-info-btn"
                 type="button"
                 data-title="Full Song Production"
-                data-price="Starting Price 150"
+                data-price="Starting at €150"
                 data-paragraph-one="Our Full Song Production service covers everything you need to bring your track to life. From initial composition and vocal arrangement to professional mixing and mastering, we handle it all to ensure your song sounds polished and ready for release."
                 data-paragraph-two="Optional publishing services are also available to help you collect royalties and protect your work. Once your track is completed, we'll discuss the best licensing options for you, including leasing or exclusive rights."
               >
@@ -2021,7 +2267,7 @@
 
             <article class="service-card">
               <h3>Mid Song Production</h3>
-              <p class="card-price">Starting Price 100</p>
+              <p class="card-price">Starting at €100</p>
               <ul class="card-list">
                 <li>Composition</li>
                 <li>Vocal arrangement</li>
@@ -2032,7 +2278,7 @@
                 class="card-button service-info-btn"
                 type="button"
                 data-title="Mid Song Production"
-                data-price="Starting Price 100"
+                data-price="Starting at €100"
                 data-paragraph-one="Ideal for artists seeking a strong musical foundation with professional vocal arrangement. This package focuses on crafting the core composition and arranging vocals to suit your style, giving you a quality track to build on."
                 data-paragraph-two="After the production process, we will review available licensing options such as leasing or exclusive rights tailored to your needs."
               >
@@ -2042,7 +2288,7 @@
 
             <article class="service-card">
               <h3>Custom Production</h3>
-              <p class="card-price">Starting Price 75</p>
+              <p class="card-price">Starting at €75</p>
               <ul class="card-list">
                 <li>Tailored composition</li>
                 <li>Flexible structure</li>
@@ -2053,7 +2299,7 @@
                 class="card-button service-info-btn"
                 type="button"
                 data-title="Custom Production"
-                data-price="Starting Price 75"
+                data-price="Starting at €75"
                 data-paragraph-one="For those wanting a unique, tailored sound, our Custom Production service offers bespoke compositions crafted specifically to your vision. Perfect for artists seeking an original and personalized sound."
                 data-paragraph-two="Once your custom production is complete, we'll explore leasing or exclusive licensing options together."
               >
@@ -2067,59 +2313,8 @@
           <h2>Leasing</h2>
           <p>Explore our diverse range of purchasing and leasing options.</p>
 
-          <div class="service-grid">
-            <article class="service-card">
-              <h3>MP3 Standard License</h3>
-              <p class="card-price">30</p>
-              <ul class="card-list">
-                <li>All streaming platforms</li>
-                <li>Up to 100,000 streams</li>
-                <li>1 year term duration</li>
-                <li>MP3 file</li>
-                <li>No tags</li>
-              </ul>
-              <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
-            </article>
-
-            <article class="service-card">
-              <h3>WAV Premium License</h3>
-              <p class="card-price">50</p>
-              <ul class="card-list">
-                <li>All streaming platforms</li>
-                <li>Up to 500,000 streams</li>
-                <li>3 year term duration</li>
-                <li>MP3 WAV file</li>
-                <li>No tags</li>
-              </ul>
-              <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
-            </article>
-
-            <article class="service-card">
-              <h3>WAV Stems Premium</h3>
-              <p class="card-price">75</p>
-              <ul class="card-list">
-                <li>Tracked out files for mixing and rearranging</li>
-                <li>All streaming platforms</li>
-                <li>Up to 1 million streams</li>
-                <li>3 year term duration</li>
-                <li>MP3 WAV stems</li>
-              </ul>
-              <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
-            </article>
-
-            <article class="service-card">
-              <h3>Exclusive License</h3>
-              <p class="card-price">Starting from 150</p>
-              <ul class="card-list">
-                <li>Tracked out files for mixing and rearranging</li>
-                <li>Unlimited streams</li>
-                <li>Unlimited term duration</li>
-                <li>MP3 WAV stems</li>
-                <li>No tags</li>
-              </ul>
-              <a class="card-button" href="https://drive.google.com/file/d/14gkXLXLgf477Ygx6lEZmTTNB3XwyBPS/view?usp=drivelink" target="_blank" rel="noopener">More Info</a>
-            </article>
-          </div>
+          <div class="service-grid" id="license-grid"></div>
+          <p class="license-note">Pick a beat, choose a license and checkout securely on BeatStars. Full terms for every license can be read and downloaded right here.</p>
         </section>
 
         <section id="production" class="content-section">
@@ -2186,7 +2381,10 @@
             </div>
           </div>
 
-          <button class="newsletter-button" onclick="window.open('https://arouldavinci.beehiiv.com/subscribe', '_blank')">Subscribe to Newsletter</button>
+          <div class="contact-cta-row">
+            <a class="newsletter-button" href="https://arouldavinci.beehiiv.com/subscribe" target="_blank" rel="noopener">Subscribe to Newsletter</a>
+            <a class="newsletter-button" href="https://ig.me/m/arouldavinci" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Message on Instagram</a>
+          </div>
 
           <div class="contact-form-container">
             <form id="contact-form" class="contact-form" novalidate>
@@ -2265,8 +2463,48 @@
       <p class="service-modal-text">This website may collect the data you submit through the contact form: name, email address, subject, and message.</p>
       <p class="service-modal-text">This data is used only to respond to your inquiry, discuss music production, licensing, collaborations, or customer support.</p>
       <p class="service-modal-text">Form submissions are sent to an external Google Apps Script endpoint for processing. External platforms linked on this website may include Instagram, X, BeatStars, Beehiiv, Google Drive, and email services.</p>
+      <p class="service-modal-text">Your saved beats and the last beat you listened to are stored only in your own browser (local storage) so the player can remember them on your next visit. This data never leaves your device and you can remove it by clearing your browser's site data.</p>
       <p class="service-modal-text">If you are in Italy or the EU, you may have rights under GDPR, including access, correction, deletion, restriction, objection, and the right to contact the Garante per la protezione dei dati personali.</p>
       <p class="service-modal-note">Data Controller: Pradeep Aroulmoji. Contact: aroulkingproduction@gmail.com</p>
+    </div>
+  </div>
+
+  <div class="service-modal-overlay" id="license-modal-overlay" aria-hidden="true"></div>
+  <div class="service-modal license-modal" id="license-modal" role="dialog" aria-modal="true" aria-labelledby="license-modal-title">
+    <div class="service-modal-header">
+      <div>
+        <h3 class="service-modal-title" id="license-modal-title">License</h3>
+        <p class="service-modal-price" id="license-modal-price"></p>
+      </div>
+      <button class="service-modal-close" id="license-modal-close" type="button" aria-label="Close license terms">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <div class="service-modal-body">
+      <div class="license-actions">
+        <button type="button" class="card-button" id="license-download-btn"><i class="fas fa-file-arrow-down"></i>&nbsp;Download terms (.txt)</button>
+        <button type="button" class="card-button" id="license-print-btn"><i class="fas fa-print"></i>&nbsp;Print / Save as PDF</button>
+      </div>
+      <div class="license-doc" id="license-doc"></div>
+    </div>
+  </div>
+
+  <div class="service-modal-overlay" id="buy-modal-overlay" aria-hidden="true"></div>
+  <div class="service-modal" id="buy-modal" role="dialog" aria-modal="true" aria-labelledby="buy-modal-title">
+    <div class="service-modal-header">
+      <div>
+        <h3 class="service-modal-title" id="buy-modal-title">Lease this beat</h3>
+        <p class="service-modal-price">Choose a license, then checkout on BeatStars</p>
+      </div>
+      <button class="service-modal-close" id="buy-modal-close" type="button" aria-label="Close license options">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <div class="service-modal-body">
+      <div class="buy-options" id="buy-options"></div>
+      <a class="card-button buy-checkout-btn" id="buy-checkout-btn" href="#" target="_blank" rel="noopener">
+        <i class="fas fa-lock"></i>&nbsp;Checkout on BeatStars
+      </a>
     </div>
   </div>
 
@@ -2379,12 +2617,96 @@
       var toastIcon = document.getElementById('toast-icon');
       var toastClose = document.getElementById('toast-close');
 
+      var sortSelect = document.getElementById('beat-sort');
+      var favFilterBtn = document.getElementById('beat-fav-filter');
+      var favCountEl = document.getElementById('beat-fav-count');
+      var playerBuyBtn = document.getElementById('player-buy-btn');
+      var playerBuyLabel = document.getElementById('player-buy-label');
+      var playerFavBtn = document.getElementById('player-fav-btn');
+      var playerShareBtn = document.getElementById('player-share-btn');
+      var prevBtn = document.getElementById('player-prev-btn');
+      var nextBtn = document.getElementById('player-next-btn');
+
+      var licenseGrid = document.getElementById('license-grid');
+      var licenseModal = document.getElementById('license-modal');
+      var licenseModalOverlay = document.getElementById('license-modal-overlay');
+      var licenseModalClose = document.getElementById('license-modal-close');
+      var licenseModalTitle = document.getElementById('license-modal-title');
+      var licenseModalPrice = document.getElementById('license-modal-price');
+      var licenseDoc = document.getElementById('license-doc');
+      var licenseDownloadBtn = document.getElementById('license-download-btn');
+      var licensePrintBtn = document.getElementById('license-print-btn');
+
+      var buyModal = document.getElementById('buy-modal');
+      var buyModalOverlay = document.getElementById('buy-modal-overlay');
+      var buyModalClose = document.getElementById('buy-modal-close');
+      var buyModalTitle = document.getElementById('buy-modal-title');
+      var buyOptionsEl = document.getElementById('buy-options');
+      var buyCheckoutBtn = document.getElementById('buy-checkout-btn');
+
       var CONTACT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxFylcaWg3yvrwA3fInDP95wYabAuSdfsAjdvGdST4GOgEb5UlRhXzblJhefCva1yti/exec';
 
       var DEFAULT_COVER ='data:image/svg+xml,' + encodeURIComponent(
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#222"/>' +
         '<path d="M42 30v32a8 8 0 1 0 4 7V42l20-5v19a8 8 0 1 0 4 7V25z" fill="#555"/></svg>'
       );
+
+      var CURRENCY = '€';
+      var PRODUCER = 'Aroul Da Vinci';
+      var CONTACT_EMAIL = 'aroulkingproduction@gmail.com';
+      var LICENSE_UPDATED = '28 October 2026';
+
+      // Single source for the Leasing section, the per-beat license picker and the
+      // downloadable terms. Edit prices and limits here.
+      var LICENSES = [
+        {
+          id: 'mp3',
+          name: 'MP3 Standard License',
+          price: 30,
+          fromPrice: false,
+          exclusive: false,
+          files: 'MP3 file (untagged, no voice tags)',
+          streams: 100000,
+          termYears: 1,
+          highlights: ['All streaming platforms', 'Up to 100,000 streams', '1 year term', 'MP3 file', 'No tags']
+        },
+        {
+          id: 'wav',
+          name: 'WAV Premium License',
+          price: 50,
+          fromPrice: false,
+          exclusive: false,
+          files: 'MP3 + WAV files (untagged, no voice tags)',
+          streams: 500000,
+          termYears: 3,
+          highlights: ['All streaming platforms', 'Up to 500,000 streams', '3 year term', 'MP3 + WAV files', 'No tags']
+        },
+        {
+          id: 'stems',
+          name: 'WAV Stems Premium',
+          price: 75,
+          fromPrice: false,
+          exclusive: false,
+          files: 'MP3 + WAV + WAV stems (tracked-out files for mixing and rearranging)',
+          streams: 1000000,
+          termYears: 3,
+          highlights: ['Tracked-out stems for mixing', 'All streaming platforms', 'Up to 1,000,000 streams', '3 year term', 'MP3 + WAV + stems']
+        },
+        {
+          id: 'exclusive',
+          name: 'Exclusive License',
+          price: 150,
+          fromPrice: true,
+          exclusive: true,
+          files: 'MP3 + WAV + WAV stems (tracked-out files for mixing and rearranging)',
+          streams: 0,
+          termYears: 0,
+          highlights: ['Beat removed from sale', 'Unlimited streams', 'Unlimited term', 'MP3 + WAV + stems', 'No tags']
+        }
+      ];
+
+      var STORAGE_FAVORITES = 'adv:favorites';
+      var STORAGE_LAST = 'adv:last-played';
 
       var ALL_TRACKS = [];
       var FILTERED_TRACKS = [];
@@ -2393,6 +2715,13 @@
       var isMainSeeking = false;
       var isFloatingSeeking = false;
       var hideFloatingOnly = false;
+      var favorites = {};
+      var showFavoritesOnly = false;
+      var sortMode = 'default';
+      var resumeState = null;
+      var lastProgressSave = 0;
+      var buyTrack = null;
+      var openLicenseId = null;
 
       // Cloudflare Pages ignores HTTP Range requests for static files, so the browser
       // cannot jump to an unbuffered position and restarts from 0. When that happens we
@@ -2580,6 +2909,9 @@
         bpmEl.style.display = track.bpm ? 'inline-flex' : 'none';
 
         listensEl.textContent = formatNumber(track.listenCount) + ' listens';
+        playerBuyLabel.textContent = 'Lease from ' + CURRENCY + lowestPrice();
+        setFavButtonState(playerFavBtn, isFavorite(track));
+        updateMediaSession(track);
       }
 
       function updatePlayIcons() {
@@ -2616,14 +2948,18 @@
       }
 
       function updateFilterStatus() {
+        var scope = showFavoritesOnly ? ' saved' : '';
         if (!currentFilter) {
-          filterStatusEl.textContent = 'Showing all tracks (' + FILTERED_TRACKS.length + ')';
+          filterStatusEl.textContent = showFavoritesOnly
+            ? 'Showing your saved beats (' + FILTERED_TRACKS.length + ')'
+            : 'Showing all tracks (' + FILTERED_TRACKS.length + ')';
           return;
         }
 
         filterStatusEl.textContent =
           'Showing ' +
           FILTERED_TRACKS.length +
+          scope +
           ' result' +
           (FILTERED_TRACKS.length === 1 ? '' : 's') +
           ' for "' +
@@ -2660,7 +2996,9 @@
         updateFilterStatus();
 
         if (!FILTERED_TRACKS.length) {
-          tracklistEl.innerHTML = '<div class="beat-empty">No beats match that search.</div>';
+          tracklistEl.innerHTML = showFavoritesOnly && !Object.keys(favorites).length
+            ? '<div class="beat-empty">No saved beats yet. Tap the heart on a beat to save it for your next visit.</div>'
+            : '<div class="beat-empty">No beats match that search.</div>';
           updatePlayIcons();
           updateScrollIndicators();
           return;
@@ -2680,6 +3018,8 @@
 
           var item = document.createElement('div');
           item.className = 'beat-track-item';
+          item.tabIndex = 0;
+          item.setAttribute('aria-label', 'Play ' + track.title);
           if (track === currentTrack) item.classList.add('active');
 
           item.innerHTML = `
@@ -2692,9 +3032,12 @@
             <div class="track-col">${escapeHtml(track.key || '--')}</div>
             <div class="track-col">${escapeHtml(track.bpm ? track.bpm + ' BPM' : '--')}</div>
             <div class="track-actions">
-              <button class="buy-btn" type="button" aria-label="Buy">
+              <button class="fav-btn" type="button" aria-label="Save ${escapeHtml(track.title)}" aria-pressed="false">
+                <i class="far fa-heart"></i>
+              </button>
+              <button class="buy-btn" type="button" aria-label="Lease ${escapeHtml(track.title)}">
                 <i class="fas fa-shopping-cart"></i>
-                <span>Buy</span>
+                <span>${escapeHtml(CURRENCY + lowestPrice())}+</span>
               </button>
               <a class="download-btn" href="${escapeHtml(track.download)}" download="${escapeHtml(safeFileName)}.mp3" aria-label="Download">
                 <i class="fas fa-download"></i>
@@ -2709,11 +3052,13 @@
           item.addEventListener('click', function (e) {
             if (e.target.closest('.buy-btn')) {
               e.stopPropagation();
-              if (track.buyUrl) {
-                window.open(track.buyUrl, '_blank');
-              } else {
-                showToast('Info', 'No buy link available for this beat.', 'info');
-              }
+              openBuyModal(track, e.target.closest('.buy-btn'));
+              return;
+            }
+
+            if (e.target.closest('.fav-btn')) {
+              e.stopPropagation();
+              toggleFavorite(track);
               return;
             }
 
@@ -2731,11 +3076,319 @@
             }
           });
 
+          item.addEventListener('keydown', function (e) {
+            if (e.target !== item || (e.key !== 'Enter' && e.key !== ' ')) return;
+            e.preventDefault();
+            hideFloatingOnly = false;
+            if (track === currentTrack) {
+              togglePlayback();
+            } else {
+              playTrack(track);
+            }
+          });
+
           tracklistEl.appendChild(item);
         });
 
         updatePlayIcons();
+        updateFavoriteUI();
         updateScrollIndicators();
+      }
+
+      // ---- Local storage (favorites, last played). Every access may throw in private mode.
+      function readStorage(key, fallback) {
+        try {
+          var raw = window.localStorage.getItem(key);
+          return raw ? JSON.parse(raw) : fallback;
+        } catch (e) {
+          return fallback;
+        }
+      }
+
+      function writeStorage(key, value) {
+        try { window.localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+      }
+
+      function isFavorite(track) {
+        return !!track && !!favorites[track.id];
+      }
+
+      function setFavButtonState(btn, active) {
+        btn.classList.toggle('is-fav', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        var icon = btn.querySelector('i');
+        if (icon) icon.className = active ? 'fas fa-heart' : 'far fa-heart';
+      }
+
+      function updateFavoriteUI() {
+        favCountEl.textContent = String(Object.keys(favorites).length);
+        setFavButtonState(playerFavBtn, isFavorite(currentTrack));
+        tracklistEl.querySelectorAll('.beat-track-item').forEach(function (item, i) {
+          var btn = item.querySelector('.fav-btn');
+          if (btn) setFavButtonState(btn, isFavorite(FILTERED_TRACKS[i]));
+        });
+      }
+
+      function toggleFavorite(track) {
+        if (!track) return;
+        if (favorites[track.id]) {
+          delete favorites[track.id];
+          showToast('Removed', '"' + track.title + '" removed from your saved beats.', 'info');
+        } else {
+          favorites[track.id] = true;
+          showToast('Saved', '"' + track.title + '" saved. Find it again any time with the Saved filter.', 'success');
+        }
+        writeStorage(STORAGE_FAVORITES, Object.keys(favorites));
+        if (showFavoritesOnly) {
+          applyFilter();
+        } else {
+          updateFavoriteUI();
+        }
+      }
+
+      // ---- Sharing and deep links (?beat=<folder>)
+      function getTrackUrl(track) {
+        return location.origin + location.pathname + '?beat=' + encodeURIComponent(track.id);
+      }
+
+      function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+        return new Promise(function (resolve, reject) {
+          var area = document.createElement('textarea');
+          area.value = text;
+          area.setAttribute('readonly', '');
+          area.style.position = 'fixed';
+          area.style.opacity = '0';
+          document.body.appendChild(area);
+          area.select();
+          var ok = false;
+          try { ok = document.execCommand('copy'); } catch (e) {}
+          document.body.removeChild(area);
+          ok ? resolve() : reject(new Error('copy failed'));
+        });
+      }
+
+      function shareTrack(track) {
+        if (!track) return;
+        var url = getTrackUrl(track);
+        if (navigator.share && window.matchMedia('(pointer: coarse)').matches) {
+          navigator.share({ title: track.title + ' | ' + PRODUCER, text: 'Listen to "' + track.title + '" by ' + PRODUCER, url: url })
+            .catch(function () {});
+          return;
+        }
+        copyText(url)
+          .then(function () { showToast('Link copied', 'Send it to anyone: the link opens "' + track.title + '" directly.', 'success'); })
+          .catch(function () { window.prompt('Copy this link:', url); });
+      }
+
+      function findTrackById(id) {
+        for (var i = 0; i < ALL_TRACKS.length; i++) {
+          if (ALL_TRACKS[i].id === id) return ALL_TRACKS[i];
+        }
+        return null;
+      }
+
+      function revealTrackRow(track) {
+        var index = FILTERED_TRACKS.indexOf(track);
+        var row = tracklistEl.querySelectorAll('.beat-track-item')[index];
+        if (!row) return;
+        tracklistEl.scrollTop = Math.max(0, row.offsetTop - tracklistEl.clientHeight / 2 + row.offsetHeight / 2);
+        row.classList.add('deep-linked');
+        updateScrollIndicators();
+      }
+
+      // ---- Resume where the visitor left off
+      function saveLastPlayed() {
+        if (!currentTrack || !audio.dataset.src) return;
+        var time = pendingSeekTime !== null ? pendingSeekTime : audio.currentTime || 0;
+        writeStorage(STORAGE_LAST, { id: currentTrack.id, time: Math.floor(time) });
+      }
+
+      // ---- Prices and licenses
+      function formatPrice(license) {
+        return (license.fromPrice ? 'From ' : '') + CURRENCY + license.price;
+      }
+
+      function getLicense(id) {
+        for (var i = 0; i < LICENSES.length; i++) {
+          if (LICENSES[i].id === id) return LICENSES[i];
+        }
+        return LICENSES[0];
+      }
+
+      function lowestPrice() {
+        return Math.min.apply(null, LICENSES.map(function (l) { return l.price; }));
+      }
+
+      function getLicenseSections(license) {
+        var streams = license.streams ? license.streams.toLocaleString('en-US') + ' streams' : 'unlimited streams';
+        var term = license.termYears
+          ? license.termYears + ' year' + (license.termYears === 1 ? '' : 's') + ' from the date of purchase'
+          : 'unlimited (no expiry)';
+
+        var grant = license.exclusive
+          ? [
+              'The Producer (' + PRODUCER + ') grants the Licensee exclusive rights to use the beat (the "Beat") to create and commercially release new songs (the "Song").',
+              'After the exclusive purchase the Beat is removed from sale and will not be licensed to anyone else.',
+              'Non-exclusive licenses sold before the exclusive purchase remain valid until they expire.'
+            ]
+          : [
+              'The Producer (' + PRODUCER + ') grants the Licensee a non-exclusive, non-transferable license to use the beat (the "Beat") to create one (1) new song (the "Song").',
+              'Because the license is non-exclusive, the Producer may keep licensing the Beat to other artists until it is sold exclusively. Your license stays valid even if the Beat is later sold exclusively.'
+            ];
+
+        return [
+          { title: 'Grant of license', items: grant },
+          {
+            title: 'Usage',
+            items: [
+              'Distribution of the Song on all streaming and download platforms (Spotify, Apple Music, YouTube, TikTok, SoundCloud and similar).',
+              'Stream limit: ' + streams + ', counted across all platforms combined.',
+              'Term: ' + term + '.',
+              license.exclusive
+                ? 'No stream or time limit applies.'
+                : 'When the stream limit or the term is reached, you need to renew or upgrade the license to keep the Song online.'
+            ]
+          },
+          { title: 'Files delivered', items: [license.files + ', delivered digitally through BeatStars right after payment.'] },
+          {
+            title: 'Credit',
+            items: ['Credit the Producer as "Prod. by ' + PRODUCER + '" in the song title or credits on every platform where credits can be added.']
+          },
+          {
+            title: 'Ownership',
+            items: [
+              'The Producer keeps the copyright and authorship of the Beat (the instrumental composition and recording).',
+              'The Licensee owns the lyrics, melodies and vocal performances they add to the Song.'
+            ]
+          },
+          {
+            title: 'Restrictions',
+            items: [
+              'You may not resell, sublicense, share, or distribute the Beat on its own or as an instrumental.',
+              'You may not register the Beat, or a Song using it, with Content ID or similar fingerprinting systems' + (license.exclusive ? ' without written agreement from the Producer.' : '.'),
+              'You may not claim to be the author or producer of the Beat.'
+            ]
+          },
+          {
+            title: 'Purchase and contract',
+            items: [
+              'Payment and file delivery are handled by BeatStars. The license agreement issued with your BeatStars purchase is the binding contract; if it differs from this summary, the agreement issued at purchase prevails.',
+              'Questions before or after buying: ' + CONTACT_EMAIL + '.'
+            ]
+          }
+        ];
+      }
+
+      function renderLicenseGrid() {
+        licenseGrid.innerHTML = LICENSES.map(function (license) {
+          return '<article class="service-card">' +
+            '<h3>' + escapeHtml(license.name) + '</h3>' +
+            '<p class="card-price">' + escapeHtml(formatPrice(license)) + '</p>' +
+            '<ul class="card-list">' + license.highlights.map(function (h) { return '<li>' + escapeHtml(h) + '</li>'; }).join('') + '</ul>' +
+            '<button class="card-button license-terms-btn" type="button" data-license="' + license.id + '">' +
+              '<i class="fas fa-file-contract"></i>&nbsp;Terms &amp; download' +
+            '</button>' +
+          '</article>';
+        }).join('');
+      }
+
+      function openLicenseTerms(id, focusEl) {
+        var license = getLicense(id);
+        openLicenseId = license.id;
+        licenseModalTitle.textContent = license.name;
+        licenseModalPrice.textContent = formatPrice(license) + ' • ' + license.highlights.join(' • ');
+        licenseDoc.innerHTML = getLicenseSections(license).map(function (section, i) {
+          return '<h4>' + (i + 1) + '. ' + escapeHtml(section.title) + '</h4>' +
+            '<ul>' + section.items.map(function (item) { return '<li>' + escapeHtml(item) + '</li>'; }).join('') + '</ul>';
+        }).join('') + '<p class="license-meta">Last updated: ' + escapeHtml(LICENSE_UPDATED) + '</p>';
+        licenseModal.scrollTop = 0;
+        openModal(licenseModal, licenseModalOverlay, focusEl);
+      }
+
+      function downloadLicenseTerms(id) {
+        var license = getLicense(id);
+        var lines = [
+          license.name.toUpperCase(),
+          PRODUCER + ' - ' + formatPrice(license),
+          'Last updated: ' + LICENSE_UPDATED,
+          ''
+        ];
+        getLicenseSections(license).forEach(function (section, i) {
+          lines.push((i + 1) + '. ' + section.title.toUpperCase());
+          section.items.forEach(function (item) { lines.push('   - ' + item); });
+          lines.push('');
+        });
+        var blob = new Blob([lines.join('\r\n')], { type: 'text/plain;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'aroul-da-vinci-' + license.id + '-license.txt';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      }
+
+      function openBuyModal(track, focusEl) {
+        if (!track) return;
+        buyTrack = track;
+        buyModalTitle.textContent = 'Lease "' + track.title + '"';
+        buyOptionsEl.innerHTML = LICENSES.map(function (license, i) {
+          return '<label class="buy-option">' +
+            '<input type="radio" name="buy-license" value="' + license.id + '"' + (i === 0 ? ' checked' : '') + '>' +
+            '<span>' +
+              '<span class="buy-option-name">' + escapeHtml(license.name) + '</span>' +
+              '<span class="buy-option-points" style="display:block;">' + escapeHtml(license.highlights.slice(0, 4).join(' • ')) + '</span>' +
+              '<button type="button" class="buy-option-terms" data-license="' + license.id + '">Read full terms</button>' +
+            '</span>' +
+            '<span class="buy-option-price">' + escapeHtml(formatPrice(license)) + '</span>' +
+          '</label>';
+        }).join('');
+
+        if (track.buyUrl) {
+          buyCheckoutBtn.href = track.buyUrl;
+          buyCheckoutBtn.target = '_blank';
+          buyCheckoutBtn.innerHTML = '<i class="fas fa-lock"></i>&nbsp;Checkout on BeatStars';
+        } else {
+          buyCheckoutBtn.href = '#contact';
+          buyCheckoutBtn.removeAttribute('target');
+          buyCheckoutBtn.innerHTML = '<i class="far fa-envelope"></i>&nbsp;Contact me to buy this beat';
+        }
+        openModal(buyModal, buyModalOverlay, focusEl);
+      }
+
+      // ---- Lock screen / headphone controls
+      function updateMediaSession(track) {
+        if (!('mediaSession' in navigator) || !track || typeof MediaMetadata === 'undefined') return;
+        try {
+          var art = artworkEl.src && artworkEl.src.indexOf('data:') !== 0 ? artworkEl.src : new URL(track.artwork, location.href).href;
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: track.title,
+            artist: PRODUCER,
+            album: 'Beats',
+            artwork: [{ src: art, sizes: '512x512' }]
+          });
+        } catch (e) {}
+      }
+
+      function playRelative(delta) {
+        if (!FILTERED_TRACKS.length) return;
+        var index = FILTERED_TRACKS.indexOf(currentTrack);
+        var next = index === -1 ? 0 : index + delta;
+        if (next < 0 || next >= FILTERED_TRACKS.length) return;
+        playTrack(FILTERED_TRACKS[next]);
+      }
+
+      function sortTracks(list) {
+        var byBpm = function (t) { var n = parseFloat(t.bpm); return isFinite(n) ? n : 0; };
+        if (sortMode === 'popular') list.sort(function (a, b) { return b.listenCount - a.listenCount; });
+        else if (sortMode === 'az') list.sort(function (a, b) { return a.title.localeCompare(b.title); });
+        else if (sortMode === 'bpm-asc') list.sort(function (a, b) { return byBpm(a) - byBpm(b); });
+        else if (sortMode === 'bpm-desc') list.sort(function (a, b) { return byBpm(b) - byBpm(a); });
+        return list;
       }
 
       function releaseBlob() {
@@ -2856,7 +3509,14 @@
 
       async function playTrack(track) {
         hideFloatingOnly = false;
+        var resumeAt = resumeState && resumeState.track === track ? resumeState.time : 0;
+        resumeState = null;
         loadTrack(track);
+        if (resumeAt > 0) {
+          audio.addEventListener('loadedmetadata', function () {
+            if (currentTrack === track && audio.duration > resumeAt + 5) seekToRatio(resumeAt / audio.duration);
+          }, { once: true });
+        }
         await safePlay();
       }
 
@@ -2882,9 +3542,9 @@
       }
 
       function applyFilter() {
-        FILTERED_TRACKS = ALL_TRACKS.filter(function (track) {
-          return matchesFilter(track, currentFilter);
-        });
+        FILTERED_TRACKS = sortTracks(ALL_TRACKS.filter(function (track) {
+          return matchesFilter(track, currentFilter) && (!showFavoritesOnly || isFavorite(track));
+        }));
 
         // Searching never interrupts the song that is already loaded. If nothing has
         // been played yet, preview the first matching beat in the main player.
@@ -2908,12 +3568,35 @@
           ALL_TRACKS = data.map(normalizeTrack);
           FILTERED_TRACKS = ALL_TRACKS.slice();
 
+          favorites = {};
+          readStorage(STORAGE_FAVORITES, []).forEach(function (id) {
+            if (findTrackById(id)) favorites[id] = true;
+          });
+
+          var linkedId = new URLSearchParams(location.search).get('beat');
+          var linkedTrack = linkedId ? findTrackById(linkedId) : null;
+          var last = readStorage(STORAGE_LAST, null);
+          var lastTrack = last && last.id ? findTrackById(last.id) : null;
+
           renderTrackList();
 
           if (FILTERED_TRACKS.length) {
             checkRangeSupport(FILTERED_TRACKS[0].audio);
-            currentTrack = FILTERED_TRACKS[0];
+            currentTrack = linkedTrack || lastTrack || FILTERED_TRACKS[0];
             syncMeta(currentTrack);
+            updatePlayIcons();
+            updateFavoriteUI();
+
+            if (linkedTrack) {
+              revealTrackRow(linkedTrack);
+              document.getElementById('beats').scrollIntoView();
+            } else if (lastTrack && last.time > 5) {
+              resumeState = { track: lastTrack, time: last.time };
+              currentTimeEl.textContent = formatTime(last.time);
+              floatingCurrent.textContent = formatTime(last.time);
+              revealTrackRow(lastTrack);
+              tracklistEl.querySelectorAll('.deep-linked').forEach(function (el) { el.classList.remove('deep-linked'); });
+            }
           } else {
             syncMeta(null);
             tracklistEl.innerHTML = '<div class="beat-empty">No beats found.</div>';
@@ -3004,6 +3687,10 @@
 
       audio.addEventListener('timeupdate', function () {
         syncProgress();
+        if (Date.now() - lastProgressSave > 3000) {
+          lastProgressSave = Date.now();
+          saveLastPlayed();
+        }
       });
 
       // Safari refuses to play media from servers without Range support; fall back to a Blob.
@@ -3115,8 +3802,108 @@
         if (e.key === 'Escape') {
           if (serviceModal.classList.contains('active')) closeModal(serviceModal, serviceModalOverlay);
           if (privacyModal.classList.contains('active')) closeModal(privacyModal, privacyModalOverlay);
+          if (licenseModal.classList.contains('active')) closeModal(licenseModal, licenseModalOverlay);
+          if (buyModal.classList.contains('active')) closeModal(buyModal, buyModalOverlay);
+          return;
+        }
+
+        // Space toggles playback unless the visitor is typing or using a control.
+        if ((e.key === ' ' || e.code === 'Space') && !e.repeat) {
+          var target = e.target;
+          var interactive = target.closest && target.closest('input, textarea, select, button, a, [contenteditable], .beat-track-item');
+          if (interactive || document.body.classList.contains('modal-open')) return;
+          e.preventDefault();
+          hideFloatingOnly = false;
+          togglePlayback();
         }
       });
+
+      bindCloseModal(licenseModal, licenseModalOverlay, licenseModalClose);
+      bindCloseModal(buyModal, buyModalOverlay, buyModalClose);
+
+      licenseGrid.addEventListener('click', function (e) {
+        var btn = e.target.closest('.license-terms-btn');
+        if (btn) openLicenseTerms(btn.dataset.license, btn);
+      });
+
+      licenseDownloadBtn.addEventListener('click', function () {
+        downloadLicenseTerms(openLicenseId);
+      });
+
+      licensePrintBtn.addEventListener('click', function () {
+        document.body.classList.add('printing-license');
+        window.print();
+      });
+
+      window.addEventListener('afterprint', function () {
+        document.body.classList.remove('printing-license');
+      });
+
+      buyOptionsEl.addEventListener('click', function (e) {
+        var termsBtn = e.target.closest('.buy-option-terms');
+        if (!termsBtn) return;
+        e.preventDefault();
+        var returnFocus = lastFocusedBeforeModal;
+        closeModal(buyModal, buyModalOverlay);
+        openLicenseTerms(termsBtn.dataset.license, returnFocus);
+      });
+
+      buyCheckoutBtn.addEventListener('click', function () {
+        var selected = buyOptionsEl.querySelector('input[name="buy-license"]:checked');
+        // Without a BeatStars link the button jumps to #contact; restoring focus would scroll back.
+        if (!buyTrack || !buyTrack.buyUrl) lastFocusedBeforeModal = null;
+        closeModal(buyModal, buyModalOverlay);
+        if (buyTrack && buyTrack.buyUrl && selected) {
+          showToast('Opening BeatStars', 'Choose "' + getLicense(selected.value).name + '" at checkout.', 'info');
+        }
+      });
+
+      playerBuyBtn.addEventListener('click', function () {
+        openBuyModal(currentTrack, playerBuyBtn);
+      });
+
+      playerFavBtn.addEventListener('click', function () {
+        toggleFavorite(currentTrack);
+      });
+
+      playerShareBtn.addEventListener('click', function () {
+        shareTrack(currentTrack);
+      });
+
+      prevBtn.addEventListener('click', function () { playRelative(-1); });
+      nextBtn.addEventListener('click', function () { playRelative(1); });
+
+      sortSelect.addEventListener('change', function () {
+        sortMode = sortSelect.value;
+        applyFilter();
+      });
+
+      favFilterBtn.addEventListener('click', function () {
+        showFavoritesOnly = !showFavoritesOnly;
+        favFilterBtn.setAttribute('aria-pressed', showFavoritesOnly ? 'true' : 'false');
+        applyFilter();
+      });
+
+      artworkEl.addEventListener('load', function () {
+        updateMediaSession(currentTrack);
+      });
+
+      window.addEventListener('pagehide', saveLastPlayed);
+
+      if ('mediaSession' in navigator) {
+        var mediaHandlers = {
+          play: function () { togglePlayback(); },
+          pause: function () { audio.pause(); },
+          previoustrack: function () { playRelative(-1); },
+          nexttrack: function () { playRelative(1); },
+          seekto: function (details) {
+            if (audio.duration > 0) seekToRatio(details.seekTime / audio.duration);
+          }
+        };
+        Object.keys(mediaHandlers).forEach(function (action) {
+          try { navigator.mediaSession.setActionHandler(action, mediaHandlers[action]); } catch (e) {}
+        });
+      }
 
       toastClose.addEventListener('click', function () {
         toast.classList.remove('show');
@@ -3164,6 +3951,8 @@
 
       artworkEl.src = DEFAULT_COVER;
       floatingArtwork.src = DEFAULT_COVER;
+      renderLicenseGrid();
+      playerBuyLabel.textContent = 'Lease from ' + CURRENCY + lowestPrice();
       audio.volume = 0.8;
       audio.dataset.src = '';
       setSeekBackground(seekBar, 0);
