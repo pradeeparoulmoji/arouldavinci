@@ -1325,6 +1325,15 @@
       cursor: pointer;
     }
 
+    /* `.contact-form input` would otherwise stretch this invisible box over the whole label,
+       swallowing clicks on the Privacy Policy link. */
+    .contact-form .checkbox-input {
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      border: 0;
+    }
+
     .checkbox-input {
       position: absolute;
       left: 0;
@@ -4125,10 +4134,10 @@
               throw err;
             }
             contactForm.reset();
+            formStatus.textContent = '';
+            formStatus.className = 'form-status';
             var extra = result.data && result.data.confirmationSent ? ' A confirmation has been sent to your email.' : '';
-            formStatus.textContent = 'Message sent. Thank you, I will get back to you soon.' + extra;
-            formStatus.className = 'form-status success';
-            showToast('Message sent', 'Thank you, I will get back to you soon.', 'success');
+            showToast('Message sent', 'Thank you, I will get back to you soon.' + extra, 'success');
           })
           .catch(function (err) {
             console.error(err);
