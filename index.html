@@ -1685,6 +1685,72 @@
       margin-top: 0;
     }
 
+    .hp-field {
+      position: absolute !important;
+      left: -10000px !important;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    .newsletter-form {
+      width: min(100%, 600px);
+      margin: 28px auto 8px;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      text-align: left;
+    }
+
+    .newsletter-title {
+      margin: 0 0 12px !important;
+      font-size: 20px !important;
+      text-transform: uppercase;
+      color: #fff !important;
+      text-align: center;
+    }
+
+    .newsletter-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .newsletter-row input {
+      flex: 1 1 220px;
+      min-height: 48px;
+      padding: 12px 16px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      font-size: 16px;
+      font-family: inherit;
+    }
+
+    .newsletter-row input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .newsletter-row button {
+      flex: 0 0 auto;
+      min-height: 48px;
+      padding: 10px 26px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #000;
+      font-family: 'cxoxo', system-ui, sans-serif;
+      font-size: 15px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .newsletter-row button:disabled { opacity: 0.5; cursor: not-allowed; }
+
     .license-actions {
       display: flex;
       flex-wrap: wrap;
@@ -2382,9 +2448,23 @@
           </div>
 
           <div class="contact-cta-row">
-            <a class="newsletter-button" href="https://arouldavinci.beehiiv.com/subscribe" target="_blank" rel="noopener">Subscribe to Newsletter</a>
             <a class="newsletter-button" href="https://ig.me/m/arouldavinci" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Message on Instagram</a>
           </div>
+
+          <form id="newsletter-form" class="newsletter-form" novalidate>
+            <p class="newsletter-title">Get new beats first</p>
+            <div class="newsletter-row">
+              <input type="email" id="newsletter-email" name="email" placeholder="Your email" required autocomplete="email" aria-label="Email for new beats" />
+              <button type="submit" id="newsletter-submit">Subscribe</button>
+            </div>
+            <label class="checkbox-label newsletter-consent" for="newsletter-consent">
+              <input class="checkbox-input" type="checkbox" id="newsletter-consent" required />
+              <span class="checkbox-custom" aria-hidden="true"></span>
+              <span class="checkbox-text">I agree to receive emails about new beats and offers. Unsubscribe any time by writing to aroulkingproduction@gmail.com.</span>
+            </label>
+            <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <div class="form-status" id="newsletter-status" role="status" aria-live="polite"></div>
+          </form>
 
           <div class="contact-form-container">
             <form id="contact-form" class="contact-form" novalidate>
@@ -2411,6 +2491,7 @@
                 </label>
               </div>
 
+              <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
               <button type="submit">Submit</button>
               <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
             </form>
@@ -2462,7 +2543,9 @@
     <div class="service-modal-body" id="privacy-modal-description">
       <p class="service-modal-text">This website may collect the data you submit through the contact form: name, email address, subject, and message.</p>
       <p class="service-modal-text">This data is used only to respond to your inquiry, discuss music production, licensing, collaborations, or customer support.</p>
-      <p class="service-modal-text">Form submissions are sent to an external Google Apps Script endpoint for processing. External platforms linked on this website may include Instagram, X, BeatStars, Beehiiv, Google Drive, and email services.</p>
+      <p class="service-modal-text">Contact form messages and newsletter sign-ups are stored in this website's database hosted by Cloudflare. Contact messages are forwarded to the site owner by email through Resend; if the website's own system is unavailable, the form is processed by a Google Apps Script endpoint instead. Newsletter emails are kept until you unsubscribe; contact messages are kept as long as needed to handle your request.</p>
+      <p class="service-modal-text">To count listens without duplicates, the website stores an anonymous code made from a one-way hash of your IP address and browser, which changes every day and is deleted after two days. Your IP address itself is never stored.</p>
+      <p class="service-modal-text">External platforms linked on this website may include Instagram, X, BeatStars, and email services.</p>
       <p class="service-modal-text">Your saved beats and the last beat you listened to are stored only in your own browser (local storage) so the player can remember them on your next visit. This data never leaves your device and you can remove it by clearing your browser's site data.</p>
       <p class="service-modal-text">If you are in Italy or the EU, you may have rights under GDPR, including access, correction, deletion, restriction, objection, and the right to contact the Garante per la protezione dei dati personali.</p>
       <p class="service-modal-note">Data Controller: Pradeep Aroulmoji. Contact: aroulkingproduction@gmail.com</p>
@@ -2617,6 +2700,12 @@
       var toastIcon = document.getElementById('toast-icon');
       var toastClose = document.getElementById('toast-close');
 
+      var newsletterForm = document.getElementById('newsletter-form');
+      var newsletterEmail = document.getElementById('newsletter-email');
+      var newsletterConsent = document.getElementById('newsletter-consent');
+      var newsletterSubmit = document.getElementById('newsletter-submit');
+      var newsletterStatus = document.getElementById('newsletter-status');
+
       var sortSelect = document.getElementById('beat-sort');
       var favFilterBtn = document.getElementById('beat-fav-filter');
       var favCountEl = document.getElementById('beat-fav-count');
@@ -2721,6 +2810,10 @@
       var resumeState = null;
       var lastProgressSave = 0;
       var buyTrack = null;
+      var LISTEN_THRESHOLD_SECONDS = 10;
+      var listenedSeconds = 0;
+      var lastPlayheadTime = null;
+      var countedThisVisit = {};
       var openLicenseId = null;
 
       // Cloudflare Pages ignores HTTP Range requests for static files, so the browser
@@ -2810,6 +2903,7 @@
           audio: audioPath,
           download: downloadPath,
           buyUrl: item.buyUrl || '',
+          baseListens: Number(item.listenCount || item.plays || item.playCount || 0),
           listenCount: Number(item.listenCount || item.plays || item.playCount || 0)
         };
       }
@@ -3010,11 +3104,7 @@
             .replace(/\s+/g, ' ')
             .trim() || 'beat';
 
-          var subline = [
-            track.genre || '',
-            track.tags.length ? track.tags.slice(0, 3).join(' • ') : '',
-            formatNumber(track.listenCount) + ' listens'
-          ].filter(Boolean).join(' • ');
+          var subline = getSubline(track);
 
           var item = document.createElement('div');
           item.className = 'beat-track-item';
@@ -3391,6 +3481,82 @@
         return list;
       }
 
+      function getSubline(track) {
+        return [
+          track.genre || '',
+          track.tags.length ? track.tags.slice(0, 3).join(' • ') : '',
+          formatNumber(track.listenCount) + ' listens'
+        ].filter(Boolean).join(' • ');
+      }
+
+      // ---- Backend (Cloudflare Pages Functions). `available` is false when the API is not deployed
+      // or not configured, so callers can fall back gracefully.
+      function postApi(path, payload) {
+        return fetch(path, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function (response) {
+          var isJson = (response.headers.get('content-type') || '').indexOf('application/json') !== -1;
+          if (!isJson || response.status === 404 || response.status === 405 || response.status === 503) {
+            return { available: false, ok: false, status: response.status, data: {} };
+          }
+          return response.json().then(function (data) {
+            return { available: true, ok: response.ok, status: response.status, data: data || {} };
+          });
+        }, function () {
+          return { available: false, ok: false, status: 0, data: {} };
+        });
+      }
+
+      function updateListenUI(track) {
+        if (track === currentTrack) listensEl.textContent = formatNumber(track.listenCount) + ' listens';
+        var index = FILTERED_TRACKS.indexOf(track);
+        var row = index === -1 ? null : tracklistEl.querySelectorAll('.beat-track-item')[index];
+        var subline = row && row.querySelector('.track-subline');
+        if (subline) subline.textContent = getSubline(track);
+      }
+
+      function loadListenCounts() {
+        fetch('/api/listens')
+          .then(function (response) {
+            var isJson = (response.headers.get('content-type') || '').indexOf('application/json') !== -1;
+            return response.ok && isJson ? response.json() : null;
+          })
+          .then(function (data) {
+            if (!data || !data.counts) return;
+            ALL_TRACKS.forEach(function (track) {
+              track.listenCount = track.baseListens + (Number(data.counts[track.id]) || 0);
+            });
+            if (sortMode === 'popular') {
+              applyFilter();
+            } else {
+              ALL_TRACKS.forEach(updateListenUI);
+            }
+          })
+          .catch(function () {});
+      }
+
+      // A listen counts after LISTEN_THRESHOLD_SECONDS of actual playback, once per beat per visit.
+      function trackListenProgress() {
+        var track = currentTrack;
+        if (!track || audio.paused || pendingSeekTime !== null || countedThisVisit[track.id]) {
+          lastPlayheadTime = audio.currentTime;
+          return;
+        }
+        var delta = lastPlayheadTime === null ? 0 : audio.currentTime - lastPlayheadTime;
+        lastPlayheadTime = audio.currentTime;
+        if (delta > 0 && delta < 1.5) listenedSeconds += delta;
+        if (listenedSeconds < LISTEN_THRESHOLD_SECONDS) return;
+
+        countedThisVisit[track.id] = true;
+        postApi('/api/listens', { id: track.id }).then(function (result) {
+          if (!result.ok || !result.data || typeof result.data.count !== 'number') return;
+          track.listenCount = track.baseListens + result.data.count;
+          updateListenUI(track);
+        });
+      }
+
       function releaseBlob() {
         blobRequestId++;
         usingBlob = false;
@@ -3489,6 +3655,8 @@
         syncMeta(track);
 
         if (!sameTrack) {
+          listenedSeconds = 0;
+          lastPlayheadTime = null;
           releaseBlob();
           audio.src = track.audio;
           audio.dataset.src = track.audio;
@@ -3579,6 +3747,7 @@
           var lastTrack = last && last.id ? findTrackById(last.id) : null;
 
           renderTrackList();
+          loadListenCounts();
 
           if (FILTERED_TRACKS.length) {
             checkRangeSupport(FILTERED_TRACKS[0].audio);
@@ -3687,6 +3856,7 @@
 
       audio.addEventListener('timeupdate', function () {
         syncProgress();
+        trackListenProgress();
         if (Date.now() - lastProgressSave > 3000) {
           lastProgressSave = Date.now();
           saveLastPlayed();
@@ -3925,27 +4095,96 @@
         formStatus.textContent = '';
         formStatus.className = 'form-status';
 
-        fetch(CONTACT_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(new FormData(contactForm)).toString()
-        })
-          .then(function (response) {
-            if (!response.ok) throw new Error('Request failed: ' + response.status);
+        var formData = new FormData(contactForm);
+        var payload = {
+          name: formData.get('name'),
+          email: formData.get('email'),
+          subject: formData.get('subject'),
+          message: formData.get('message'),
+          consent: document.getElementById('privacy-consent').checked,
+          website: formData.get('website')
+        };
+
+        postApi('/api/contact', payload)
+          .then(function (result) {
+            if (result.available) return result;
+            // Backend not deployed or not configured yet: use the Google Apps Script endpoint.
+            formData.delete('website');
+            return fetch(CONTACT_ENDPOINT, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: new URLSearchParams(formData).toString()
+            }).then(function (response) {
+              return { available: true, ok: response.ok, status: response.status, data: {} };
+            });
+          })
+          .then(function (result) {
+            if (!result.ok) {
+              var err = new Error('Request failed: ' + result.status);
+              err.code = result.data && result.data.error;
+              throw err;
+            }
             contactForm.reset();
-            formStatus.textContent = 'Message sent. Thank you, we will respond soon.';
+            var extra = result.data && result.data.confirmationSent ? ' A confirmation has been sent to your email.' : '';
+            formStatus.textContent = 'Message sent. Thank you, I will get back to you soon.' + extra;
             formStatus.className = 'form-status success';
-            showToast('Message sent', 'Thank you, we will respond soon.', 'success');
+            showToast('Message sent', 'Thank you, I will get back to you soon.', 'success');
           })
           .catch(function (err) {
             console.error(err);
-            formStatus.textContent = 'Something went wrong. Please try again or email aroulkingproduction@gmail.com.';
+            var message = err.code === 'rate_limited'
+              ? 'Too many messages in a short time. Please try again later or email aroulkingproduction@gmail.com.'
+              : err.code === 'invalid_fields'
+                ? 'Please check your name, email, subject and message.'
+                : 'Something went wrong. Please try again or email aroulkingproduction@gmail.com.';
+            formStatus.textContent = message;
             formStatus.className = 'form-status error';
-            showToast('Submission failed', 'Something went wrong. Please try again.', 'error');
+            showToast('Submission failed', message, 'error');
           })
           .finally(function () {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Submit';
+          });
+      });
+
+      newsletterForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var emailValue = newsletterEmail.value.trim();
+        if (!newsletterEmail.checkValidity() || !emailValue || !newsletterConsent.checked) {
+          newsletterStatus.textContent = 'Enter a valid email and tick the consent box.';
+          newsletterStatus.className = 'form-status error';
+          return;
+        }
+
+        newsletterSubmit.disabled = true;
+        newsletterStatus.textContent = '';
+        newsletterStatus.className = 'form-status';
+
+        postApi('/api/subscribe', {
+          email: emailValue,
+          consent: true,
+          website: newsletterForm.querySelector('.hp-field').value
+        })
+          .then(function (result) {
+            if (!result.available) {
+              newsletterStatus.innerHTML = 'Sign-up is temporarily unavailable here. You can <a href="https://arouldavinci.beehiiv.com/subscribe" target="_blank" rel="noopener" style="text-decoration:underline;">subscribe on Beehiiv</a> instead.';
+              newsletterStatus.className = 'form-status error';
+              return;
+            }
+            if (!result.ok) throw new Error('Request failed: ' + result.status);
+            newsletterForm.reset();
+            newsletterStatus.textContent = result.data.alreadySubscribed
+              ? 'You are already subscribed. Thanks!'
+              : 'You are in! New beats will land in your inbox first.';
+            newsletterStatus.className = 'form-status success';
+          })
+          .catch(function (err) {
+            console.error(err);
+            newsletterStatus.textContent = 'Something went wrong. Please try again.';
+            newsletterStatus.className = 'form-status error';
+          })
+          .finally(function () {
+            newsletterSubmit.disabled = false;
           });
       });
 
